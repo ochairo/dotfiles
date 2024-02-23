@@ -9,11 +9,10 @@ brew install fvm
 fvm install stable
 fvm global stable
 
-# https://docs.flutter.dev/deployment/cd#fastlane
-# https://docs.fastlane.tools/
 brew install fastlane
 
-# https://pub.dev/packages/flutter_gen
+brew install lefthook
+
 dart pub global activate flutter_gen
 
 exit 0
