@@ -1,5 +1,29 @@
 {
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.formatOnSave": true,
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.formatOnSave": true,
+  },
   "cSpell.enabled": true,
+  "cSpell.ignoreRegExpList": [
+    "japaneseLetters",
+    "japanesePrefectures"
+  ],
   "cSpell.patterns": [
     {
       "description": "Japanese letters",
@@ -61,13 +85,10 @@
       ]
     }
   ],
-  "cSpell.ignoreRegExpList": [
-    "japaneseLetters",
-    "japanesePrefectures"
-  ],
   "cSpell.words": [
     "catppuccin",
     "dotfiles",
+    "hjkl",
     "iterm",
     "karabiner",
     "meslolgs",
@@ -81,14 +102,17 @@
     "source.organizeImports": "explicit"
   },
   "editor.fontLigatures": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.guides.bracketPairs": true,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 120,
+  "editor.wrappingIndent": "same",
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true
   },
+  "prettier.printWidth": 120,
   "typescript.preferences.importModuleSpecifier": "non-relative"
 }
