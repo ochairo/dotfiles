@@ -1,6 +1,6 @@
 # dotfiles
 
-Basic setup for macOS
+Basic setup CLI for macOS
 
 ## Getting Started
 
