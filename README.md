@@ -1,6 +1,6 @@
 # dotfiles
 
-Dotfiles for macOS
+Basic setup for macOS
 
 ## Getting Started
 
