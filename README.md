@@ -6,10 +6,10 @@ Basic setup for macOS
 
 - Clone the repository.
 
-- Execute "start-setup.sh".
+- Execute the setup CLI.
 
   ```sh
-  sh ./start-setup.sh
+  sh ./setup-cli.sh
   ```
 
 ## Configurations
