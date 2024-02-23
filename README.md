@@ -6,13 +6,13 @@ Dotfiles for macOS
 
 - Clone the repository.
 
-- Declare the variable "REPO_DIR" with the path with which you cloned the repository and run 'start-setup.sh'. Note that if "REPO_DIR" is not declared, "REPO_DIR" will be "$HOME" by default.
+- Execute "start-setup.sh".
 
   ```sh
-  export REPO_DIR=$HOME && sh $REPO_DIR/dotfiles/start-setup.sh
+  sh ./start-setup.sh
   ```
 
-## Common Configurations
+## Oher Configurations
 
 1. Open or re-open your terminal.
 1. Change the font to `MesloLGS NF`.
