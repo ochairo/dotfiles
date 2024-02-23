@@ -1,43 +1,35 @@
 {
-    "description": "Change left_command+g; to home and end",
-    "manipulators": [
-        {
-            "from": {
-                "key_code": "g",
-                "modifiers": {
-                    "mandatory": [
-                        "left_command"
-                    ],
-                    "optional": [
-                        "any"
-                    ]
-                }
-            },
-            "to": [
-                {
-                    "key_code": "home"
-                }
-            ],
-            "type": "basic"
-        },
-        {
-            "from": {
-                "key_code": "semicolon",
-                "modifiers": {
-                    "mandatory": [
-                        "left_command"
-                    ],
-                    "optional": [
-                        "any"
-                    ]
-                }
-            },
-            "to": [
-                {
-                    "key_code": "end"
-                }
-            ],
-            "type": "basic"
-        }
-    ]
+	"description": "Change left_command+g; to home and end",
+	"manipulators": [
+		{
+			"from": {
+				"key_code": "g",
+				"modifiers": {
+					"mandatory": ["left_command"],
+					"optional": ["any"]
+				}
+			},
+			"to": [
+				{
+					"key_code": "home"
+				}
+			],
+			"type": "basic"
+		},
+		{
+			"from": {
+				"key_code": "semicolon",
+				"modifiers": {
+					"mandatory": ["left_command"],
+					"optional": ["any"]
+				}
+			},
+			"to": [
+				{
+					"key_code": "end"
+				}
+			],
+			"type": "basic"
+		}
+	]
 }
