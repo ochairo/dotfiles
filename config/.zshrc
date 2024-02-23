@@ -11,24 +11,23 @@ setopt hist_save_no_dups      # Do not write a duplicate event to the history fi
 setopt hist_verify            # Do not execute immediately upon history expansion.
 setopt inc_append_history     # Write to the history file immediately, not when the shell exits.
 setopt share_history          # Share history between different instances of the shell.
-
 setopt no_beep                # Don't beep on error.
 
 # -------------------- Powerlevel10k -------------------------------------------
-[[ -d /opt/homebrew/share/powerlevel10k ]] && \
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # -------------------- Autosuggestions ----------------------------------------
-[[ -d $HOME/.zsh/plugins/zsh-users/zsh-autosuggestions ]] && \
-source $HOME/.zsh/plugins/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # -------------------- Highlighting -------------------------------------------
-[[ -d $HOME/.zsh/plugins/zsh-users/zsh-syntax-highlighting ]] && \
-source $HOME/.zsh/plugins/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # -------------------- Completions ---------------------------------------------
-[[ -d $HOME/.zsh/plugins/zsh-users/zsh-completions ]] && \
-source $HOME/.zsh/plugins/zsh-users/zsh-completions/zsh-completions.plugin.zsh
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  autoload -Uz compinit
+  compinit
+fi
 
 # -------------------- Aliases ------------------------------------------------
 alias la="ls -a"
