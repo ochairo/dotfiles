@@ -69,7 +69,7 @@ done
 
 echo ""
 echo ""
-echo "${PASTEL_GREEN}                         ... Setting ...${NC}"
+echo "${PASTEL_GREEN}                          . ... Setting ... .${NC}"
 
 brew_output=$(./scripts/brew.sh 2>&1)
 brew_exit_status=$?
