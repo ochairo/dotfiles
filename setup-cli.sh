@@ -2,14 +2,9 @@
 
 clear
 
-RED='\033[0;31m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-GREEN='\033[0;32m'
-PASTEL_RED='\033[1;91m'
-PASTEL_YELLOW='\033[1;93m'
-PASTEL_BLUE='\033[1;94m'
-PASTEL_GREEN='\033[1;92m'
+RED='\033[1;91m'
+BLUE='\033[1;94m'
+GREEN='\033[1;92m'
 GRAY='\033[1;30m'
 NC='\033[0m'
 PDW=$(pwd)
@@ -28,7 +23,7 @@ error_handler() {
 
 export REPO_DIR=$PDW
 
-echo "${PASTEL_BLUE}"
+echo "${BLUE}"
 echo "0000000000000000000000000000000000000000000000000000000000000000000000000"
 echo ""
 echo "                   Welcome to ochairo's basic setup!                     "
@@ -48,7 +43,7 @@ fi
 
 valid_choice=false
 while [ "$valid_choice" == false ]; do
-    echo ${PASTEL_GREEN}
+    echo ${GREEN}
     read -p "Do you want to continue? (y/n):" choice
     echo ${NC}
 
@@ -59,21 +54,21 @@ while [ "$valid_choice" == false ]; do
             ;;
         n|N)
             echo "No"
-            echo "${PASTEL_BLUE}"
+            echo "${BLUE}"
             echo "_________________________________________________________________________"
             echo "                          PROCESS CANCELED!"
             echo "${NC}"
             exit 1
             ;;
         *)
-            echo " ${PASTEL_RED}Invalid choice. Please enter 'y' or 'n'${NC}"
+            echo " ${RED}Invalid choice. Please enter 'y' or 'n'${NC}"
             ;;
     esac
 done
 
 echo ""
 echo ""
-echo "${PASTEL_GREEN}                          . ... Setting ... .${NC}"
+echo "${GREEN}                          . ... Setting ... .${NC}"
 
 brew_output=$(./scripts/brew.sh 2>&1)
 brew_exit_status=$?
@@ -147,7 +142,7 @@ if [ $flutter_output_status -ne 0 ]; then
     error_handler $flutter_output_status "$flutter_output"
 fi
 
-echo ${PASTEL_BLUE}
+echo ${BLUE}
 echo "0000000000000000000000000000000000000000000000000000000000000000000000000"
 echo ""
 echo "               🚀 CONGRATULATIONS! SETUP IS COMPLETE! 🚀" 
