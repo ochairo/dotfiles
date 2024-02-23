@@ -1,8 +1,9 @@
 # dotfiles CLI
 
 This is a dotfiles-CLI for clean install.
-
-Just basic commanline tools, templates, themes, etc.
+  - Basic commanline tools
+  - Themes
+  - Templates, etc..
 
 ## Getting Started
 
