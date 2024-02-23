@@ -1,4 +1,4 @@
-# dotfiles
+# dotfiles CLI
 
 Basic setup CLI for macOS
 
