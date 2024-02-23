@@ -1,0 +1,43 @@
+{
+    "description": "Change left_command+io to delete",
+    "manipulators": [
+        {
+            "from": {
+                "key_code": "i",
+                "modifiers": {
+                    "mandatory": [
+                        "left_command"
+                    ],
+                    "optional": [
+                        "any"
+                    ]
+                }
+            },
+            "to": [
+                {
+                    "key_code": "delete_or_backspace"
+                }
+            ],
+            "type": "basic"
+        },
+        {
+            "from": {
+                "key_code": "o",
+                "modifiers": {
+                    "mandatory": [
+                        "left_command"
+                    ],
+                    "optional": [
+                        "any"
+                    ]
+                }
+            },
+            "to": [
+                {
+                    "key_code": "delete_forward"
+                }
+            ],
+            "type": "basic"
+        }
+    ]
+}

@@ -1,0 +1,94 @@
+{
+  "cSpell.enabled": true,
+  "cSpell.patterns": [
+    {
+      "description": "Japanese letters",
+      "name": "japaneseLetters",
+      "pattern": "[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"
+    },
+    {
+      "description": "Japanese prefectures",
+      "name": "japanesePrefectures",
+      "pattern": [
+        "aichi",
+        "akita",
+        "aomori",
+        "chiba",
+        "ehime",
+        "fukui",
+        "fukuoka",
+        "fukushima",
+        "gifu",
+        "gumma",
+        "gunma",
+        "hiroshima",
+        "hokkaido",
+        "hyogo",
+        "ibaraki",
+        "ishikawa",
+        "iwate",
+        "kagawa",
+        "kagoshima",
+        "kanagawa",
+        "kochi",
+        "kumamoto",
+        "kyoto",
+        "mie",
+        "miyagi",
+        "miyazaki",
+        "nagano",
+        "nagasaki",
+        "nara",
+        "niigata",
+        "oita",
+        "okayama",
+        "okinawa",
+        "osaka",
+        "saga",
+        "saitama",
+        "shiga",
+        "shimane",
+        "shizuoka",
+        "tochigi",
+        "tokushima",
+        "tokyo",
+        "tottori",
+        "toyama",
+        "wakayama",
+        "yamagata",
+        "yamaguchi",
+        "yamanashi"
+      ]
+    }
+  ],
+  "cSpell.ignoreRegExpList": [
+    "japaneseLetters",
+    "japanesePrefectures"
+  ],
+  "cSpell.words": [
+    "catppuccin",
+    "dotfiles",
+    "iterm",
+    "karabiner",
+    "meslolgs",
+    "neovim",
+    "nvim",
+    "ochairo",
+    "usekeychain"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "wordWrapColumn",
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative"
+}
