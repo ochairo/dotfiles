@@ -42,6 +42,10 @@ echo "Feel free to use it as a reference for your own setup."
 echo "※ you can find the source code at ${GRAY}https://github.com/ochairo/dotfiles${NC}"
 echo ""
 
+if [ `uname` != "Darwin" ]; then
+    error_handler 1 "This is only for macOS"
+fi
+
 valid_choice=false
 while [ "$valid_choice" == false ]; do
     echo ${PASTEL_GREEN}
