@@ -1,6 +1,6 @@
 # dotfiles CLI
 
-Basic setup CLI for macOS
+This is a dotfiles-CLI for clean install.
 
 ## Getting Started
 
