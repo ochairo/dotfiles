@@ -3,11 +3,23 @@
 echo "essentails.sh"
 
 # -------------------- Basic commands ------------------------------------------
-brew install tree
-brew install wget
-brew install lf
+brew install bash
+brew install coreutils
 brew install fd
+brew install findutils
+brew install gawk
+brew install gnu-sed
+brew install gnu-tar
+brew install grep
+brew install gzip
+brew install less
+brew install make
+brew install openssh
 brew install ripgrep
+brew install rsync
+brew install tree
+brew install unzip
+brew install wget
 
 # -------------------- Version managers ----------------------------------------
 brew install fnm
@@ -31,18 +43,18 @@ brew install --cask iterm2
 brew install --cask google-japanese-ime
 
 # -------------------- Keybindings ---------------------------------------------
-brew install --cask karabiner-elements
 brew install --cask hhkb
+brew install --cask karabiner-elements
 
 # -------------------- Browsers ------------------------------------------------
 brew install --cask brave-browser
-brew install --cask google-chrome
 brew install --cask firefox
+brew install --cask google-chrome
 brew install --cask microsoft-edge
 
 # -------------------- Chats ---------------------------------------------------
-brew install --cask microsoft-teams
 brew install --cask discord
+brew install --cask microsoft-teams
 brew install --cask slack
 
 # -------------------- Screenshot ----------------------------------------------
