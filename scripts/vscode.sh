@@ -6,13 +6,15 @@ brew install --cask visual-studio-code
 
 # -------------------- Essentials ----------------------------------------------
 code --install-extension aaron-bond.better-comments            # Comment Highlighter
+code --install-extension chrmarti.regex                        # Regex Previewer
 code --install-extension streetsidesoftware.code-spell-checker # Spell Checker
 code --install-extension usernamehw.errorlens                  # Error Displayer
-code --install-extension chrmarti.regex                        # Regex Previewer
 code --install-extension wmaurer.change-case                   # Change Case
 
 # -------------------- Formatter -----------------------------------------------
 code --install-extension esbenp.prettier-vscode
+code --install-extension EditorConfig.EditorConfig
+code --install-extension foxundermoon.shell-format
 
 # -------------------- Nvim ----------------------------------------------------
 code --install-extension asvetliakov.vscode-neovim
@@ -24,9 +26,6 @@ code --install-extension GitHub.copilot-chat
 # -------------------- Git -----------------------------------------------------
 code --install-extension eamodio.gitlens
 code --install-extension mhutchie.git-graph
-
-# -------------------- Live Share ----------------------------------------------
-code --install-extension ms-vsliveshare.vsliveshare
 
 # -------------------- API Test ------------------------------------------------
 code --install-extension Arjun.swagger-viewer
