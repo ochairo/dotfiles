@@ -12,7 +12,7 @@ Dotfiles for macOS
   sh ./start-setup.sh
   ```
 
-## Oher Configurations
+## Configurations
 
 1. Open or re-open your terminal.
 1. Change the font to `MesloLGS NF`.
@@ -35,6 +35,6 @@ Dotfiles for macOS
 
 ![vscode](./assets/vs-code.png)
 
-## TODO: Detailed Configurations
+## TODO: Other Configurations and Customizations
 
 - ...
