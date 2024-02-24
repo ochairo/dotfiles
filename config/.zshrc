@@ -35,6 +35,9 @@ alias lgit="lazygit"
 alias ll="ls -lA"
 alias ls="ls -G"
 
+# -------------------- Directory environment manager ---------------------------------------
+eval "$(direnv hook zsh)"
+
 # -------------------- Node version(fnm) ---------------------------------------
 eval "$(fnm env --use-on-cd)"
 
