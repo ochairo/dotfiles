@@ -47,7 +47,6 @@ brew install --cask google-japanese-ime
 
 # -------------------- Keybindings ---------------------------------------------
 brew install --cask hhkb
-brew install --cask karabiner-elements
 
 # -------------------- Browsers ------------------------------------------------
 brew install --cask brave-browser
