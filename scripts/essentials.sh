@@ -21,6 +21,9 @@ brew install tree
 brew install unzip
 brew install wget
 
+# -------------------- Environment manage ----------------------------------------
+brew install direnv
+
 # -------------------- Version managers ----------------------------------------
 brew install fnm
 fnm install --lts
