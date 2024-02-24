@@ -5,10 +5,6 @@ WIP: This is a dotfiles-CLI for clean install.
   - Themes
   - Templates, etc..
 
-## Why CLI?
-
-- Just for Fun.
-
 ## Getting Started
 
 - Clone the repository.
