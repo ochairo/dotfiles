@@ -1,7 +1,5 @@
 #!/bin/zsh -eu
 
-echo "vim.sh"
-
 brew install vim
 
 git clone https://github.com/catppuccin/vim.git $REPO_DIR/dotfiles/config/vim/colorschemes/catppuccin

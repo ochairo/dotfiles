@@ -1,7 +1,5 @@
 #!/bin/zsh -eu
 
-echo "nvim.sh"
-
 brew install neovim
 
 python -m pip install --user --upgrade pynvim

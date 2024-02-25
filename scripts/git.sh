@@ -1,7 +1,5 @@
 #!/bin/zsh -eu
 
-echo "git.sh"
-
 brew install git
 
 brew install lazygit

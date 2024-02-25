@@ -1,7 +1,5 @@
 #!/bin/zsh -eu
 
-echo "iterm.sh"
-
 git clone https://github.com/catppuccin/iterm.git $REPO_DIR/dotfiles/config/iterm/colors/catppuccin
 
 mkdir -p $HOME/.config/iterm2/catppuccin/colors

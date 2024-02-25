@@ -1,7 +1,5 @@
 #!/bin/zsh -eu
 
-echo "vscode.sh"
-
 brew install --cask visual-studio-code
 
 # -------------------- Essentials ----------------------------------------------

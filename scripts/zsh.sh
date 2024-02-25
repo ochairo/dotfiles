@@ -1,7 +1,5 @@
 #!/bin/zsh -eu
 
-echo "zsh.sh"
-
 brew install zsh
 
 brew install zsh-autosuggestions

@@ -1,7 +1,5 @@
 #!/bin/zsh -eu
 
-echo "essentails.sh"
-
 # -------------------- Basic commands ------------------------------------------
 brew install bash
 brew install coreutils

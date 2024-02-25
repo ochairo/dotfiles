@@ -1,7 +1,5 @@
 #!/bin/zsh -eu
 
-echo "flutter.sh"
-
 sudo softwareupdate --install-rosetta --agree-to-license
 
 brew tap leoafarias/fvm
