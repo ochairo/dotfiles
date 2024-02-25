@@ -6,6 +6,6 @@ brew install git
 
 brew install lazygit
 
-ln -nfs $REPO_DIR/dotfiles/config/.gitconfig $HOME
+cp -i $REPO_DIR/dotfiles/config/.gitconfig $HOME
 
 exit 0
