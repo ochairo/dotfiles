@@ -76,73 +76,98 @@ done
 
 # Start the setup ---------------------------------------------------------------------------------
 echo "${GREEN}                            . ... Setting ... .${NC}"
+echo ""
 
+echo "Settingup homebrew..."
+echo ""
 brew_output=$(./scripts/brew.sh 2>&1)
 brew_exit_status=$?
 if [ $brew_exit_status -ne 0 ]; then
   error_handler $brew_exit_status "$brew_output"
 fi
 
+echo "${GREEN}Settingup essentails commands...${NC}"
+echo ""
 essentials_output=$(./scripts/essentials.sh 2>&1)
 essentials_output_status=$?
 if [ $essentials_output_status -ne 0 ]; then
   error_handler $essentials_output_status "$essentials_output"
 fi
 
+echo "${GREEN}Settingup zsh...${NC}"
+echo ""
 zsh_output=$(./scripts/zsh.sh 2>&1)
 zsh_output_status=$?
 if [ $zsh_output_status -ne 0 ]; then
   error_handler $zsh_output_status "$zsh_output"
 fi
 
+echo "${GREEN}Settingup tmux...${NC}"
+echo ""
 tmux_output=$(./scripts/tmux.sh 2>&1)
 tmux_output_status=$?
 if [ $tmux_output_status -ne 0 ]; then
   error_handler $tmux_output_status "$tmux_output"
 fi
 
+echo "${GREEN}Settingup fonts...${NC}"
+echo ""
 fonts_output=$(./scripts/fonts.sh 2>&1)
 fonts_output_status=$?
 if [ $fonts_output_status -ne 0 ]; then
   error_handler $fonts_output_status "$fonts_output"
 fi
 
+echo "${GREEN}Settingup git...${NC}"
+echo ""
 git_output=$(./scripts/git.sh 2>&1)
 git_output_status=$?
 if [ $git_output_status -ne 0 ]; then
   error_handler $git_output_status "$git_output"
 fi
 
+echo "${GREEN}Settingup vim...${NC}"
+echo ""
 vim_output=$(./scripts/vim.sh 2>&1)
 vim_output_status=$?
 if [ $git_output_status -ne 0 ]; then
   error_handler $vim_output_status "$vim_output"
 fi
 
+echo "${GREEN}Settingup nvim...${NC}"
+echo ""
 nvim_output=$(./scripts/nvim.sh 2>&1)
 nvim_output_status=$?
 if [ $nvim_output_status -ne 0 ]; then
   error_handler $nvim_output_status "$nvim_output"
 fi
 
+echo "${GREEN}Settingup iterm...${NC}"
+echo ""
 iterm_output=$(./scripts/iterm.sh 2>&1)
 iterm_output_status=$?
 if [ $iterm_output_status -ne 0 ]; then
   error_handler $iterm_output_status "$iterm_output"
 fi
 
+echo "${GREEN}Settingup emacs...${NC}"
+echo ""
 emacs_output=$(./scripts/emacs.sh 2>&1)
 emacs_output_status=$?
 if [ $emacs_output_status -ne 0 ]; then
   error_handler $emacs_output_status "$emacs_output"
 fi
 
+echo "${GREEN}Settingup vscode...${NC}"
+echo ""
 vscode_output=$(./scripts/vscode.sh 2>&1)
 vscode_output_status=$?
 if [ $vscode_output_status -ne 0 ]; then
   error_handler $vscode_output_status "$vscode_output"
 fi
 
+echo "${GREEN}Settingup flutter...${NC}"
+echo ""
 flutter_output=$(./scripts/flutter.sh 2>&1)
 flutter_output_status=$?
 if [ $flutter_output_status -ne 0 ]; then
