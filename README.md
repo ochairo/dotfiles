@@ -1,9 +1,6 @@
-# WIP: dotfiles CLI
+# dotfiles
 
-Dotfiles-CLI for clean install.
-  - Basic commanline tools
-  - Themes
-  - Templates, etc..
+A Simple CLI for dotfiles clean install.
 
 ## Getting Started
 
