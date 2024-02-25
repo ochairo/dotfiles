@@ -79,7 +79,7 @@ echo "${GREEN}                            . ... Setting ... .${NC}"
 echo ""
 
 scripts=(
-  "./scripts/brew.sh"
+  "/scripts/brew.sh"
   "/scripts/essentials.sh"
   "/scripts/zsh.sh"
   "/scripts/tmux.sh"
