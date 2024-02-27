@@ -19,7 +19,7 @@
 [gpg]
   format = ssh
 [gpg "ssh"]
-	allowedSignersFile = ${GIT_ALLOWED_SIGNERS_FILE}
+	allowedSignersFile = ${allowedSignersFile}
 [merge]
   ff = false
 [pull]
@@ -27,8 +27,9 @@
 [rebase]
   autosquash = true
 [user]
-  name = ${GIT_NAME}
-  email = ${GIT_EMAIL}
-	signingkey = ${GIT_SIGNINGKEY}
+  name = ${name}
+  email = ${email}
+	signingkey = ${signingkey}
+
 [init]
 	defaultBranch = main

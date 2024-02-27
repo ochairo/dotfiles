@@ -42,6 +42,11 @@ alias lgit="lazygit"
 alias ll="ls -lA"
 alias ls="ls -G"
 
+# -------------------- SSH agent ----------------------------------------------
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval "$(ssh-agent -s 2>/dev/null)"
+fi
+
 # -------------------- Directory environment manager --------------------------
 eval "$(direnv hook zsh)"
 

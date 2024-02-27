@@ -1,33 +1,33 @@
 # dotfiles
 
-A Simple CLI for dotfiles clean install.
+A Simple dotfiles CLI.
 
 ## Getting Started
 
-- Clone the repository.
-
-- Execute the setup CLI.
-
-  ```sh
-  sh ./setup-cli.sh
-  ```
+```sh
+sh ./bootstrap.sh
+```
 
 ## Configurations
 
-1. Open or re-open your terminal.
-1. Change the font to `MesloLGS NF`.
-1. Import the colorscheme from `~.config/iterm2/catppuccin/colors`.
-1. After complete all above, Follow the instructions displayed in the terminal to complete the setup.
+1. Open or re-open iTerm2.
+    1. Open preferences
+        1. Change the font to `MesloLGS NF`.
+        1. Select colorscheme of your preference.
+1. Start tmux
+    1. Press `Control` and `s`. Then `Shift` and `i` to install plugins.
 
-### Vim
+## Editors
+
+### Vim + tmux
 
 ![vim](./assets/tmux-vim.png)
 
-### Neovim
+### Neovim + tmux
 
 ![neovim](./assets/tmux-neovim.png)
 
-### Emacs
+### Emacs + tmux
 
 ![emacs](./assets/tmux-emacs.png)
 

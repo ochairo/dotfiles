@@ -1,6 +1,8 @@
-#!/bin/zsh -eu
+#!/bin/bash -eu
 
-brew install --cask visual-studio-code
+if ! brew list --cask | grep -q "visual-studio-code"; then
+  brew install --cask visual-studio-code
+fi
 
 # -------------------- Essentials ----------------------------------------------
 code --install-extension aaron-bond.better-comments            # Comment Highlighter
@@ -26,8 +28,8 @@ code --install-extension eamodio.gitlens
 code --install-extension mhutchie.git-graph
 
 # -------------------- API Test ------------------------------------------------
-code --install-extension Arjun.swagger-viewer
-code --install-extension rangav.vscode-thunder-client
+# code --install-extension Arjun.swagger-viewer
+# code --install-extension rangav.vscode-thunder-client
 
 # -------------------- HTML ----------------------------------------------------
 code --install-extension formulahendry.auto-close-tag
