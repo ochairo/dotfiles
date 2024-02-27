@@ -1,6 +1,6 @@
 # dotfiles
 
-A Simple dotfiles CLI.
+dotfiles CLI
 
 ## Getting Started
 
@@ -10,31 +10,32 @@ sh ./bootstrap.sh
 
 ## Configurations
 
+### iTerm2
+
 1. Open or re-open iTerm2.
-    1. Open preferences
-        1. Change the font to `MesloLGS NF`.
-        1. Select colorscheme of your preference.
+   1. Open preferences
+      1. Change the font to `MesloLGS NF`.
+      1. Select colorscheme of your preference.
+
+### Tmux
+
 1. Start tmux
-    1. Press `Control` and `s`. Then `Shift` and `i` to install plugins.
+1. Install plugins
+   1. Press `Control` and `s`. Then `Shift` and `i` to install plugins.
 
-## Editors
+### Neovim
 
-### Vim + tmux
+1. Start Neovim
+1. Install plugins
+   1. Press `l`
+   1. Press `U`
 
-![vim](./assets/tmux-vim.png)
+### VS code
 
-### Neovim + tmux
+1. Start VS code
+1. ...
 
-![neovim](./assets/tmux-neovim.png)
+### Emacs
 
-### Emacs + tmux
-
-![emacs](./assets/tmux-emacs.png)
-
-### VScode
-
-![vscode](./assets/vs-code.png)
-
-## TODO: Other Configurations and Customizations
-
-- ...
+1. Start Emacs
+1. ...
