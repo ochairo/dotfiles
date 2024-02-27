@@ -22,3 +22,8 @@ sh ./bootstrap.sh
 1. Start tmux
 1. Install plugins
    1. Press `Control` and `s`. Then `Shift` and `i`.
+
+## Editor sample
+
+tmux + vim
+![iTerm](./assets/iTerm.png)
