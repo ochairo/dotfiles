@@ -21,4 +21,4 @@ sh ./bootstrap.sh
 
 1. Start tmux
 1. Install plugins
-   1. Press `Control` and `s`. Then `Shift` and `i` to install plugins.
+   1. Press `Control` and `s`. Then `Shift` and `i`.
