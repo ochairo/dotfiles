@@ -3,16 +3,13 @@
 # Clear the terminal ----------------------------------------------------------
 clear
 
-# Set the color variables -----------------------------------------------------
-BLUE=$(tput setaf 4)
-GRAY=$(tput setaf 8)
-GREEN=$(tput setaf 2)
-RED=$(tput setaf 1)
-NC=$(tput sgr0)
-PDW=$(pwd)
-
-# Set the environment variables -----------------------------------------------
-export REPO_DIR=$PDW
+# Set variables -----------------------------------------------------
+export BLUE=$(tput setaf 4)
+export GRAY=$(tput setaf 8)
+export GREEN=$(tput setaf 2)
+export RED=$(tput setaf 1)
+export NC=$(tput sgr0)
+export REPO_DIR=$(pwd)
 
 # Error handling --------------------------------------------------------------
 source $REPO_DIR/scripts/bootstrap/handle_error.sh
