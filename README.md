@@ -26,4 +26,4 @@ sh ./bootstrap.sh
 ## Editor sample
 
 tmux + vim
-![iTerm](./assets/iTerm.png)
+![iTerm](./assets/iTerm2.png)
