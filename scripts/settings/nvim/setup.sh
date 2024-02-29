@@ -2,8 +2,7 @@
 
 yes="Yes"
 no="No"
-response=""
-handle_question "response" "Do you want to setup Emacs?" "$yes" "$no"
+handle_question response "Do you want to setup Emacs?" "$yes" "$no"
 
 echo "> Your selection: $response"
 case "$response" in

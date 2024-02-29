@@ -6,8 +6,7 @@ fi
 
 yes="Yes"
 no="No"
-response=""
-handle_question "response" "Do you want to continue?" "$yes" "$no"
+handle_question response "Do you want to continue?" "$yes" "$no"
 
 echo "> Your selection: $response"
 case "$response" in
@@ -21,5 +20,3 @@ case "$response" in
   exit 1
   ;;
 esac
-
-exit 0
