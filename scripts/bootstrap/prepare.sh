@@ -10,7 +10,11 @@ handle_question response "Do you want to continue?" "$yes" "$no"
 
 echo "> Your selection: $response"
 case "$response" in
-"$yes") ;;
+"$yes")
+  if ! command -v brew &>/dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+  ;;
 "$no")
   echo ""
   echo "${BLUE}"
