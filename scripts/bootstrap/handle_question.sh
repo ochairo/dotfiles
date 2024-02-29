@@ -2,8 +2,8 @@
 
 handle_question() {
   local res=$1
-  question=$2
-  options=("${@:3}")
+  local question=$2
+  local options=("${@:3}")
 
   while true; do
     echo "${BLUE}$question${NC}"
@@ -11,8 +11,8 @@ handle_question() {
       echo "  $((i + 1)). ${options[i]}"
     done
     read -ers -p "  " choice
-    if [[ "$choice" -ge 1 && "$choice" -le ${#options[@]} ]]; then
-      eval $res="${options[choice - 1]}"
+    if [[ "$choice" =~ ^[1-9]+$ && "$choice" -ge 1 && "$choice" -le ${#options[@]} ]]; then
+      eval "$res='${options[choice - 1]}'"
       return 0
     else
       echo ""
