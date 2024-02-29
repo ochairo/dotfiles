@@ -11,16 +11,14 @@ export RED=$(tput setaf 1)
 export NC=$(tput sgr0)
 export REPO_DIR=$(pwd)
 
-# HANDLER: Error --------------------------------------------------------------
+# Load handlers ---------------------------------------------------------------
 source $REPO_DIR/scripts/bootstrap/handlers/error.sh
-
-# HANDLER: Question -----------------------------------------------------------
 source $REPO_DIR/scripts/bootstrap/handlers/question.sh
 
-# MESSAGE: Welcome ------------------------------------------------------------
+# Welcome message -----------------------------------------------------
 source $REPO_DIR/scripts/bootstrap/messages/welcome.sh
 
-# Prepare for setup
+# Prepare ---------------------------------------------------------------------
 source $REPO_DIR/scripts/bootstrap/prepare.sh
 
 # Setup -----------------------------------------------------------------------
@@ -29,7 +27,7 @@ source $REPO_DIR/scripts/bootstrap/setup.sh
 # Cleanup ---------------------------------------------------------------------
 source $REPO_DIR/scripts/bootstrap/cleanup.sh
 
-# MESSAGE: Complete -----------------------------------------------------------
+# Complete message -----------------------------------------------------------
 source $REPO_DIR/scripts/bootstrap/messages/complete.sh
 
 exit 0
