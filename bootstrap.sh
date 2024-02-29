@@ -4,18 +4,18 @@
 clear
 
 # VARIABLES -------------------------------------------------------------------
-export BLUE=$(tput setaf 4)
-export GRAY=$(tput setaf 8)
-export GREEN=$(tput setaf 2)
-export RED=$(tput setaf 1)
-export NC=$(tput sgr0)
-export REPO_DIR=$(pwd)
+BLUE=$(tput setaf 4)
+GRAY=$(tput setaf 8)
+GREEN=$(tput setaf 2)
+RED=$(tput setaf 1)
+NC=$(tput sgr0)
+REPO_DIR=$(pwd)
 
-# Load handlers ---------------------------------------------------------------
+# HANDLERS --------------------------------------------------------------------
 source $REPO_DIR/scripts/handlers/error.sh
 source $REPO_DIR/scripts/handlers/question.sh
 
-# Welcome message -----------------------------------------------------
+# MESSAGE: Welcome ------------------------------------------------------------
 source $REPO_DIR/scripts/messages/welcome.sh
 
 # Prepare ---------------------------------------------------------------------
@@ -27,7 +27,7 @@ source $REPO_DIR/scripts/setup.sh
 # Cleanup ---------------------------------------------------------------------
 source $REPO_DIR/scripts/cleanup.sh
 
-# Complete message -----------------------------------------------------------
+# MESSAGE: Complete -----------------------------------------------------------
 source $REPO_DIR/scripts/messages/complete.sh
 
 exit 0
