@@ -2,10 +2,11 @@
 
 yes="Yes"
 no="No"
-handle_question "Do you want to setup Emacs?" "$yes" "$no"
+response=""
+handle_question "response" "Do you want to setup Emacs?" "$yes" "$no"
 
-echo "> Your selection: $selected_option"
-case "$selected_option" in
+echo "> Your selection: $response"
+case "$response" in
 "$yes")
   if ! brew list --formula | grep -q "emacs"; then
     brew install emacs
