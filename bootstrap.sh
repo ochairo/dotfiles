@@ -12,22 +12,22 @@ export NC=$(tput sgr0)
 export REPO_DIR=$(pwd)
 
 # Load handlers ---------------------------------------------------------------
-source $REPO_DIR/scripts/bootstrap/handlers/error.sh
-source $REPO_DIR/scripts/bootstrap/handlers/question.sh
+source $REPO_DIR/scripts/handlers/error.sh
+source $REPO_DIR/scripts/handlers/question.sh
 
 # Welcome message -----------------------------------------------------
-source $REPO_DIR/scripts/bootstrap/messages/welcome.sh
+source $REPO_DIR/scripts/messages/welcome.sh
 
 # Prepare ---------------------------------------------------------------------
-source $REPO_DIR/scripts/bootstrap/prepare.sh
+source $REPO_DIR/scripts/prepare.sh
 
 # Setup -----------------------------------------------------------------------
-source $REPO_DIR/scripts/bootstrap/setup.sh
+source $REPO_DIR/scripts/setup.sh
 
 # Cleanup ---------------------------------------------------------------------
-source $REPO_DIR/scripts/bootstrap/cleanup.sh
+source $REPO_DIR/scripts/cleanup.sh
 
 # Complete message -----------------------------------------------------------
-source $REPO_DIR/scripts/bootstrap/messages/complete.sh
+source $REPO_DIR/scripts/messages/complete.sh
 
 exit 0
