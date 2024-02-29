@@ -20,7 +20,7 @@ for SETTING in "${SETTINGS[@]}"; do
   echo " .${SETTING//$REPO_DIR/}"
   echo ""
 
-  $SETTING
+  source $SETTING
 
   if [ $? -ne 0 ]; then
     handle_error "Error running .${SETTING//$REPO_DIR/}"
