@@ -17,10 +17,10 @@ case "$response" in
   ;;
 "$no")
   echo ""
-  echo "${BLUE}"
+  echo "${COLOR_BLUE}"
   echo "________________________________________________________________________________"
   echo "                              PROCESS CANCELED!"
-  echo "${NC}"
+  echo "${COLOR_DEFAULT}"
   exit 1
   ;;
 esac

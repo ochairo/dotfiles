@@ -4,7 +4,7 @@ handle_error() {
   local exit_code=$1
   local error_message=$2
 
-  echo "${RED}"
+  echo "${COLOR_RED}"
   echo "────────────────────────────────── ERROR ───────────────────────────────────────"
 
   if [[ "$exit_code" =~ ^[0-9]+$ ]]; then
@@ -19,7 +19,7 @@ handle_error() {
 
   echo "________________________________________________________________________________"
   echo "                                PROCESS END"
-  echo "${NC}"
+  echo "${COLOR_DEFAULT}"
 
   exit "${exit_code:-1}"
 }

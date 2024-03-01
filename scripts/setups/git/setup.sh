@@ -18,8 +18,8 @@ fi
 
 if [ ! -d $HOME/.config/git ]; then
   mkdir -p $HOME/.config/git
-  cp $REPO_DIR/scripts/settings/git/config $HOME/.config/git/config
-  cp $REPO_DIR/scripts/settings/git/ignore $HOME/.config/git/ignore
+  cp $PATH_SETUPS/git/config $HOME/.config/git/config
+  cp $PATH_SETUPS/git/ignore $HOME/.config/git/ignore
 fi
 
 exit 0

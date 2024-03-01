@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 # Finish the setup --------------------------------------------------------------------------------
-echo ${BLUE}
+echo ${COLOR_BLUE}
 echo ""
 echo ""
 echo "                           . ... Setting end ... ."
@@ -28,4 +28,4 @@ echo ""
 echo ""
 echo ""
 echo ""
-echo ${NC}
+echo ${COLOR_DEFAULT}

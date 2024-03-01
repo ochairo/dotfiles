@@ -9,6 +9,6 @@ if ! brew list --formula | grep -q "tpm"; then
 fi
 
 rm $HOME/.tmux.conf
-ln -nfs $REPO_DIR/scripts/settings/tmux/.tmux.conf $HOME/.tmux.conf
+ln -nfs $PATH_SETUPS/tmux/.tmux.conf $HOME/.tmux.conf
 
 exit 0

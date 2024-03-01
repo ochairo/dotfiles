@@ -6,7 +6,7 @@ handle_question() {
   local options=("${@:3}")
 
   while true; do
-    echo "${BLUE}$question${NC} (Enter a number)"
+    echo "${COLOR_BLUE}$question${COLOR_DEFAULT} (Enter a number)"
     for ((i = 0; i < ${#options[@]}; i++)); do
       echo "  $((i + 1)). ${options[i]}"
     done
@@ -16,7 +16,7 @@ handle_question() {
       return 0
     else
       echo ""
-      echo "$RED  Please enter a number.$NC"
+      echo "${COLOR_RED}  Please enter a number.${COLOR_DEFAULT}"
       echo ""
       echo ""
     fi

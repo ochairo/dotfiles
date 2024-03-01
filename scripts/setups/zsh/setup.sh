@@ -10,10 +10,10 @@ brew install powerlevel10k
 chmod go-w '/opt/homebrew/share'
 chmod -R go-w '/opt/homebrew/share/zsh'
 
-ln -nfs $REPO_DIR/scripts/settings/zsh/.zshrc $HOME
-ln -nfs $REPO_DIR/scripts/settings/zsh/.zshenv $HOME
-ln -nfs $REPO_DIR/scripts/settings/zsh/.zlogin $HOME
-ln -nfs $REPO_DIR/scripts/settings/zsh/.zlogout $HOME
-ln -nfs $REPO_DIR/scripts/settings/zsh/.p10k.zsh $HOME
+ln -nfs $PATH_SETUPS/zsh/.zshrc $HOME
+ln -nfs $PATH_SETUPS/zsh/.zshenv $HOME
+ln -nfs $PATH_SETUPS/zsh/.zlogin $HOME
+ln -nfs $PATH_SETUPS/zsh/.zlogout $HOME
+ln -nfs $PATH_SETUPS/zsh/.p10k.zsh $HOME
 
 exit 0

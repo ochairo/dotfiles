@@ -3,31 +3,37 @@
 # Clear the terminal ----------------------------------------------------------
 clear
 
-# VARIABLES -------------------------------------------------------------------
-BLUE=$(tput setaf 4)
-GRAY=$(tput setaf 8)
-GREEN=$(tput setaf 2)
-RED=$(tput setaf 1)
-NC=$(tput sgr0)
-REPO_DIR=$(pwd)
+# VARIABLES: Colors -----------------------------------------------------------
+COLOR_BLUE=$(tput setaf 4)
+COLOR_GRAY=$(tput setaf 8)
+COLOR_GREEN=$(tput setaf 2)
+COLOR_RED=$(tput setaf 1)
+COLOR_DEFAULT=$(tput sgr0)
+
+# VARIABLES: Paths ------------------------------------------------------------
+PATH_ROOT=$(pwd)
+PATH_SCRIPTS=$PATH_ROOT/scripts
+PATH_HANDLERS=$PATH_SCRIPTS/handlers
+PATH_MESSAGES=$PATH_SCRIPTS/messages
+PATH_SETUPS=$PATH_SCRIPTS/setups
 
 # HANDLERS --------------------------------------------------------------------
-source $REPO_DIR/scripts/handlers/error.sh
-source $REPO_DIR/scripts/handlers/question.sh
+source $PATH_HANDLERS/error.sh
+source $PATH_HANDLERS/question.sh
 
 # MESSAGE: Welcome ------------------------------------------------------------
-source $REPO_DIR/scripts/messages/welcome.sh
+source $PATH_MESSAGES/welcome.sh
 
 # Prepare ---------------------------------------------------------------------
-source $REPO_DIR/scripts/prepare.sh
+source $PATH_SCRIPTS/prepare.sh
 
 # Setup -----------------------------------------------------------------------
-source $REPO_DIR/scripts/setup.sh
+source $PATH_SCRIPTS/setup.sh
 
 # Cleanup ---------------------------------------------------------------------
-source $REPO_DIR/scripts/cleanup.sh
+source $PATH_SCRIPTS/cleanup.sh
 
 # MESSAGE: Complete -----------------------------------------------------------
-source $REPO_DIR/scripts/messages/complete.sh
+source $PATH_MESSAGES/complete.sh
 
 exit 0

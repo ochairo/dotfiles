@@ -22,7 +22,7 @@ case "$response" in
 
   rm -dfr $HOME/.config/nvim/lua/plugins
   mkdir -p $HOME/.config/nvim/lua/plugins
-  ln -nfs $REPO_DIR/scripts/settings/nvim/plugins/* $HOME/.config/nvim/lua/plugins
+  ln -nfs $PATH_SETUPS/nvim/plugins/* $HOME/.config/nvim/lua/plugins
   ;;
 "$no") ;;
 esac
