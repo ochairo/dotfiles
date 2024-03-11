@@ -14,7 +14,7 @@
 1. Open or re-open iTerm2.
 1. Open preferences
     1. Change the font to `MesloLGS NF`.
-    1. Select colorscheme of your preference.
+    1. Select catppuccin colorscheme from `~/.config/iterm2/catppuccin/colors`
 
 ### Tmux
 
