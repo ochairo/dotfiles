@@ -31,7 +31,7 @@
 
 1. TODO: config
 
-### Emacs
+### Emacs(CLI)
 
 1. TODO: config
 
