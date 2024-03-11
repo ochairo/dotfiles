@@ -24,7 +24,7 @@
   
 ### Nvim
 
-1. Enable Copilot, Perttier and more plugins with `:LazyExtras`
+1. Enable Copilot, Prettier and more plugins with `:LazyExtras`
    1. [Documet](https://www.lazyvim.org/extras) page.
   
 ### Vim
