@@ -1,12 +1,11 @@
 # dotfiles
 
-dotfiles CLI
-
 ## Getting Started
+- Clone the repository and run the "bootstrap" shell script
 
-```sh
-sh ./bootstrap.sh
-```
+  ```sh
+  sh ./bootstrap.sh
+  ```
 
 ## Configurations
 
