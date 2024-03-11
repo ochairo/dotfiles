@@ -4,18 +4,20 @@ if [ $(uname) != "Darwin" ]; then
   handle_error 1 "This is only for macOS"
 fi
 
-yes="Yes"
-no="No"
-handle_question response "Do you want to continue?" "$yes" "$no"
+question="Do you want to continue?"
+responseRef="selectedValue"
+option1="Yes"
+option2="No"
+handle_question "$question" "$responseRef" "$option1" "$option2"
 
-echo "> Your selection: $response"
-case "$response" in
-"$yes")
+echo "> Your selection: $selectedValue"
+case "$selectedValue" in
+"$option1")
   if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
   ;;
-"$no")
+"$option2")
   echo ""
   echo "${COLOR_BLUE}"
   echo "________________________________________________________________________________"

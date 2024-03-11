@@ -1,8 +1,8 @@
 #!/bin/bash
 
 handle_question() {
-  local res=$1
-  local question=$2
+  local question=$1
+  local answer=$2
   local options=("${@:3}")
 
   while true; do
@@ -12,11 +12,11 @@ handle_question() {
     done
     read -ers -p "  " choice
     if [[ "$choice" =~ ^[1-9]+$ && "$choice" -ge 1 && "$choice" -le ${#options[@]} ]]; then
-      eval "$res='${options[choice - 1]}'"
+      eval "$answer='${options[choice - 1]}'"
       return 0
     else
       echo ""
-      echo "${COLOR_RED}  Please enter a number.${COLOR_DEFAULT}"
+      echo "${COLOR_RED}  Please enter an option number.${COLOR_DEFAULT}"
       echo ""
       echo ""
     fi

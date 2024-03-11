@@ -1,12 +1,14 @@
 #!/bin/bash -eu
 
-yes="Yes"
-no="No"
-handle_question response "Do you want to setup Emacs?" "$yes" "$no"
+question="Do you want to setup Emacs?"
+responseRef="selectedValue"
+option1="Yes"
+option2="No"
+handle_question "$question" "$responseRef" "$option1" "$option2"
 
-echo "> Your selection: $response"
-case "$response" in
-"$yes")
+echo "> Your selection: $selectedValue"
+case "$selectedValue" in
+"$option1")
   if ! brew list --formula | grep -q "neovim"; then
     brew install neovim
   fi
@@ -24,7 +26,7 @@ case "$response" in
   mkdir -p $HOME/.config/nvim/lua/plugins
   ln -nfs $PATH_SETUPS/nvim/plugins/* $HOME/.config/nvim/lua/plugins
   ;;
-"$no") ;;
+"$option2") ;;
 esac
 
 exit 0

@@ -1,12 +1,14 @@
 #!/bin/bash -eu
 
-yes="Yes"
-no="No"
-handle_question response "Do you want to setup Emacs?" "$yes" "$no"
+question="Do you want to setup Emacs?"
+responseRef="selectedValue"
+option1="Yes"
+option2="No"
+handle_question "$question" "$responseRef" "$option1" "$option2"
 
-echo "> Your selection: $response"
-case "$response" in
-"$yes")
+echo "> Your selection: $selectedValue"
+case "$selectedValue" in
+"$option1")
   if ! brew list --formula | grep -q "emacs"; then
     brew install emacs
     brew install emacs-dracula
@@ -15,7 +17,7 @@ case "$response" in
     $HOME/.config/emacs/bin/doom install
   fi
   ;;
-"$no") ;;
+"$option2") ;;
 esac
 
 exit 0

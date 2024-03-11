@@ -2,6 +2,7 @@
 
 # -------------------- Basic commands ------------------------------------------
 brew install bash
+brew install zsh
 brew install coreutils
 brew install fd
 brew install findutils
