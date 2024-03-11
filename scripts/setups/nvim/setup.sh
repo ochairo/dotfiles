@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-question="Do you want to setup Emacs?"
+question="Do you want to setup Nvim?"
 responseRef="selectedValue"
 option1="Yes"
 option2="No"
@@ -28,5 +28,3 @@ case "$selectedValue" in
   ;;
 "$option2") ;;
 esac
-
-exit 0

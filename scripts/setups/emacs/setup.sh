@@ -19,5 +19,3 @@ case "$selectedValue" in
   ;;
 "$option2") ;;
 esac
-
-exit 0

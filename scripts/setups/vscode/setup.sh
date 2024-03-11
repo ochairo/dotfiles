@@ -1,55 +1,66 @@
 #!/bin/bash -eu
 
-if ! brew list --cask | grep -q "visual-studio-code"; then
-  brew install --cask visual-studio-code
-fi
+question="Do you want to setup VScode?"
+responseRef="selectedValue"
+option1="Yes"
+option2="No"
+handle_question "$question" "$responseRef" "$option1" "$option2"
 
-# -------------------- Essentials ----------------------------------------------
-code --install-extension aaron-bond.better-comments            # Comment Highlighter
-code --install-extension chrmarti.regex                        # Regex Previewer
-code --install-extension streetsidesoftware.code-spell-checker # Spell Checker
-code --install-extension usernamehw.errorlens                  # Error Displayer
-code --install-extension wmaurer.change-case                   # Change Case
+echo "> Your selection: $selectedValue"
+case "$selectedValue" in
+"$option1")
 
-# -------------------- Formatter -----------------------------------------------
-code --install-extension esbenp.prettier-vscode
-code --install-extension EditorConfig.EditorConfig
-code --install-extension foxundermoon.shell-format
+  if ! brew list --cask | grep -q "visual-studio-code"; then
+    brew install --cask visual-studio-code
+  fi
 
-# -------------------- Nvim ----------------------------------------------------
-code --install-extension asvetliakov.vscode-neovim
+  # -------------------- Essentials ----------------------------------------------
+  code --install-extension aaron-bond.better-comments            # Comment Highlighter
+  code --install-extension chrmarti.regex                        # Regex Previewer
+  code --install-extension streetsidesoftware.code-spell-checker # Spell Checker
+  code --install-extension usernamehw.errorlens                  # Error Displayer
+  code --install-extension wmaurer.change-case                   # Change Case
 
-# -------------------- Copilot -------------------------------------------------
-code --install-extension GitHub.copilot
-code --install-extension GitHub.copilot-chat
+  # -------------------- Formatter -----------------------------------------------
+  code --install-extension esbenp.prettier-vscode
+  code --install-extension EditorConfig.EditorConfig
+  code --install-extension foxundermoon.shell-format
 
-# -------------------- Git -----------------------------------------------------
-code --install-extension eamodio.gitlens
-code --install-extension mhutchie.git-graph
+  # -------------------- Nvim ----------------------------------------------------
+  code --install-extension asvetliakov.vscode-neovim
 
-# -------------------- API Test ------------------------------------------------
-# code --install-extension Arjun.swagger-viewer
-# code --install-extension rangav.vscode-thunder-client
+  # -------------------- Copilot -------------------------------------------------
+  code --install-extension GitHub.copilot
+  code --install-extension GitHub.copilot-chat
 
-# -------------------- HTML ----------------------------------------------------
-code --install-extension formulahendry.auto-close-tag
+  # -------------------- Git -----------------------------------------------------
+  code --install-extension eamodio.gitlens
+  code --install-extension mhutchie.git-graph
 
-# -------------------- CSS -----------------------------------------------------
-code --install-extension anseki.vscode-color
+  # -------------------- API Test ------------------------------------------------
+  # code --install-extension Arjun.swagger-viewer
+  # code --install-extension rangav.vscode-thunder-client
 
-# -------------------- JavaScript ----------------------------------------------
-code --install-extension dbaeumer.vscode-eslint
+  # -------------------- HTML ----------------------------------------------------
+  code --install-extension formulahendry.auto-close-tag
 
-# -------------------- Markdown ------------------------------------------------
-code --install-extension DavidAnson.vscode-markdownlint
+  # -------------------- CSS -----------------------------------------------------
+  code --install-extension anseki.vscode-color
 
-# -------------------- MySQL ---------------------------------------------------
-code --install-extension Oracle.mysql-shell-for-vs-code
+  # -------------------- JavaScript ----------------------------------------------
+  code --install-extension dbaeumer.vscode-eslint
 
-# -------------------- Draw.io -------------------------------------------------
-code --install-extension hediet.vscode-drawio
+  # -------------------- Markdown ------------------------------------------------
+  code --install-extension DavidAnson.vscode-markdownlint
 
-# -------------------- Theme ---------------------------------------------------
-code --install-extension Catppuccin.catppuccin-vsc
+  # -------------------- MySQL ---------------------------------------------------
+  code --install-extension Oracle.mysql-shell-for-vs-code
 
-exit 0
+  # -------------------- Draw.io -------------------------------------------------
+  code --install-extension hediet.vscode-drawio
+
+  # -------------------- Theme ---------------------------------------------------
+  code --install-extension Catppuccin.catppuccin-vsc
+  ;;
+"$option2") ;;
+esac

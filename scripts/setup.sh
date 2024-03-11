@@ -12,6 +12,7 @@ SETUPS=(
   "$PATH_SETUPS/emacs/setup.sh"
   "$PATH_SETUPS/vscode/setup.sh"
   "$PATH_SETUPS/flutter/setup.sh"
+  "$PATH_SETUPS/qemu/setup.sh"
 )
 
 for SETUP in "${SETUPS[@]}"; do

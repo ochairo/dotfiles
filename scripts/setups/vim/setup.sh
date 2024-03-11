@@ -1,15 +1,25 @@
 #!/bin/bash -eu
 
-if ! brew list --formula | grep -q "vim"; then
-  brew install vim
-fi
+question="Do you want to setup Vim?"
+responseRef="selectedValue"
+option1="Yes"
+option2="No"
+handle_question "$question" "$responseRef" "$option1" "$option2"
 
-rm -dfr $HOME/.vim
-mkdir -p $HOME/.vim
-git clone https://github.com/catppuccin/vim.git $PATH_ROOT/vim/catppuccin
-mv $PATH_ROOT/vim/catppuccin/colors $HOME/.vim/colors
-rm -dfr $PATH_ROOT/vim
+echo "> Your selection: $selectedValue"
+case "$selectedValue" in
+"$option1")
+  if ! brew list --formula | grep -q "vim"; then
+    brew install vim
+  fi
 
-ln -nfs $PATH_SETUPS/vim/.vimrc $HOME/.vimrc
+  rm -dfr $HOME/.vim
+  mkdir -p $HOME/.vim
+  git clone https://github.com/catppuccin/vim.git $PATH_ROOT/vim/catppuccin
+  mv $PATH_ROOT/vim/catppuccin/colors $HOME/.vim/colors
+  rm -dfr $PATH_ROOT/vim
 
-exit 0
+  ln -nfs $PATH_SETUPS/vim/.vimrc $HOME/.vimrc
+  ;;
+"$option2") ;;
+esac

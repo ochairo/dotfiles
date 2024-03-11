@@ -90,5 +90,3 @@ fi
 if ! brew list --formula | grep -q "qemu"; then
   brew install qemu
 fi
-
-exit 0
