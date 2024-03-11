@@ -14,7 +14,7 @@
 1. Open or re-open iTerm2.
 1. Open preferences
    1. Change the font to `MesloLGS NF`.
-   1. Select catppuccin colorscheme from `~/.config/iterm2/catppuccin/colors`.
+   1. Select colorscheme from `~/.config/iterm2/catppuccin/colors`.
 
 ### Tmux
 
@@ -26,14 +26,6 @@
 
 1. Enable Copilot, Prettier and more plugins with `:LazyExtras`
    1. Reed the [Documet](https://www.lazyvim.org/extras) page for more information.
-  
-### Vim
-
-1. TODO: config
-
-### Emacs
-
-1. TODO: config
 
 ## Editor examples
 
