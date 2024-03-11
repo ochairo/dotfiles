@@ -31,7 +31,7 @@
 
 1. TODO: config
 
-### Emacs (No GUI)
+### Emacs
 
 1. TODO: config
 
