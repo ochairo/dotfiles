@@ -16,7 +16,7 @@ handle_question() {
       return 0
     else
       echo ""
-      echo "${COLOR_RED}  Please enter an option number.${COLOR_DEFAULT}"
+      echo "${COLOR_RED}  Please enter the number of the desired option.${COLOR_DEFAULT}"
       echo ""
       echo ""
     fi
