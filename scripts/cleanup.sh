@@ -1,8 +1,7 @@
 #!/bin/bash -eu
 
 echo ""
-echo "${COLOR_BLUE}Running.........................................................................${COLOR_DEFAULT}"
-echo " .${SETUP//$PATH_ROOT/}"
+echo "${COLOR_BLUE}Cleanup.........................................................................${COLOR_DEFAULT}"
 
 brew update
 brew upgrade
