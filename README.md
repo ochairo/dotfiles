@@ -22,20 +22,20 @@
 1. Install plugins
    1. Press `Control` and `s`. Then `Shift` and `i`.
   
-### LazyVim
+### Nvim
 
 1. Enable Copilot, Perttier and more plugins with `:LazyExtras`
-   1. [LazyVim](https://www.lazyvim.org/extras) documets.
+   1. [Documet](https://www.lazyvim.org/extras) page.
   
 ### Vim
 
 1. TODO: config
 
-### Emacs(CLI)
+### Emacs (No GUI)
 
 1. TODO: config
 
 ## Editors
 
-Example: tmux + lazyvim
+Example: tmux + nvim
 ![iTerm](./assets/iTerm.png)
