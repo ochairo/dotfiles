@@ -35,7 +35,7 @@
 
 1. TODO: config
 
-## Editors
+## Editor examples
 
-Example: tmux + nvim
+tmux + nvim
 ![iTerm](./assets/iTerm.png)
