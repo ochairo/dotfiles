@@ -27,7 +27,7 @@
 1. Enable Copilot, Prettier and more plugins with `:LazyExtras`
    1. Read the [Documet](https://www.lazyvim.org/extras) page for more information.
 
-## Editor example
+## Editor usage
 
 You can use vim, nvim, emacs and if necessary combine it with tmux or just use vscode.
 
