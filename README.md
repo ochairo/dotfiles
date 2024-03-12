@@ -31,5 +31,5 @@
 
 You can use vim, nvim, emacs and if necessary combine it with tmux or just use vscode.
 
-tmux + nvim
-![iTerm](./assets/iTerm.png)
+- tmux + nvim
+  ![iTerm](./assets/iTerm.png)
