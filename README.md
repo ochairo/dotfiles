@@ -1,5 +1,7 @@
 # dotfiles
 
+Dotfiles for MacOS
+
 ## Getting Started
 - Clone the repository and run the "bootstrap" shell script
 
