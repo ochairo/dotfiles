@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-question="Do you want to setup Docker?"
+question="Do you want to setup Docker CLI?"
 responseRef="selectedValue"
 option1="Yes"
 option2="No"
