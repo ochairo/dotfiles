@@ -14,6 +14,8 @@ case "$selectedValue" in
 
     git clone --depth 1 https://github.com/doomemacs/doomemacs $HOME/.config/emacs
     $HOME/.config/emacs/bin/doom install
+    $HOME/.config/emacs/bin/doom upgrade
+    $HOME/.config/emacs/bin/doom sync
   fi
   ;;
 "$option2") ;;
