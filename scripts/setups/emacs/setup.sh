@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-question="Do you want to setup Emacs?"
+question="Do you want to setup Emacs GUI?"
 responseRef="selectedValue"
 option1="Yes"
 option2="No"
