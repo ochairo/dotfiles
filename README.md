@@ -31,7 +31,8 @@ Dotfiles for MacOS
 
 ## Editor usage
 
-You can use vim, nvim, emacs and if necessary combine it with tmux or just use vscode.
+You can use vim, nvim, tmux + nvim, emacs or vscode.
 
-- tmux + nvim
-  ![iTerm](./assets/iTerm.png)
+- Example:
+  - tmux + nvim
+    ![iTerm](./assets/iTerm.png)
