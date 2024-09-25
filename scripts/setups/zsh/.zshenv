@@ -23,3 +23,7 @@ export PATH=$PYENV_ROOT/bin:$PATH
 
 # -------------------- Flutter -------------------------------------------------
 export PATH=$PATH:$HOME/fvm/default/bin
+
+# -------------------- Emacs ---------------------------------------------------
+export EMACS_ROOT=~/.config/emacs
+export PATH=$EMACS_ROOT/bin:$PATH
