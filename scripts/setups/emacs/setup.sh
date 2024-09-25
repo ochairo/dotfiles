@@ -10,8 +10,7 @@ echo "> Your selection: $selectedValue"
 case "$selectedValue" in
 "$option1")
   if ! brew list --formula | grep -q "emacs"; then
-    brew install emacs
-    brew install emacs-dracula
+    brew install --cask emacs
 
     git clone --depth 1 https://github.com/doomemacs/doomemacs $HOME/.config/emacs
     $HOME/.config/emacs/bin/doom install
