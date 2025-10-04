@@ -1,0 +1,6 @@
+name: pipx
+parallelSafe: true
+requires: [pyenv]
+tags: [development, python]
+critical: false
+healthCheck: "pipx --version"

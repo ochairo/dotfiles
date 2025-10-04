@@ -1,0 +1,5 @@
+name: rbenv
+parallelSafe: true
+tags: [development, ruby]
+critical: false
+healthCheck: "rbenv --version"

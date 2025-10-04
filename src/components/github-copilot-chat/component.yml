@@ -1,0 +1,22 @@
+name: github-copilot-chat
+description: GitHub Copilot Chat - AI pair programming assistant for Neovim
+category: development
+priority: 50
+critical: false
+
+dependencies: [neovim, gh, git]
+
+install_methods:
+  manual:
+    description: Install via Neovim plugin manager and GitHub CLI
+
+health_checks:
+  - type: command
+    command: gh copilot --help
+  - type: command
+    command: test -f ~/.config/nvim/lua/user/plugins/copilot_chat.lua
+
+files:
+  - ~/.config/nvim/lua/user/plugins/copilot_chat.lua
+
+tags: [ai, coding, assistant, editor, development]

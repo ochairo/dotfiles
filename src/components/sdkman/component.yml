@@ -1,0 +1,8 @@
+name: sdkman
+description: SDKMAN! - Software Development Kit Manager for JVM languages
+tags:
+  - development
+  - language
+requires:
+  - system-essentials
+healthCheck: 'command -v sdk >/dev/null 2>&1 && test -s "$HOME/.sdkman/bin/sdkman-init.sh"'

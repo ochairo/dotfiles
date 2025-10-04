@@ -1,0 +1,5 @@
+name: direnv
+parallelSafe: true
+tags: [development, shell]
+critical: false
+healthCheck: "direnv --version"

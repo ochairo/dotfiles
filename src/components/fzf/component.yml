@@ -1,0 +1,5 @@
+name: fzf
+tags: [cli]
+critical: false
+parallelSafe: true
+healthCheck: "command -v fzf >/dev/null 2>&1"

@@ -1,0 +1,7 @@
+name: tealdeer
+description: Fast Rust tldr client.
+parallelSafe: true
+tags: [development, cli]
+critical: false
+healthCheck: "command -v tldr >/dev/null 2>&1 && tldr --version >/dev/null 2>&1"
+requires: []

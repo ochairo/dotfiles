@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Auto-format shell scripts with shfmt before commit
+set -euo pipefail
+
+if ! command -v shfmt >/dev/null 2>&1; then
+  echo "[pre-commit] shfmt not installed; skipping shell formatting" >&2
+  exit 0
+fi
+
+# Collect staged shell scripts (added or modified)
+mapfile -t files < <(git diff --cached --name-only --diff-filter=ACM | grep -E '\.sh$' || true)
+[[ ${#files[@]} -eq 0 ]] && exit 0
+
+changed=0
+for f in "${files[@]}"; do
+  [ -f "$f" ] || continue
+  before_hash=$(sha1sum "$f" | awk '{print $1}') || true
+  shfmt -w "$f"
+  after_hash=$(sha1sum "$f" | awk '{print $1}') || true
+  if [[ $before_hash != "$after_hash" ]]; then
+    git add "$f"
+    echo "[pre-commit] formatted: $f"
+    changed=1
+  fi
+done
+
+if [[ $changed -eq 1 ]]; then
+  echo "[pre-commit] Shell scripts reformatted and re-staged."
+fi

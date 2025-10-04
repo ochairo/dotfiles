@@ -1,0 +1,7 @@
+name: ripgrep
+parallelSafe: true
+tags: [development, cli]
+critical: false
+healthCheck: "rg --version"
+files:
+  - ~/.config/ripgrep/

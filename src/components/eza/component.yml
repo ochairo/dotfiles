@@ -1,0 +1,5 @@
+name: eza
+parallelSafe: true
+tags: [shell]
+critical: false
+healthCheck: "eza --version"

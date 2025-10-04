@@ -1,0 +1,5 @@
+name: podman
+parallelSafe: true
+tags: [development, container]
+critical: false
+healthCheck: "podman --version"

@@ -1,0 +1,19 @@
+name: system-essentials
+description: Core system tools and dependencies required across all platforms
+category: system
+priority: 2
+critical: true
+
+dependencies: []
+
+install_methods:
+  auto:
+    description: Install essential tools based on available package managers
+
+health_checks:
+  - type: command
+    command: curl --version
+    description: curl is available
+  - type: command
+    command: git --version
+    description: git is available

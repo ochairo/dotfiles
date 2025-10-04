@@ -1,0 +1,5 @@
+name: rustup
+parallelSafe: true
+tags: [development, rust]
+critical: false
+healthCheck: "rustup --version"

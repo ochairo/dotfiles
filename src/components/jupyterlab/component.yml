@@ -1,0 +1,6 @@
+name: jupyterlab
+parallelSafe: true
+requires: [pipx]
+tags: [development, python]
+critical: false
+healthCheck: "jupyter-lab --version"

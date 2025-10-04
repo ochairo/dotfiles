@@ -1,0 +1,8 @@
+name: helix
+description: Modern text editor written in Rust with built-in LSP support
+parallelSafe: true
+tags: [editor, development]
+critical: false
+healthCheck: "hx --version"
+files:
+  - ~/.config/helix/

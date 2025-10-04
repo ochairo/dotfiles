@@ -1,0 +1,9 @@
+name: neovim
+parallelSafe: true
+requires: [git, ripgrep, fd, tree-sitter]
+provides: [editor]
+tags: [development]
+critical: false
+healthCheck: "nvim --version"
+files:
+  - ~/.config/nvim/

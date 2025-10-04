@@ -1,0 +1,6 @@
+name: fast-syntax-highlighting
+parallelSafe: true
+tags: [shell,cli]
+critical: false
+healthCheck: "test -f $HOME/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh || command -v fast-theme >/dev/null 2>&1"
+requires: [ohmyzsh]

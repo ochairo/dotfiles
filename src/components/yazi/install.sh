@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Component: yazi
+# shellcheck disable=SC1091
+source "${DOTFILES_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}/core/bootstrap.sh"
+core_require log fs
+
+component_install() {
+	# Install yazi binary
+	if command -v yazi >/dev/null 2>&1; then
+		log_info "yazi already installed"
+	else
+		log_info "Installing yazi"
+		if command -v brew >/dev/null 2>&1; then
+			# macOS with Homebrew
+			brew install yazi || return 1
+		elif command -v cargo >/dev/null 2>&1; then
+			# Install via cargo
+			cargo install --locked yazi-fm || return 1
+		elif command -v apt-get >/dev/null 2>&1; then
+			# Ubuntu/Debian - yazi might not be in default repos, use cargo as fallback
+			if ! sudo apt-get update -y || ! sudo apt-get install -y yazi 2>/dev/null; then
+				log_info "yazi not available via apt, trying cargo..."
+				if command -v cargo >/dev/null 2>&1; then
+					cargo install --locked yazi-fm || return 1
+				else
+					log_warn "Neither apt nor cargo available for yazi installation"
+					return 1
+				fi
+			fi
+		elif command -v dnf >/dev/null 2>&1; then
+			# Fedora/RHEL - yazi might not be in default repos, use cargo as fallback
+			if ! sudo dnf install -y yazi 2>/dev/null; then
+				log_info "yazi not available via dnf, trying cargo..."
+				if command -v cargo >/dev/null 2>&1; then
+					cargo install --locked yazi-fm || return 1
+				else
+					log_warn "Neither dnf nor cargo available for yazi installation"
+					return 1
+				fi
+			fi
+		else
+			log_warn "No supported package manager found for yazi"
+			return 1
+		fi
+	fi
+
+	# Install config files using the generic approach
+	fs_symlink_component_files yazi
+}
+
+component_install "$@"

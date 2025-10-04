@@ -1,0 +1,5 @@
+name: jq
+parallelSafe: true
+tags: [development, json]
+critical: false
+healthCheck: "jq --version"

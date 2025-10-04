@@ -1,0 +1,8 @@
+name: fonts
+parallelSafe: true
+requires: []
+provides: [ui]
+tags: [appearance]
+critical: false
+healthCheck: "if [[ $(uname -s) == Darwin* ]]; then brew list --cask 2>/dev/null | grep -qi '^font-jetbrains-mono-nerd-font$'; else command -v fc-list >/dev/null 2>&1 && fc-list | grep -qi 'JetBrainsMono Nerd'; fi"
+files: []

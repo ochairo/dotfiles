@@ -1,0 +1,5 @@
+name: btop
+parallelSafe: true
+tags: [development, system]
+critical: false
+healthCheck: "btop --version"

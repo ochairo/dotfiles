@@ -1,0 +1,22 @@
+name: tree-sitter
+description: Tree-sitter CLI for parsing and syntax highlighting
+category: development
+priority: 50
+critical: true
+
+dependencies: [system-essentials]
+
+install_methods:
+  homebrew:
+    formula: tree-sitter-cli
+  apt:
+    package: tree-sitter-cli
+  dnf:
+    package: tree-sitter-cli
+  pacman:
+    package: tree-sitter-cli
+
+health_checks:
+  - type: command
+    command: tree-sitter --version
+    description: Tree-sitter CLI is available

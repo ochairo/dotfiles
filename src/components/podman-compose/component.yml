@@ -1,0 +1,6 @@
+name: podman-compose
+tags: [cli,container]
+critical: false
+parallelSafe: true
+requires: [podman]
+healthCheck: "command -v podman-compose >/dev/null 2>&1 && podman-compose --version >/dev/null 2>&1"

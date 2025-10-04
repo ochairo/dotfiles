@@ -1,0 +1,6 @@
+name: zsh-completions
+parallelSafe: true
+tags: [shell,cli]
+critical: false
+requires: [ohmyzsh]
+healthCheck: "test -d $HOME/.oh-my-zsh/custom/plugins/zsh-completions/src || ls $HOME/.oh-my-zsh/custom/plugins/zsh-completions 2>/dev/null | grep -qi completion || grep -q 'zsh-completions' $HOME/.zshrc"

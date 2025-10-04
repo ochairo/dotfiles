@@ -1,0 +1,6 @@
+name: zsh-plugins
+parallelSafe: true
+tags: [shell,meta]
+critical: false
+requires: [ohmyzsh, fast-syntax-highlighting, zsh-autosuggestions, zsh-completions, fzf-tab]
+healthCheck: "test -f $HOME/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh && test -f $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh && test -d $HOME/.oh-my-zsh/custom/plugins/zsh-completions/src && test -f $HOME/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh"

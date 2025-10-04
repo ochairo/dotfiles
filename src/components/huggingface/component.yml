@@ -1,0 +1,6 @@
+name: huggingface
+parallelSafe: true
+requires: [pipx]
+tags: [ml,python]
+critical: false
+healthCheck: "huggingface-cli --help"

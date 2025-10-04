@@ -1,0 +1,16 @@
+name: homebrew
+description: The Missing Package Manager for macOS (and Linux)
+category: package-manager
+priority: 1
+critical: true
+
+dependencies: []
+
+install_methods:
+  manual:
+    description: Install via official script
+
+health_checks:
+  - type: command
+    command: brew --version
+    description: Homebrew is available

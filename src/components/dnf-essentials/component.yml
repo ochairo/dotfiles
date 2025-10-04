@@ -1,0 +1,16 @@
+name: dnf-essentials
+description: Essential packages and setup for Fedora/RHEL systems
+category: package-manager
+priority: 1
+critical: true
+
+dependencies: []
+
+install_methods:
+  dnf:
+    packages: [curl, wget, unzip, gcc, make]
+
+health_checks:
+  - type: command
+    command: dnf --version
+    description: DNF package manager is available

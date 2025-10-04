@@ -1,0 +1,5 @@
+name: ollama
+parallelSafe: true
+tags: [ml]
+critical: false
+healthCheck: "ollama --version"

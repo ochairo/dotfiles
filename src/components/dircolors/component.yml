@@ -1,0 +1,7 @@
+name: dircolors
+parallelSafe: true
+tags: [shell]
+critical: false
+healthCheck: "test -L $HOME/.config/dircolors/dircolors -o -f $HOME/.config/dircolors/dircolors"
+files:
+  - ~/.config/dircolors/

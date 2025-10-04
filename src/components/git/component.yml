@@ -1,0 +1,8 @@
+name: git
+parallelSafe: true
+requires: []
+provides: [scm]
+tags: [core]
+critical: true
+healthCheck: "command -v git >/dev/null 2>&1"
+files: []

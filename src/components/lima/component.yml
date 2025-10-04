@@ -1,0 +1,5 @@
+name: lima
+parallelSafe: true
+tags: [development, virtualization]
+critical: false
+healthCheck: "limactl --version"

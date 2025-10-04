@@ -1,0 +1,5 @@
+name: dust
+parallelSafe: true
+tags: [development, system]
+critical: false
+healthCheck: "dust --version"

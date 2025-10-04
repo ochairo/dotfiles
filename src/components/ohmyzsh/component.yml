@@ -1,0 +1,8 @@
+name: ohmyzsh
+parallelSafe: false
+requires: [git]
+provides: [shell]
+tags: [core]
+critical: true
+healthCheck: "test -d $HOME/.oh-my-zsh"
+files: []

@@ -1,0 +1,5 @@
+name: pyenv
+parallelSafe: true
+tags: [development, python]
+critical: false
+healthCheck: "pyenv --version"

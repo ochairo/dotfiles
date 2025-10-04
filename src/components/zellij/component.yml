@@ -1,0 +1,9 @@
+name: zellij
+parallelSafe: true
+requires: [wezterm]
+provides: [terminal-mux]
+tags: [terminal]
+critical: false
+healthCheck: "zellij --version"
+files:
+  - ~/.config/zellij/

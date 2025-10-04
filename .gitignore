@@ -1,0 +1,74 @@
+# Runtime / cloned frameworks (user environment, not source-of-truth)
+configs/.config/ohmyzsh/
+configs/.config/shell/ohmyzsh-custom/plugins/*
+configs/.config/shell/ohmyzsh-custom/themes/*
+
+# Histories / ephemeral
+configs/.config/shell/*history*
+
+# Backup artifacts
+*.bak.*
+*.swp
+*.tmp
+
+# OS metadata
+.DS_Store
+
+# Runtime state (new architecture)
+state/
+!state/.gitkeep
+
+# Node / Python / Go build artifacts (future-proofing)
+node_modules/
+__pycache__/
+*.pyc
+dist/
+build/
+
+# Editor settings (optional ignore)
+.idea/
+.envrc
+
+# Security-sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+*_rsa*
+*_dsa*
+*_ecdsa*
+*_ed25519*
+id_*
+known_hosts*
+authorized_keys*
+.ssh/config
+.gnupg/
+.gpg
+*.asc
+*.sig
+
+# API Keys and environment files
+.env
+.env.*
+!.env.example
+*api_key*
+*secret*
+*token*
+*credential*
+*password*
+
+# Local override files that might contain personal info
+*local*
+*override*
+.override.*
+config.local.*
+settings.local.*
+.secrets/
+secrets/
+
+# Age/SOPS encrypted files (keep templates, exclude actual secrets)
+*.age
+!*.age.template
+!*.age.example
+
+lazy-lock.json

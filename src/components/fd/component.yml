@@ -1,0 +1,9 @@
+name: fd
+packages:
+  brew: fd
+  apt: fd-find
+  dnf: fd-find
+parallelSafe: true
+tags: [development, search]
+critical: false
+healthCheck: "fd --version"

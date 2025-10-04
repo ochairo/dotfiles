@@ -1,0 +1,16 @@
+name: apt-essentials
+description: Essential packages and setup for Ubuntu/Debian systems
+category: package-manager
+priority: 1
+critical: true
+
+dependencies: []
+
+install_methods:
+  apt:
+    packages: [curl, wget, unzip, build-essential]
+
+health_checks:
+  - type: command
+    command: apt --version
+    description: APT package manager is available

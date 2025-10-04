@@ -1,0 +1,470 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://dotfiles.local/schemas/component.schema.json",
+  "title": "Dotfiles Component Schema",
+  "description": "Schema for dotfiles component.yml configuration files",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Component name using kebab-case (lowercase letters, numbers, and hyphens only)",
+      "examples": [
+        "nvim",
+        "zsh-plugins",
+        "git-config"
+      ]
+    },
+    "packages": {
+      "type": "object",
+      "description": "Package names for different package managers",
+      "properties": {
+        "brew": {
+          "type": "string",
+          "description": "Package name for Homebrew (macOS)"
+        },
+        "apt": {
+          "type": "string",
+          "description": "Package name for apt (Ubuntu/Debian)"
+        },
+        "dnf": {
+          "type": "string",
+          "description": "Package name for dnf (Fedora/RHEL)"
+        },
+        "pacman": {
+          "type": "string",
+          "description": "Package name for pacman (Arch Linux)"
+        },
+        "zypper": {
+          "type": "string",
+          "description": "Package name for zypper (openSUSE)"
+        }
+      },
+      "additionalProperties": false,
+      "examples": [
+        {
+          "brew": "neovim",
+          "apt": "neovim",
+          "dnf": "neovim"
+        },
+        {
+          "brew": "fd",
+          "apt": "fd-find",
+          "dnf": "fd-find"
+        }
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 200,
+      "description": "Brief description of what this component provides",
+      "examples": [
+        "Modern Neovim configuration with LSP support",
+        "Enhanced shell with Oh My Zsh and plugins"
+      ]
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "uniqueItems": true,
+      "description": "List of component dependencies that must be installed first",
+      "examples": [
+        [
+          "ohmyzsh",
+          "zsh"
+        ],
+        [
+          "homebrew"
+        ]
+      ]
+    },
+    "provides": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "uniqueItems": true,
+      "description": "List of capabilities or tools this component provides",
+      "examples": [
+        [
+          "editor",
+          "ide"
+        ],
+        [
+          "shell",
+          "terminal"
+        ]
+      ]
+    },
+    "critical": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this component is critical for system operation"
+    },
+    "parallelSafe": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this component can be installed in parallel with others"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ai",
+          "appearance",
+          "assistant",
+          "cli",
+          "cloud",
+          "coding",
+          "container",
+          "core",
+          "development",
+          "editor",
+          "git",
+          "go",
+          "json",
+          "language",
+          "markdown",
+          "meta",
+          "ml",
+          "network",
+          "node",
+          "package-manager",
+          "productivity",
+          "prompt",
+          "python",
+          "ruby",
+          "rust",
+          "scm",
+          "search",
+          "security",
+          "shell",
+          "system",
+          "terminal",
+          "terminal-mux",
+          "ui",
+          "virtualization"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1,
+      "description": "Categorization tags for the component"
+    },
+    "healthCheck": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "description": "Shell command to verify component is properly installed"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Shell command to run for health check"
+            },
+            "timeout": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 300,
+              "default": 30,
+              "description": "Timeout in seconds for the health check command"
+            },
+            "retries": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5,
+              "default": 0,
+              "description": "Number of retries if health check fails"
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "description": "Command or configuration to verify component installation"
+    },
+    "platforms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "macos",
+          "linux",
+          "ubuntu",
+          "debian",
+          "fedora",
+          "rhel",
+          "centos"
+        ]
+      },
+      "uniqueItems": true,
+      "default": [
+        "macos",
+        "linux"
+      ],
+      "description": "Supported operating systems"
+    },
+    "environment": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Z_][A-Z0-9_]*$": {
+          "type": "string",
+          "description": "Environment variable value"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Environment variables required by this component"
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "description": "Source file path relative to component directory"
+              },
+              "target": {
+                "type": "string",
+                "description": "Target file path (supports variables like $HOME, $XDG_CONFIG_HOME)"
+              },
+              "template": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether the file should be processed as a template"
+              },
+              "executable": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether the file should be made executable"
+              }
+            },
+            "required": [
+              "source",
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Configuration files to be installed"
+        },
+        "directories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Directories to create during installation"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Configuration file and directory specifications"
+    },
+    "install": {
+      "type": "object",
+      "properties": {
+        "pre": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Commands to run before main installation"
+        },
+        "post": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Commands to run after main installation"
+        },
+        "cleanup": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Commands to run for cleanup if installation fails"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Installation lifecycle hooks"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "Component author or maintainer"
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri",
+          "description": "Homepage URL for the component"
+        },
+        "repository": {
+          "type": "string",
+          "format": "uri",
+          "description": "Source repository URL"
+        },
+        "license": {
+          "type": "string",
+          "description": "License identifier (SPDX format preferred)"
+        },
+        "created": {
+          "type": "string",
+          "format": "date",
+          "description": "Creation date (YYYY-MM-DD)"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date",
+          "description": "Last update date (YYYY-MM-DD)"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Additional metadata about the component"
+    },
+    "category": {
+      "type": "string",
+      "description": "Component category for organization"
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "Installation priority (lower numbers install first)"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "uniqueItems": true,
+      "description": "Alternative name for requires - list of component dependencies"
+    },
+    "install_methods": {
+      "type": "object",
+      "properties": {
+        "apt": {
+          "type": "object",
+          "properties": {
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "APT packages to install"
+            }
+          }
+        },
+        "brew": {
+          "type": "object",
+          "properties": {
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Homebrew packages to install"
+            }
+          }
+        }
+      },
+      "additionalProperties": true,
+      "description": "Package manager installation methods"
+    },
+    "health_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "command",
+              "file",
+              "service"
+            ],
+            "description": "Type of health check"
+          },
+          "command": {
+            "type": "string",
+            "description": "Command to run for health check"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what this health check verifies"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Structured health check definitions"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "File paths to be symlinked (supports ~ and variables)"
+      },
+      "uniqueItems": true,
+      "description": "List of files or directories to be symlinked from src/configs/"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "name": "nvim",
+      "description": "Modern Neovim configuration with LSP support",
+      "requires": [
+        "homebrew"
+      ],
+      "critical": false,
+      "parallelSafe": true,
+      "tags": [
+        "editor",
+        "development"
+      ],
+      "healthCheck": "command -v nvim && nvim --version",
+      "platforms": [
+        "macos",
+        "linux"
+      ]
+    },
+    {
+      "name": "zsh-plugins",
+      "description": "Collection of useful Zsh plugins",
+      "requires": [
+        "ohmyzsh",
+        "zsh"
+      ],
+      "critical": false,
+      "parallelSafe": true,
+      "tags": [
+        "shell",
+        "meta"
+      ],
+      "healthCheck": {
+        "command": "test -d $HOME/.oh-my-zsh/custom/plugins",
+        "timeout": 10
+      }
+    }
+  ]
+}

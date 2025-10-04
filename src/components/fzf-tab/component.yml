@@ -1,0 +1,11 @@
+name: fzf-tab
+description: fzf-enhanced tab completion for zsh
+requires:
+  - oh-my-zsh
+  - fzf
+critical: false
+tags:
+  - shell
+  - zsh
+healthCheck:
+  command: test -f "$ZSH_CUSTOM/plugins/fzf-tab/fzf-tab.plugin.zsh"

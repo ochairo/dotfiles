@@ -1,0 +1,8 @@
+name: yazi
+description: Modern terminal file manager written in Rust
+parallelSafe: true
+tags: [cli, productivity]
+critical: false
+healthCheck: "yazi --version"
+files:
+  - ~/.config/yazi/

@@ -1,0 +1,5 @@
+name: fnm
+parallelSafe: true
+tags: [development, node]
+critical: false
+healthCheck: "fnm --version"

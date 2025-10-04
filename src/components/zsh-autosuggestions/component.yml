@@ -1,0 +1,6 @@
+name: zsh-autosuggestions
+parallelSafe: true
+tags: [shell,cli]
+critical: false
+requires: [ohmyzsh]
+healthCheck: "test -f $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh || grep -q 'zsh-autosuggestions' $HOME/.zshrc || typeset -f _zsh_autosuggest_start >/dev/null 2>&1"

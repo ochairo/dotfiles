@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Post-commit hook for dotfiles project
+set -euo pipefail
+
+# Colors for output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Get commit information
+commit_hash=$(git rev-parse HEAD)
+short_hash=$(git rev-parse --short HEAD)
+commit_msg=$(git log -1 --pretty=%B)
+files_changed=$(git diff-tree --no-commit-id --name-only -r HEAD | wc -l)
+author=$(git log -1 --pretty=%an)
+
+echo ""
+echo -e "${GREEN}🎉 Commit successful!${NC}"
+echo -e "${BLUE}📝 Commit: $short_hash${NC}"
+echo -e "${BLUE}👤 Author: $author${NC}"
+echo -e "${BLUE}📂 Files changed: $files_changed${NC}"
+
+# Check if any components were modified
+component_changes=$(git diff-tree --no-commit-id --name-only -r HEAD | grep "src/components/" | wc -l)
+if [ "$component_changes" -gt 0 ]; then
+    echo -e "${YELLOW}🔧 Components modified: $component_changes${NC}"
+fi
+
+# Check if configuration files were modified
+config_changes=$(git diff-tree --no-commit-id --name-only -r HEAD | grep -E "(\.yml|\.yaml|\.json)$" | wc -l)
+if [ "$config_changes" -gt 0 ]; then
+    echo -e "${YELLOW}⚙️  Configuration files modified: $config_changes${NC}"
+fi
+
+# Check if documentation was updated
+doc_changes=$(git diff-tree --no-commit-id --name-only -r HEAD | grep -E "(\.md|docs/)" | wc -l)
+if [ "$doc_changes" -gt 0 ]; then
+    echo -e "${YELLOW}📚 Documentation updated: $doc_changes files${NC}"
+fi
+
+# Suggest next steps
+echo ""
+echo -e "${BLUE}💡 Next steps:${NC}"
+echo -e "   • Test installation: ${YELLOW}src/bin/dot install${NC}"
+echo -e "   • Check health: ${YELLOW}src/bin/dot health${NC}"
+echo -e "   • Validate: ${YELLOW}src/bin/dot validate${NC}"
+
+# Check if this is a new component
+new_components=$(git diff-tree --no-commit-id --name-only -r HEAD | grep "src/components/.*/component.yml" | head -5)
+if [ -n "$new_components" ]; then
+    echo ""
+    echo -e "${GREEN}🆕 New components detected:${NC}"
+    while IFS= read -r component_file; do
+        component_name=$(dirname "$component_file" | xargs basename)
+        echo -e "   • ${YELLOW}$component_name${NC}"
+    done <<< "$new_components"
+    echo -e "${BLUE}💡 Don't forget to test the new component(s)!${NC}"
+fi
+
+echo ""

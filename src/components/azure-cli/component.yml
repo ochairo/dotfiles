@@ -1,0 +1,9 @@
+name: azure-cli
+packages:
+  brew: azure-cli
+  apt: azure-cli
+  dnf: azure-cli
+tags: [cli, cloud]
+critical: false
+parallelSafe: true
+healthCheck: "command -v az >/dev/null 2>&1 && az version >/dev/null 2>&1"

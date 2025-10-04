@@ -1,0 +1,9 @@
+name: starship
+parallelSafe: true
+requires: [ohmyzsh]
+provides: [prompt]
+tags: [shell]
+critical: false
+healthCheck: "starship --version"
+files:
+  - ~/.config/starship/

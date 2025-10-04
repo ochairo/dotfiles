@@ -1,0 +1,9 @@
+name: wezterm
+parallelSafe: true
+requires: [fonts]
+provides: [terminal]
+tags: [terminal, productivity]
+critical: false
+healthCheck: "wezterm ls-fonts >/dev/null 2>&1 || wezterm --version >/dev/null 2>&1"
+files:
+  - ~/.config/wezterm/

@@ -1,0 +1,5 @@
+name: bat
+parallelSafe: true
+tags: [development]
+critical: false
+healthCheck: "bat --version"

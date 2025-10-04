@@ -1,0 +1,8 @@
+name: gpg_ssh
+parallelSafe: false
+requires: []
+provides: [security]
+tags: [security]
+critical: false
+healthCheck: "test -d $HOME/.ssh && test -d $HOME/.gnupg"
+files: []

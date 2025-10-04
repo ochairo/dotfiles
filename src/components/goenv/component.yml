@@ -1,0 +1,5 @@
+name: goenv
+parallelSafe: true
+tags: [development, go]
+critical: false
+healthCheck: "goenv --version"

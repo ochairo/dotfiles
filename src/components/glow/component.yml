@@ -1,0 +1,5 @@
+name: glow
+parallelSafe: true
+tags: [development, markdown]
+critical: false
+healthCheck: "glow --version"

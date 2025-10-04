@@ -1,0 +1,6 @@
+name: uv
+parallelSafe: true
+requires: [pyenv]
+tags: [development, python]
+critical: false
+healthCheck: "uv --version"
