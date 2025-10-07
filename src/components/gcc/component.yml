@@ -1,0 +1,44 @@
+name: gcc
+description: "GCC compiler and essential build tools"
+tags: [core, development]
+parallelSafe: true
+critical: true
+healthCheck: "gcc --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: gcc
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: build-essential
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: build-essential
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: gcc
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: gcc
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: gcc
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: build-essential

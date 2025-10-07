@@ -1,0 +1,46 @@
+#!/bin/bash
+# Shell functions for macOS and Linux compatibility
+
+# Cross-platform functions
+mkcd() { mkdir -p "$1" && cd "$1" || return 1; }
+
+extract() {
+  local file="$1"
+  [ -f "$file" ] || { echo "File not found"; return 1; }
+  case "$file" in
+    *.tar.bz2) tar xjf "$file" ;;
+    *.tar.gz) tar xzf "$file" ;;
+    *.tar.xz) tar xJf "$file" ;;
+    *.tar) tar xf "$file" ;;
+    *.tbz2) tar xjf "$file" ;;
+    *.tgz) tar xzf "$file" ;;
+    *.zip) unzip "$file" ;;
+    *.rar) unrar x "$file" ;;
+    *.7z) 7z x "$file" ;;
+    *) echo "Cannot extract '$file'" ;;
+  esac
+}
+
+sshhosts() {
+  awk '
+    function output() {
+      if (host && hostname && identity) {
+        print host "\t" hostname "\t" identity;
+      }
+    }
+    /^[[:space:]]*[Hh][Oo][Ss][Tt][[:space:]]+/ {
+      # Flush previous block
+      output();
+      host=""; hostname=""; identity="";
+      # Collect host patterns (skip lone *)
+      for (i = 2; i <= NF; i++) {
+        if ($i == "*") continue;
+        if (host) host = host "," $i; else host = $i;
+      }
+      next;
+    }
+    /^[[:space:]]*[Hh][Oo][Ss][Tt][Nn][Aa][Mm][Ee][[:space:]]+/ { hostname = $2; next }
+    /^[[:space:]]*[Ii][Dd][Ee][Nn][Tt][Ii][Tt][Yy][Ff][Ii][Ll][Ee][[:space:]]+/ { identity = $2; next }
+    END { output() }
+  ' ~/.ssh/config
+}

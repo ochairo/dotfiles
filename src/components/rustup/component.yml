@@ -1,0 +1,45 @@
+name: rustup
+description: "The Rust toolchain installer"
+platforms:
+  macos:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+  ubuntu:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+  debian:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+  fedora:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+  rhel:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+  centos:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+  arch:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+  opensuse:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+  alpine:
+    installMethod: script
+    scriptUrl: "https://sh.rustup.rs"
+    scriptArgs: ["-y"]
+parallelSafe: true
+critical: false
+requires: []
+provides: [cargo, rustc]
+healthCheck: "rustup --version && cargo --version"
+tags: [development, rust]

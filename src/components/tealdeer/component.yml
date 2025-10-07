@@ -1,0 +1,44 @@
+name: tealdeer
+description: "Fast Rust tldr client"
+tags: [development, cli]
+parallelSafe: true
+critical: false
+healthCheck: "command -v tldr >/dev/null 2>&1 && tldr --version >/dev/null 2>&1"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: tealdeer
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: tealdeer
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: tealdeer
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: tealdeer
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: tealdeer
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: tealdeer
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: tealdeer

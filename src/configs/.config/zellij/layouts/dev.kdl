@@ -1,0 +1,15 @@
+layout {
+    pane split_direction="horizontal" {
+        pane split_direction="vertical" {
+            pane {
+                // Main development pane
+            };
+        };
+        pane split_direction="vertical" size=10 {
+            // Side pane for quick commands
+        };
+    };
+    pane split_direction="vertical" size=1 borderless=true {
+        plugin location="zellij:compact-bar";
+    };
+}

@@ -1,0 +1,116 @@
+themes {
+    tokyonight {
+        text_unselected {
+            base 169 177 214
+            background 26 27 38
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        text_selected {
+            base 192 202 245
+            background 36 40 59
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        ribbon_unselected {
+            base 26 27 38
+            background 46 49 68
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        ribbon_selected {
+            base 36 40 59
+            background 68 71 90
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        frame_unselected {
+            base 86 95 137
+            background 26 27 38
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        frame_selected {
+            base 192 202 245
+            background 36 40 59
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        frame_highlight {
+            base 192 202 245
+            background 36 40 59
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        table_title {
+            base 192 202 245
+            background 36 40 59
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        table_cell_unselected {
+            base 26 27 38
+            background 86 95 137
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        table_cell_selected {
+            base 36 40 59
+            background 192 202 245
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        list_unselected {
+            base 26 27 38
+            background 86 95 137
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        list_selected {
+            base 36 40 59
+            background 192 202 245
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        exit_code_success {
+            base 158 206 106
+            background 26 27 38
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+        exit_code_error {
+            base 255 85 85
+            background 26 27 38
+            emphasis_0 255 158 100
+            emphasis_1 255 85 85
+            emphasis_2 0 217 227
+            emphasis_3 255 0 255
+        }
+    }
+}

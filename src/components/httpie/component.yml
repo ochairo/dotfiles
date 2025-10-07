@@ -1,0 +1,44 @@
+name: httpie
+description: Modern command-line HTTP client
+tags: [development, network]
+parallelSafe: true
+critical: false
+healthCheck: "http --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: httpie
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: httpie
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: httpie
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: httpie
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: httpie
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: httpie
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: httpie

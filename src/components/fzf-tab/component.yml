@@ -1,0 +1,54 @@
+name: fzf-tab
+description: fzf-enhanced tab completion for zsh
+platforms:
+  macos:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+  ubuntu:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+  debian:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+  fedora:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+  rhel:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+  centos:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+  arch:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+  opensuse:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+  alpine:
+    installMethod: git
+    gitUrl: "https://github.com/Aloxaf/fzf-tab"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab"
+    depth: 1
+parallelSafe: true
+critical: false
+requires: [ohmyzsh]
+provides: []
+healthCheck: "test -d $HOME/.oh-my-zsh/custom/plugins/fzf-tab"
+tags: [shell, productivity]

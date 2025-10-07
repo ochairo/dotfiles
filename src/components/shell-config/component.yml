@@ -1,0 +1,203 @@
+name: shell-config
+description: "Centralized shell configuration (zsh/bash) with symlinks to repository"
+tags: [shell]
+parallelSafe: true
+critical: true
+healthCheck: "[[ -L $HOME/.zshrc && -L $HOME/.zshenv ]]"
+requires: [zsh]
+provides: []
+
+platforms:
+  macos:
+    installMethod: script
+    postInstall: |
+      # Source filesystem helpers
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      else
+        log_error "fs.sh not found"
+        return 1
+      fi
+
+      # Define source directory for shell configs
+      SHELL_CONFIG_DIR="${DOTFILES_ROOT}/src/configs/.config/shell"
+
+      if [[ ! -d "$SHELL_CONFIG_DIR" ]]; then
+        log_error "Shell config directory not found: $SHELL_CONFIG_DIR"
+        return 1
+      fi
+
+      log_info "Setting up shell configuration symlinks..."
+
+      # Only symlink the essential entry point files
+      # All other files (.zsh_lazy, .zsh_performance, etc.) are sourced directly
+      # from the repository via auto-detected DOTFILES_ROOT in .zshenv
+      local configs=(
+        ".zshrc"
+        ".zshenv"
+      )
+
+      for config in "${configs[@]}"; do
+        local source="$SHELL_CONFIG_DIR/$config"
+        local dest="$HOME/$config"
+
+        if [[ -f "$source" ]]; then
+          fs_symlink "$source" "$dest" "shell-config"
+          log_info "✓ Linked $config"
+        else
+          log_warn "Config file not found: $source"
+        fi
+      done
+
+      log_success "Shell configuration symlinks created successfully"
+      log_info "Note: Other files (.zsh_lazy, etc.) are sourced directly from repository"
+
+  ubuntu:
+    installMethod: script
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      else
+        log_error "fs.sh not found"
+        return 1
+      fi
+
+      SHELL_CONFIG_DIR="${DOTFILES_ROOT}/src/configs/.config/shell"
+      [[ ! -d "$SHELL_CONFIG_DIR" ]] && log_error "Shell config directory not found" && return 1
+
+      log_info "Setting up shell configuration symlinks..."
+      local configs=(".zshrc" ".zshenv")
+
+      for config in "${configs[@]}"; do
+        local source="$SHELL_CONFIG_DIR/$config"
+        local dest="$HOME/$config"
+
+        [[ -f "$source" ]] && fs_symlink "$source" "$dest" "shell-config" && log_info "✓ Linked $config"
+      done
+
+      log_success "Shell configuration complete"
+
+  debian:
+    installMethod: script
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      else
+        log_error "fs.sh not found"
+        return 1
+      fi
+
+      SHELL_CONFIG_DIR="${DOTFILES_ROOT}/src/configs/.config/shell"
+      [[ ! -d "$SHELL_CONFIG_DIR" ]] && log_error "Shell config directory not found" && return 1
+
+      log_info "Setting up shell configuration symlinks..."
+      local configs=(".zshrc" ".zshenv")
+
+      for config in "${configs[@]}"; do
+        local source="$SHELL_CONFIG_DIR/$config"
+        local dest="$HOME/$config"
+
+        [[ -f "$source" ]] && fs_symlink "$source" "$dest" "shell-config" && log_info "✓ Linked $config"
+      done
+
+      log_success "Shell configuration complete"
+
+  fedora:
+    installMethod: script
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      else
+        log_error "fs.sh not found"
+        return 1
+      fi
+
+      SHELL_CONFIG_DIR="${DOTFILES_ROOT}/src/configs/.config/shell"
+      [[ ! -d "$SHELL_CONFIG_DIR" ]] && log_error "Shell config directory not found" && return 1
+
+      log_info "Setting up shell configuration symlinks..."
+      local configs=(".zshrc" ".zshenv")
+
+      for config in "${configs[@]}"; do
+        local source="$SHELL_CONFIG_DIR/$config"
+        local dest="$HOME/$config"
+
+        [[ -f "$source" ]] && fs_symlink "$source" "$dest" "shell-config" && log_info "✓ Linked $config"
+      done
+
+      log_success "Shell configuration complete"
+
+  rhel:
+    installMethod: script
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      else
+        log_error "fs.sh not found"
+        return 1
+      fi
+
+      SHELL_CONFIG_DIR="${DOTFILES_ROOT}/src/configs/.config/shell"
+      [[ ! -d "$SHELL_CONFIG_DIR" ]] && log_error "Shell config directory not found" && return 1
+
+      log_info "Setting up shell configuration symlinks..."
+      local configs=(".zshrc" ".zshenv")
+
+      for config in "${configs[@]}"; do
+        local source="$SHELL_CONFIG_DIR/$config"
+        local dest="$HOME/$config"
+
+        [[ -f "$source" ]] && fs_symlink "$source" "$dest" "shell-config" && log_info "✓ Linked $config"
+      done
+
+      log_success "Shell configuration complete"
+
+  centos:
+    installMethod: script
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      else
+        log_error "fs.sh not found"
+        return 1
+      fi
+
+      SHELL_CONFIG_DIR="${DOTFILES_ROOT}/src/configs/.config/shell"
+      [[ ! -d "$SHELL_CONFIG_DIR" ]] && log_error "Shell config directory not found" && return 1
+
+      log_info "Setting up shell configuration symlinks..."
+      local configs=(".zshrc" ".zshenv")
+
+      for config in "${configs[@]}"; do
+        local source="$SHELL_CONFIG_DIR/$config"
+        local dest="$HOME/$config"
+
+        [[ -f "$source" ]] && fs_symlink "$source" "$dest" "shell-config" && log_info "✓ Linked $config"
+      done
+
+      log_success "Shell configuration complete"
+
+  arch:
+    installMethod: script
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      else
+        log_error "fs.sh not found"
+        return 1
+      fi
+
+      SHELL_CONFIG_DIR="${DOTFILES_ROOT}/src/configs/.config/shell"
+      [[ ! -d "$SHELL_CONFIG_DIR" ]] && log_error "Shell config directory not found" && return 1
+
+      log_info "Setting up shell configuration symlinks..."
+      local configs=(".zshrc" ".zshenv")
+
+      for config in "${configs[@]}"; do
+        local source="$SHELL_CONFIG_DIR/$config"
+        local dest="$HOME/$config"
+
+        [[ -f "$source" ]] && fs_symlink "$source" "$dest" "shell-config" && log_info "✓ Linked $config"
+      done
+
+      log_success "Shell configuration complete"

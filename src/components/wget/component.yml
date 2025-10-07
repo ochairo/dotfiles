@@ -1,0 +1,44 @@
+name: wget
+description: "Command-line tool for retrieving files using HTTP, HTTPS, FTP and FTPS"
+tags: [system, network]
+parallelSafe: true
+critical: true
+healthCheck: "wget --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: wget
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: wget
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: wget
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: wget
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: wget
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: wget
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: wget

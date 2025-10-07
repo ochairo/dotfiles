@@ -1,0 +1,44 @@
+name: zsh
+description: "Modern Z shell with configuration"
+tags: [shell]
+parallelSafe: true
+critical: true
+healthCheck: "command -v zsh >/dev/null 2>&1 && zsh -fc 'echo ok' >/dev/null 2>&1"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: zsh
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: zsh
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: zsh
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: zsh
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: zsh
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: zsh
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: zsh

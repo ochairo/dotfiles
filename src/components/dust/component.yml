@@ -1,0 +1,44 @@
+name: dust
+description: "A more intuitive version of du"
+tags: [development]
+parallelSafe: true
+critical: false
+healthCheck: "dust --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: dust
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: dust
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: dust
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: du-dust
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: du-dust
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: du-dust
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: dust

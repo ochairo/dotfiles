@@ -1,0 +1,98 @@
+name: fonts
+description: "JetBrainsMono Nerd Font"
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew-cask
+    packageName: font-jetbrains-mono-nerd-font
+    repositorySetup:
+      type: custom
+      repoName: homebrew/cask-fonts
+  ubuntu:
+    installMethod: script
+    scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+    postInstall: |
+      tmpdir=$(mktemp -d)
+      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
+      mkdir -p "$HOME/.local/share/fonts"
+      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
+      fc-cache -fv
+      rm -rf "$tmpdir"
+  debian:
+    installMethod: script
+    scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+    postInstall: |
+      tmpdir=$(mktemp -d)
+      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
+      mkdir -p "$HOME/.local/share/fonts"
+      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
+      fc-cache -fv
+      rm -rf "$tmpdir"
+  fedora:
+    installMethod: script
+    scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+    postInstall: |
+      tmpdir=$(mktemp -d)
+      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
+      mkdir -p "$HOME/.local/share/fonts"
+      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
+      fc-cache -fv
+      rm -rf "$tmpdir"
+  rhel:
+    installMethod: script
+    scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+    postInstall: |
+      tmpdir=$(mktemp -d)
+      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
+      mkdir -p "$HOME/.local/share/fonts"
+      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
+      fc-cache -fv
+      rm -rf "$tmpdir"
+  centos:
+    installMethod: script
+    scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+    postInstall: |
+      tmpdir=$(mktemp -d)
+      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
+      mkdir -p "$HOME/.local/share/fonts"
+      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
+      fc-cache -fv
+      rm -rf "$tmpdir"
+  arch:
+    installMethod: package
+    packageManager: yay
+    packageName: nerd-fonts-jetbrains-mono
+  opensuse:
+    installMethod: script
+    scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+    postInstall: |
+      tmpdir=$(mktemp -d)
+      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
+      mkdir -p "$HOME/.local/share/fonts"
+      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
+      fc-cache -fv
+      rm -rf "$tmpdir"
+  alpine:
+    installMethod: script
+    scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+    postInstall: |
+      tmpdir=$(mktemp -d)
+      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
+      mkdir -p "$HOME/.local/share/fonts"
+      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
+      fc-cache -fv
+      rm -rf "$tmpdir"
+parallelSafe: true
+critical: false
+requires: []
+provides: [ui]
+healthCheck: "if [[ $(uname -s) == Darwin* ]]; then brew list --cask 2>/dev/null | grep -qi '^font-jetbrains-mono-nerd-font$'; else command -v fc-list >/dev/null 2>&1 && fc-list | grep -qi 'JetBrainsMono Nerd'; fi"
+tags: [appearance]
+files: []

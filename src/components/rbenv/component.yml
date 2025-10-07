@@ -1,0 +1,45 @@
+name: rbenv
+description: "Ruby version management"
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: rbenv
+  ubuntu:
+    installMethod: script
+    scriptUrl: "https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer"
+    preInstall: "sudo apt-get update -y && sudo apt-get install -y build-essential libssl-dev libreadline-dev zlib1g-dev"
+  debian:
+    installMethod: script
+    scriptUrl: "https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer"
+    preInstall: "sudo apt-get update -y && sudo apt-get install -y build-essential libssl-dev libreadline-dev zlib1g-dev"
+  fedora:
+    installMethod: script
+    scriptUrl: "https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer"
+    preInstall: "sudo dnf install -y gcc openssl-devel readline-devel zlib-devel"
+  rhel:
+    installMethod: script
+    scriptUrl: "https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer"
+    preInstall: "sudo dnf install -y gcc openssl-devel readline-devel zlib-devel"
+  centos:
+    installMethod: script
+    scriptUrl: "https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer"
+    preInstall: "sudo dnf install -y gcc openssl-devel readline-devel zlib-devel"
+  arch:
+    installMethod: package
+    packageManager: yay
+    packageName: rbenv
+  opensuse:
+    installMethod: script
+    scriptUrl: "https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer"
+    preInstall: "sudo zypper install -y gcc libopenssl-devel readline-devel zlib-devel"
+  alpine:
+    installMethod: script
+    scriptUrl: "https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer"
+    preInstall: "sudo apk add --no-cache build-base openssl-dev readline-dev zlib-dev"
+parallelSafe: true
+critical: false
+requires: []
+provides: [ruby]
+healthCheck: "rbenv --version"
+tags: [development, ruby]

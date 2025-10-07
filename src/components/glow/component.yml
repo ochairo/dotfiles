@@ -1,0 +1,44 @@
+name: glow
+description: "Render markdown on the CLI"
+tags: [development, markdown]
+parallelSafe: true
+critical: false
+healthCheck: "glow --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: glow
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: glow
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: glow
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: glow
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: glow
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: glow
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: glow

@@ -1,0 +1,46 @@
+name: sdkman
+description: SDKMAN! - Software Development Kit Manager for JVM languages
+platforms:
+  macos:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+  ubuntu:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+  debian:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+  fedora:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+  rhel:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+  centos:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+  arch:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+  opensuse:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+  alpine:
+    installMethod: script
+    scriptUrl: "https://get.sdkman.io"
+    scriptArgs: []
+parallelSafe: true
+critical: false
+requires: [curl, unzip]
+provides: [sdk]
+healthCheck: 'command -v sdk >/dev/null 2>&1 && test -s "$HOME/.sdkman/bin/sdkman-init.sh"'
+tags: [development, language]
+files: []

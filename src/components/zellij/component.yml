@@ -1,0 +1,44 @@
+name: zellij
+description: "Terminal workspace with batteries included"
+tags: [terminal]
+parallelSafe: true
+critical: false
+healthCheck: "zellij --version"
+requires: [wezterm]
+provides: [terminal-mux]
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: zellij
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: zellij
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: zellij
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: zellij
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: zellij
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: zellij
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: zellij

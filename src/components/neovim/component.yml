@@ -1,0 +1,85 @@
+name: neovim
+description: "Modern Vim-based text editor with LSP support"
+tags: [editor, development, cli]
+parallelSafe: true
+critical: false
+healthCheck: "command -v nvim >/dev/null 2>&1"
+requires: [fonts, tree-sitter]
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: neovim
+    postInstall: |
+      # Load filesystem utilities
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      # Symlink Neovim configuration
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/nvim"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/nvim" "neovim"
+        log_success "Neovim configuration linked"
+      else
+        log_warn "Neovim config directory not found: $CONFIG_SOURCE"
+      fi
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: neovim
+    postInstall: |
+      # Load filesystem utilities
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      # Symlink Neovim configuration
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/nvim"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/nvim" "neovim"
+        log_success "Neovim configuration linked"
+      else
+        log_warn "Neovim config directory not found: $CONFIG_SOURCE"
+      fi
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: neovim
+    postInstall: |
+      # Load filesystem utilities
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      # Symlink Neovim configuration
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/nvim"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/nvim" "neovim"
+        log_success "Neovim configuration linked"
+      else
+        log_warn "Neovim config directory not found: $CONFIG_SOURCE"
+      fi
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: neovim
+    postInstall: |
+      # Load filesystem utilities
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      # Symlink Neovim configuration
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/nvim"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/nvim" "neovim"
+        log_success "Neovim configuration linked"
+      else
+        log_warn "Neovim config directory not found: $CONFIG_SOURCE"
+      fi

@@ -1,0 +1,44 @@
+name: ripgrep
+description: "A line-oriented search tool that recursively searches directories for a regex pattern"
+tags: [development, cli]
+parallelSafe: true
+critical: false
+healthCheck: "rg --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: ripgrep
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: ripgrep
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: ripgrep
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: ripgrep
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: ripgrep
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: ripgrep
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: ripgrep

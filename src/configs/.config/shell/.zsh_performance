@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Ultra-performance optimizations for macOS and Linux
+# Source this file from shell config for maximum speed improvements
+
+# Disable unnecessary macOS features for better terminal performance
+export DISABLE_AUTO_TITLE="true"
+export DISABLE_CORRECTION="true"
+export DISABLE_UNTRACKED_FILES_DIRTY="true"  # Speed up git status
+
+# Git performance optimizations (aggressive)
+export GIT_OPTIONAL_LOCKS=0  # Disable git index locks for speed
+export GIT_CONFIG_NOSYSTEM=1 # Skip system-wide git config
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=0  # Disable cross-filesystem discovery
+export GIT_PAGER=""  # Disable git pager to prevent stuck less processes
+export GIT_EDITOR="nvim"  # Fast editor
+
+# Homebrew optimizations
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_INSECURE_REDIRECT=1
+export HOMEBREW_NO_INSTALL_CLEANUP=1  # Skip cleanup for speed
+
+# Node.js/npm performance (aggressive)
+export npm_config_progress=false
+export npm_config_loglevel=error  # Less verbose
+export npm_config_audit=false  # Skip security audits for speed
+
+# Python optimizations
+export PYTHONDONTWRITEBYTECODE=1  # Skip .pyc files
+export PYTHONUNBUFFERED=1
+export PYTHONSTARTUP=""  # Skip startup file
+
+# Disable zsh session restore (can be slow)
+export SHELL_SESSIONS_DISABLE=1
+
+# Faster file operations
+export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
+export COPYFILE_DISABLE=1
+
+# Zellij performance optimizations (aggressive)
+export ZELLIJ_CONFIG_DIR="$HOME/.config/zellij"
+export ZELLIJ_AUTO_ATTACH=false  # Prevent automatic session attachment delays
+export ZELLIJ_AUTO_EXIT=true  # Auto-exit when all panes close
+
+# System optimizations
+export TERM_PROGRAM_VERSION=""  # Skip version checks
+export COLORTERM=""  # Skip color capability detection
+
+# Memory optimizations (aggressive)
+ulimit -n 8192  # Increase file descriptor limit
+ulimit -u 2048  # Process limit

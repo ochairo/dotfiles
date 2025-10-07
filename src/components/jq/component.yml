@@ -1,0 +1,44 @@
+name: jq
+description: "Command-line JSON processor"
+tags: [development, json]
+parallelSafe: true
+critical: false
+healthCheck: "jq --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: jq
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: jq
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: jq
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: jq
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: jq
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: jq
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: jq

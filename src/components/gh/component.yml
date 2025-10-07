@@ -1,0 +1,44 @@
+name: gh
+description: "GitHub CLI tool"
+tags: [cli, development]
+parallelSafe: true
+critical: false
+healthCheck: "command -v gh >/dev/null 2>&1 && gh --version >/dev/null 2>&1"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: gh
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: gh
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: gh
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: gh
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: gh
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: gh
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: gh

@@ -1,0 +1,44 @@
+name: podman-compose
+description: "Docker-compose alternative for Podman"
+tags: [cli, container]
+parallelSafe: true
+critical: false
+healthCheck: "command -v podman-compose >/dev/null 2>&1 && podman-compose --version >/dev/null 2>&1"
+requires: [podman]
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: podman-compose
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: podman-compose
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: podman-compose
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: podman-compose
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: podman-compose
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: podman-compose
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: podman-compose

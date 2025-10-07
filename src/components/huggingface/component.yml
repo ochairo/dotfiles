@@ -1,0 +1,44 @@
+name: huggingface
+description: "Hugging Face Hub command-line interface"
+tags: [ml, python]
+parallelSafe: true
+critical: false
+healthCheck: "huggingface-cli --help"
+requires: [pipx]
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: huggingface
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: python3-huggingface-hub
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: python3-huggingface-hub
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: python3-huggingface-hub
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: python3-huggingface-hub
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: python3-huggingface-hub
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: python3-huggingface-hub

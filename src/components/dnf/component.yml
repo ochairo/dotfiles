@@ -1,0 +1,44 @@
+name: dnf
+description: "DNF package manager for Fedora/RHEL systems"
+tags: [core, system]
+parallelSafe: false
+critical: true
+healthCheck: "command -v dnf >/dev/null 2>&1"
+requires: []
+provides: [package-manager]
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: dnf
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: dnf
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: dnf
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: dnf
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: dnf
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: dnf
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: dnf

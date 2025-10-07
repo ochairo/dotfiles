@@ -1,0 +1,44 @@
+name: zstd
+description: "Zstandard - Fast compression algorithm and data compression tool"
+tags: [cli, system]
+parallelSafe: true
+critical: false
+healthCheck: "command -v zstd >/dev/null 2>&1 && zstd -V >/dev/null 2>&1"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: zstd
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: zstd
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: zstd
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: zstd
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: zstd
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: zstd
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: zstd

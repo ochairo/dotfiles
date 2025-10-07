@@ -1,0 +1,44 @@
+name: btop
+description: "Resource monitor that shows usage and stats"
+tags: [development]
+parallelSafe: true
+critical: false
+healthCheck: "btop --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: btop
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: btop
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: btop
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: btop
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: btop
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: btop
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: btop

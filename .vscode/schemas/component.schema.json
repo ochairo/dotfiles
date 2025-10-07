@@ -1,0 +1,452 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://dotfiles.local/schemas/component.schema.json",
+  "title": "Dotfiles Component Schema",
+  "description": "Schema for dotfiles component.yml configuration files",
+  "type": "object",
+  "required": [
+    "name",
+    "description",
+    "platforms",
+    "healthCheck",
+    "requires",
+    "provides",
+    "parallelSafe",
+    "critical",
+    "tags"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Component name using kebab-case (lowercase letters, numbers, and hyphens only)",
+      "examples": [
+        "nvim",
+        "zsh-plugins",
+        "git-config"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 200,
+      "description": "Brief description of what this component provides",
+      "examples": [
+        "Modern Neovim configuration with LSP support",
+        "Enhanced shell with Oh My Zsh and plugins"
+      ]
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "uniqueItems": true,
+      "description": "List of component dependencies that must be installed first",
+      "examples": [
+        [
+          "ohmyzsh",
+          "zsh"
+        ],
+        [
+          "homebrew"
+        ]
+      ]
+    },
+    "provides": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "uniqueItems": true,
+      "description": "List of capabilities or tools this component provides",
+      "examples": [
+        [
+          "editor",
+          "ide"
+        ],
+        [
+          "shell",
+          "terminal"
+        ]
+      ]
+    },
+    "critical": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this component is critical for system operation"
+    },
+    "parallelSafe": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this component can be installed in parallel with others"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ai",
+          "appearance",
+          "assistant",
+          "cli",
+          "cloud",
+          "coding",
+          "container",
+          "core",
+          "development",
+          "editor",
+          "git",
+          "go",
+          "json",
+          "language",
+          "markdown",
+          "meta",
+          "ml",
+          "network",
+          "node",
+          "package-manager",
+          "productivity",
+          "prompt",
+          "python",
+          "ruby",
+          "rust",
+          "scm",
+          "search",
+          "security",
+          "shell",
+          "system",
+          "terminal",
+          "terminal-mux",
+          "ui",
+          "virtualization"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1,
+      "description": "Categorization tags for the component"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "File or directory path to be managed by this component"
+      },
+      "uniqueItems": true,
+      "description": "List of configuration files or directories this component manages",
+      "examples": [
+        [
+          "~/.config/nvim/",
+          "~/.vimrc"
+        ],
+        [
+          "~/.zshrc",
+          "~/.config/zsh/"
+        ]
+      ]
+    },
+    "healthCheck": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "description": "Shell command to verify component is properly installed"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Shell command to run for health check"
+            },
+            "timeout": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 300,
+              "default": 30,
+              "description": "Timeout in seconds for the health check command"
+            },
+            "retries": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5,
+              "default": 0,
+              "description": "Number of retries if health check fails"
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "description": "Command or configuration to verify component installation"
+    },
+    "platforms": {
+      "type": "object",
+      "description": "Platform-specific installation configuration",
+      "properties": {
+        "macos": {
+          "$ref": "#/definitions/platformConfig"
+        },
+        "ubuntu": {
+          "$ref": "#/definitions/platformConfig"
+        },
+        "debian": {
+          "$ref": "#/definitions/platformConfig"
+        },
+        "fedora": {
+          "$ref": "#/definitions/platformConfig"
+        },
+        "rhel": {
+          "$ref": "#/definitions/platformConfig"
+        },
+        "centos": {
+          "$ref": "#/definitions/platformConfig"
+        },
+        "arch": {
+          "$ref": "#/definitions/platformConfig"
+        },
+        "opensuse": {
+          "$ref": "#/definitions/platformConfig"
+        },
+        "alpine": {
+          "$ref": "#/definitions/platformConfig"
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "platformConfig": {
+      "type": "object",
+      "required": [
+        "installMethod"
+      ],
+      "properties": {
+        "installMethod": {
+          "type": "string",
+          "enum": [
+            "package",
+            "script",
+            "git",
+            "binary"
+          ],
+          "description": "Installation method for this platform"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Package name for package managers"
+        },
+        "packageManager": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "brew",
+            "brew-cask",
+            "apt",
+            "apk",
+            "dnf",
+            "pacman",
+            "zypper",
+            "yay",
+            "paru",
+            "snap",
+            "flatpak",
+            "pip",
+            "pip3",
+            "npm",
+            "yarn",
+            "cargo",
+            "go",
+            "meta"
+          ],
+          "description": "Specific package manager to use"
+        },
+        "scriptUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to installation script"
+        },
+        "scriptArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Arguments to pass to script"
+        },
+        "fallbackMethod": {
+          "type": "string",
+          "enum": [
+            "package",
+            "script",
+            "git",
+            "binary"
+          ],
+          "description": "Fallback installation method if primary method fails"
+        },
+        "fallbackScriptUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to fallback installation script"
+        },
+        "fallbackPackageManager": {
+          "type": "string",
+          "description": "Fallback package manager"
+        },
+        "fallbackPackageName": {
+          "type": "string",
+          "description": "Fallback package name"
+        },
+        "gitUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Git repository URL"
+        },
+        "targetDir": {
+          "type": "string",
+          "description": "Target directory for git clone or binary extraction"
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Git clone depth"
+        },
+        "branch": {
+          "type": "string",
+          "description": "Git branch to clone"
+        },
+        "buildCommand": {
+          "type": "string",
+          "description": "Command to run after git clone"
+        },
+        "downloadUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to download binary/archive"
+        },
+        "extractPath": {
+          "type": "string",
+          "description": "Path within archive to extract"
+        },
+        "makeExecutable": {
+          "type": "boolean",
+          "description": "Make downloaded file executable"
+        },
+        "preInstall": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "Commands to run before installation"
+        },
+        "postInstall": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "Commands to run after installation"
+        },
+        "repositorySetup": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "microsoft",
+                "nodejs",
+                "docker",
+                "custom"
+              ],
+              "description": "Type of repository setup required"
+            },
+            "keyUrl": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL to GPG key for repository verification"
+            },
+            "repoUrl": {
+              "type": "string",
+              "format": "uri",
+              "description": "Repository base URL"
+            },
+            "repoName": {
+              "type": "string",
+              "description": "Human-readable repository name"
+            },
+            "repoId": {
+              "type": "string",
+              "description": "Repository identifier/section name"
+            },
+            "repoConfig": {
+              "type": "string",
+              "description": "Custom repository configuration (override for non-standard cases)"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false,
+          "description": "Repository setup configuration for package installation"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "name": "azure-cli",
+      "description": "Azure command-line interface",
+      "platforms": {
+        "macos": {
+          "installMethod": "package",
+          "packageName": "azure-cli",
+          "packageManager": "brew"
+        },
+        "ubuntu": {
+          "installMethod": "script",
+          "scriptUrl": "https://aka.ms/InstallAzureCLIDeb"
+        },
+        "debian": {
+          "installMethod": "script",
+          "scriptUrl": "https://aka.ms/InstallAzureCLIDeb"
+        },
+        "arch": {
+          "installMethod": "package",
+          "packageName": "azure-cli",
+          "packageManager": "yay"
+        }
+      },
+      "healthCheck": "az version",
+      "requires": [],
+      "provides": [
+        "cloud-cli"
+      ],
+      "critical": false,
+      "parallelSafe": true,
+      "tags": [
+        "cli",
+        "cloud"
+      ]
+    }
+  ]
+}

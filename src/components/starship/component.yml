@@ -1,0 +1,44 @@
+name: starship
+description: "Fast, customizable prompt for any shell"
+tags: [shell]
+parallelSafe: true
+critical: false
+healthCheck: "starship --version"
+requires: [ohmyzsh]
+provides: [prompt]
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: starship
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: starship
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: starship
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: starship
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: starship
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: starship
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: starship

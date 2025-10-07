@@ -1,0 +1,15 @@
+#!/bin/bash
+# Shell aliases for macOS and Linux compatibility
+
+# Cross-platform aliases
+alias h="hx"
+alias sshg='grep -E "^[[:space:]]*Host[[:space:]]+" ~/.ssh/config'
+
+# OS-specific aliases
+if [[ "$(uname)" == "Darwin" ]]; then
+  # macOS specific
+  alias wezterm-speed='time /Applications/WezTerm.app/Contents/MacOS/wezterm start --always-new-process'
+elif [[ "$(uname)" == "Linux" ]]; then
+  # Linux specific
+  alias wezterm-speed='time wezterm start --always-new-process'
+fi

@@ -1,0 +1,44 @@
+name: tree-sitter
+description: Tree-sitter CLI for parsing and syntax highlighting
+tags: [development, language]
+parallelSafe: true
+critical: false
+healthCheck: "command -v tree-sitter >/dev/null 2>&1"
+requires: [gcc]
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: tree-sitter
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: tree-sitter-cli
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: tree-sitter-cli
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: tree-sitter-cli
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: tree-sitter-cli
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: tree-sitter-cli
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: tree-sitter-cli

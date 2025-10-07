@@ -1,0 +1,44 @@
+name: apt-get
+description: "APT package manager for Debian/Ubuntu systems"
+tags: [core, system]
+parallelSafe: false
+critical: true
+healthCheck: "command -v apt-get >/dev/null 2>&1"
+requires: []
+provides: [package-manager]
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: apt-get
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: apt
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: apt
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: apt-get
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: apt-get
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: apt-get
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: apt

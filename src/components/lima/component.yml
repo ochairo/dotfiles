@@ -1,0 +1,44 @@
+name: lima
+description: Linux virtual machines on macOS
+tags: [development, virtualization]
+parallelSafe: true
+critical: false
+healthCheck: "limactl --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: lima
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: lima
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: lima
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: lima
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: lima
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: lima
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: lima

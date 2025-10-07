@@ -1,0 +1,44 @@
+name: pipx
+description: "Install and run Python applications in isolated environments"
+tags: [development, python]
+parallelSafe: true
+critical: false
+healthCheck: "pipx --version"
+requires: [pyenv]
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: pipx
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: pipx
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: pipx
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: pipx
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: pipx
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: pipx
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: pipx

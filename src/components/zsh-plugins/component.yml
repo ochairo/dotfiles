@@ -1,0 +1,52 @@
+name: zsh-plugins
+description: Meta-component for Zsh plugins collection
+platforms:
+  macos:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+  ubuntu:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+  debian:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+  fedora:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+  rhel:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+  centos:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+  arch:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+  opensuse:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+  alpine:
+    installMethod: package
+    packageManager: meta
+    packageName: zsh-plugins
+parallelSafe: true
+critical: false
+requires:
+  [
+    ohmyzsh,
+    fast-syntax-highlighting,
+    zsh-autosuggestions,
+    zsh-completions,
+    fzf-tab,
+  ]
+provides: []
+healthCheck: "test -f $HOME/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh && test -f $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh && test -d $HOME/.oh-my-zsh/custom/plugins/zsh-completions/src && test -f $HOME/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh"
+tags: [shell, meta]

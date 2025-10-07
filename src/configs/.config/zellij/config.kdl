@@ -1,0 +1,19 @@
+default_layout "dev"
+theme "tokyonight"
+auto_layout true
+
+default_shell "zsh"
+mouse_mode false
+copy_command "pbcopy"
+scroll_buffer_size 1000
+
+pane_frames true
+simplified_ui false
+show_pane_frames true
+session_serialization false
+disable_session_metadata true
+on_force_close "detach"
+copy_on_select false
+
+// Disable startup tips - CORRECT option name
+show_startup_tips false

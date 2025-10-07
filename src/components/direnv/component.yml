@@ -1,0 +1,44 @@
+name: direnv
+description: "Environment switcher for the shell"
+tags: [development]
+parallelSafe: true
+critical: false
+healthCheck: "direnv --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: direnv
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: direnv
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: direnv
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: direnv
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: direnv
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: direnv
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: direnv
