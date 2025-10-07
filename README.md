@@ -109,12 +109,17 @@ and cross-platform support</em></p>
 
 ## Requirements
 
-### Minimal
+### System Requirements
 
+- **Bash 4.0+** (required for associative arrays)
 - Unix-like system (macOS 10.15+, Linux)
-- Bash 4.0+ or Zsh 5.0+
+- Git 2.0+
 - curl or wget
-- git
+
+### Package Managers
+
+- **macOS**: Homebrew (auto-installed if missing)
+- **Linux**: APT (Ubuntu/Debian) or DNF (Fedora/RHEL)
 
 ## Quick Start
 
@@ -141,16 +146,3 @@ env DOTFILES_ROOT="$(pwd)/src" CORE_DIR="$(pwd)/src/core" COMPONENTS_DIR="$(pwd)
 # Test all components with dry-run
 env DOTFILES_ROOT="$(pwd)/src" CORE_DIR="$(pwd)/src/core" COMPONENTS_DIR="$(pwd)/src/components" CONFIGS_DIR="$(pwd)/src/configs" COMMANDS_DIR="$(pwd)/src/commands" PROJECT_ROOT="$(pwd)" src/commands/install.sh --dry-run
 ```
-
-## Detailed Documentation
-
-| Document | Description |
-|----------|-------------|
-| [Documentation Overview](docs/README.md) | Complete documentation index and structure |
-| [Architecture](docs/architecture.md) | System design and architecture overview |
-| [Development Guide](docs/development.md) | Extending and maintaining the system |
-| [Troubleshooting](docs/troubleshooting.md) | Common issues and solutions |
-| [Commands Reference](docs/commands/README.md) | Complete CLI command documentation |
-| [API Reference](docs/api/README.md) | Internal APIs and core functions |
-| [Components Guide](docs/components/README.md) | Creating and managing components |
-| [Git Hooks Guide](.github/hooks/README.md) | Code quality automation and validation |
