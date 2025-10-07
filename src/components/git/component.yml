@@ -1,0 +1,44 @@
+name: git
+description: "Distributed version control system"
+tags: [core, development]
+parallelSafe: true
+critical: true
+healthCheck: "git --version"
+requires: []
+provides: [scm]
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: git
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: git
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: git
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: git
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: git
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: git
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: git

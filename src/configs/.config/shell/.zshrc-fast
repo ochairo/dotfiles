@@ -1,0 +1,72 @@
+# Ultra-fast shell profile for floating terminals
+# This file is sourced when FAST_TERMINAL=1
+
+# Load safety mechanisms first (critical for stuck process prevention)
+[[ -f "$HOME/.zsh_safety" ]] && source "$HOME/.zsh_safety"
+
+# Minimal history (ultra-fast)
+HISTFILE=${HISTFILE:-$HOME/.zsh_history}
+HISTSIZE=500  # Reduced for speed
+SAVEHIST=500  # Reduced for speed
+setopt HIST_IGNORE_DUPS SHARE_HISTORY
+
+# Enable colors for terminal (minimal setup)
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# Essential color aliases
+if command -v eza >/dev/null 2>&1; then
+  alias ll='eza -laF --group-directories-first --color=always'
+  alias la='eza -A --color=always'
+  alias l='eza -CF --color=always'
+  alias ls='eza --color=always'
+else
+  alias ll='ls -laF --color=auto'
+  alias la='ls -A --color=auto'
+  alias l='ls -CF --color=auto'
+  alias ls='ls --color=auto'
+fi
+
+# Other essential colored aliases
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias h='hx'
+
+# Enable zsh colors
+autoload -U colors && colors
+
+# Ultra-minimal completion (just basic tab completion)
+autoload -Uz compinit
+compinit -C  # Skip security check for maximum speed
+
+# Essential completion options (minimal)
+setopt AUTO_MENU          # Show completion menu on tab
+setopt NO_BEEP            # No beep on completion errors
+
+# Load autosuggestions if available (minimal setup)
+if [[ -f "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+elif [[ -f "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
+# Load theme with full colors (simplified for speed)
+if command -v starship >/dev/null 2>&1 && [[ -n "$STARSHIP_CONFIG" ]]; then
+  # Starship is fast and provides great themes
+  eval "$(starship init zsh)"
+else
+  # Simple fast prompt without Oh My Zsh
+  autoload -U colors && colors
+  # Git status function for prompt
+  git_prompt_info() {
+    branch=$(git branch 2>/dev/null | grep '^*' | colrm 1 2)
+    [[ -n "$branch" ]] && echo " %F{yellow}($branch)%f"
+  }
+  PROMPT='%F{cyan}%1~%f$(git_prompt_info) %F{green}❯%f '
+fi
+
+# Essential PATH (only what's immediately needed)
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+
+# No heavy plugins, minimal completions

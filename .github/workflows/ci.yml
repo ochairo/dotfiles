@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install BATS and ensure bash 4+
+        run: |
+          if command -v apt-get >/dev/null 2>&1; then
+            # Ubuntu - install modern bash and bats
+            sudo apt-get update
+            sudo apt-get install -y bats bash
+            echo "Ubuntu bash version: $(bash --version | head -1)"
+            # Ensure bash is in PATH
+            echo "/bin" >> $GITHUB_PATH
+          else
+            # macOS - install modern bash and bats via homebrew
+            brew install bash bats-core
+            echo "macOS system bash version: $(/bin/bash --version | head -1)"
+            echo "macOS homebrew bash version: $(/opt/homebrew/bin/bash --version | head -1)"
+            # Update PATH to use modern bash
+            echo "/opt/homebrew/bin" >> $GITHUB_PATH
+          fi
+      - name: Run tests
+        run: |
+          # Ensure we're using bash 4+
+          bash --version
+          bats tests/bats/

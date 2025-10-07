@@ -1,0 +1,36 @@
+name: uv
+description: "Extremely fast Python package installer and resolver"
+platforms:
+  macos:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+  ubuntu:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+  debian:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+  fedora:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+  rhel:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+  centos:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+  arch:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+  opensuse:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+  alpine:
+    installMethod: script
+    scriptUrl: "https://astral.sh/uv/install.sh"
+parallelSafe: true
+critical: false
+requires: [pyenv]
+provides: []
+healthCheck: "uv --version"
+tags: [development, python]

@@ -1,0 +1,44 @@
+name: gpg-ssh
+description: "GPG and SSH key configuration"
+tags: [security]
+parallelSafe: false
+critical: false
+healthCheck: "test -d $HOME/.ssh && test -d $HOME/.gnupg"
+requires: []
+provides: [security]
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: gnupg
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: gnupg
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: gnupg
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: gnupg2
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: gnupg2
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: gnupg2
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: gnupg

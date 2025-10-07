@@ -1,0 +1,44 @@
+name: unzip
+description: "Archive extraction utility for ZIP files"
+tags: [core, system]
+parallelSafe: true
+critical: true
+healthCheck: "unzip -v"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: unzip
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: unzip
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: unzip
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: unzip
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: unzip
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: unzip
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: unzip

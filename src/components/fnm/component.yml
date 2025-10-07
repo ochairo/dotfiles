@@ -1,0 +1,40 @@
+name: fnm
+description: "Fast Node Manager"
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: fnm
+  ubuntu:
+    installMethod: script
+    scriptUrl: "https://fnm.vercel.app/install"
+  debian:
+    installMethod: script
+    scriptUrl: "https://fnm.vercel.app/install"
+  fedora:
+    installMethod: script
+    scriptUrl: "https://fnm.vercel.app/install"
+  rhel:
+    installMethod: script
+    scriptUrl: "https://fnm.vercel.app/install"
+  centos:
+    installMethod: script
+    scriptUrl: "https://fnm.vercel.app/install"
+  arch:
+    installMethod: package
+    packageManager: yay
+    packageName: fnm-bin
+    fallbackMethod: script
+    fallbackScriptUrl: "https://fnm.vercel.app/install"
+  opensuse:
+    installMethod: script
+    scriptUrl: "https://fnm.vercel.app/install"
+  alpine:
+    installMethod: script
+    scriptUrl: "https://fnm.vercel.app/install"
+parallelSafe: true
+critical: false
+requires: []
+provides: [node, npm]
+healthCheck: "fnm --version"
+tags: [development, node]

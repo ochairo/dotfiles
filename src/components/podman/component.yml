@@ -1,0 +1,44 @@
+name: podman
+description: "Daemonless container engine for developing, managing, and running OCI Containers"
+tags: [development, container]
+parallelSafe: true
+critical: false
+healthCheck: "podman --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: podman
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: podman
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: podman
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: podman
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: podman
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: podman
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: podman

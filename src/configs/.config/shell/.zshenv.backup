@@ -1,0 +1,49 @@
+# zshenv (XDG version) - environment variables & early exports
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PAGER="less"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# Ensure XDG base
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+# Ripgrep config path (now moved under XDG hierarchy)
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+
+# Zsh configuration
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_THEME="robbyrussell"
+
+# Starship prompt configuration path (ensure custom config is used)
+if [[ -n "$DOTFILES_ROOT" ]]; then
+    export STARSHIP_CONFIG="$DOTFILES_ROOT/configs/.config/starship/starship.toml"
+elif [[ -f "$HOME/.config/dotfiles/starship.toml" ]]; then
+    export STARSHIP_CONFIG="$HOME/.config/dotfiles/starship.toml"
+elif [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/starship/starship.toml" ]]; then
+    export STARSHIP_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/starship/starship.toml"
+fi
+[ -f "$STARSHIP_CONFIG" ] || unset STARSHIP_CONFIG
+
+# Zsh autosuggestions
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
+
+# Path helper
+_add_path() { [ -d "$1" ] && case ":$PATH:" in *":$1:"*) ;; *) PATH="$1:$PATH";; esac }
+for p in \
+  "$HOME/.pyenv/shims" \
+  "$HOME/.rbenv/shims" \
+  "$HOME/.cargo/bin" \
+  "$HOME/.local/bin" \
+  /opt/homebrew/bin \
+  /usr/local/bin; do _add_path "$p"; done
+
+# fnm latest active shell bin
+if [[ -d $HOME/.local/state/fnm_multishells ]]; then
+  _fnm_latest=$(ls -1t "$HOME/.local/state/fnm_multishells" 2>/dev/null | head -1 || true)
+  [[ -n $_fnm_latest ]] && _add_path "$HOME/.local/state/fnm_multishells/$_fnm_latest/bin"
+fi
+
+export PATH

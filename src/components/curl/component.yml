@@ -1,0 +1,44 @@
+name: curl
+description: "Command-line tool for transferring data with URLs"
+tags: [system, network]
+parallelSafe: true
+critical: true
+healthCheck: "curl --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: curl
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: curl
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: curl
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: curl
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: curl
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: curl
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: curl

@@ -1,0 +1,46 @@
+name: lazydocker
+description: "A simple terminal UI for both docker and docker-compose"
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: lazydocker
+  ubuntu:
+    installMethod: package
+    packageManager: snap
+    packageName: lazydocker
+  debian:
+    installMethod: package
+    packageManager: snap
+    packageName: lazydocker
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: lazydocker
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: lazydocker
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: lazydocker
+  arch:
+    installMethod: package
+    packageManager: yay
+    packageName: lazydocker
+  opensuse:
+    installMethod: package
+    packageManager: zypper
+    packageName: lazydocker
+  alpine:
+    installMethod: package
+    packageManager: apk
+    packageName: lazydocker
+parallelSafe: true
+critical: false
+requires: [docker]
+provides: []
+healthCheck: "lazydocker --version"
+tags: [development, container]
+files: []

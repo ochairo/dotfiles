@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# dot - unified dotfiles CLI dispatcher
+# Provides dynamic subcommand discovery and central configuration.
+
+# =============================================================================
+# LOAD CONSTANTS AND CONFIGURATION
+# =============================================================================
+
+# Get the core directory relative to this script
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+CORE_DIR="$SCRIPT_DIR/../core"
+
+# Source central constants
+# shellcheck disable=SC1091
+source "$CORE_DIR/constants.sh"
+
+# =============================================================================
+# CLI FUNCTIONS
+# =============================================================================
+
+usage() {
+  echo "dot <command> [args...]" >&2
+  echo "" >&2
+  echo "Commands:" >&2
+  local f name summary
+  for f in "$COMMANDS_DIR"/*.sh; do
+    [ -f "$f" ] || continue
+    name="$(basename "$f" .sh)"
+    summary="$(grep -E '^# summary:' "$f" | head -1 | sed 's/# summary:[[:space:]]*//')"
+    printf "  %-18s %s\n" "$name" "${summary:-}" >&2
+  done
+  echo "" >&2
+  echo "Use 'dot help <command>' for details." >&2
+}
+
+help_cmd() {
+  local target="$1"
+  local file="$COMMANDS_DIR/$target.sh"
+  if [ ! -f "$file" ]; then
+    echo "Unknown command: $target" >&2
+    exit 1
+  fi
+  awk '/^# usage:/{print substr($0,3)} /^# summary:/{print substr($0,3)} /^# aliases:/{print substr($0,3)}' "$file"
+  echo
+  echo "Source: src/commands/$target.sh"
+}
+
+# =============================================================================
+# MAIN CLI DISPATCHER
+# =============================================================================
+
+if [ $# -eq 0 ]; then
+  usage; exit 1
+fi
+
+case "$1" in
+  help)
+    shift || true
+    if [ $# -eq 0 ]; then usage; exit 0; fi
+    help_cmd "$1"; exit 0;
+    ;;
+  --version|-v)
+    echo "dot (scaffold) 0.0.1"; exit 0;
+    ;;
+  -h|--help)
+    usage; exit 0;
+    ;;
+esac
+
+cmd="$1"; shift || true
+cmd_file="$COMMANDS_DIR/$cmd.sh"
+if [ ! -f "$cmd_file" ]; then
+  echo "Unknown command: $cmd" >&2
+  echo "Run 'dot help' to list commands." >&2
+  exit 1
+fi
+
+# shellcheck source=/dev/null
+source "$cmd_file"

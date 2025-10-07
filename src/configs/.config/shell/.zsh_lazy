@@ -1,0 +1,48 @@
+# Lazy loading utilities for zsh performance
+# Source this file to enable lazy loading of heavy tools
+
+# Lazy load function generator
+lazy_load() {
+  local command="$1"
+  local init_command="$2"
+
+  eval "$command() {
+    unfunction $command
+    $init_command
+    $command \"\$@\"
+  }"
+}
+
+# Lazy load SDKMAN
+lazy_load sdk 'source "$HOME/.sdkman/bin/sdkman-init.sh"'
+
+# Lazy load pyenv
+lazy_load pyenv 'eval "$(pyenv init -)"'
+
+# Lazy load rbenv
+lazy_load rbenv 'eval "$(rbenv init -)"'
+
+# Lazy load fnm
+lazy_load fnm 'eval "$(fnm env --use-on-cd)"'
+
+# Function to add paths only if they exist
+add_to_path() {
+  [[ -d "$1" ]] && case ":$PATH:" in
+    *":$1:"*) ;;
+    *) export PATH="$1:$PATH" ;;
+  esac
+}
+
+# Setup PATH with common directories
+setup_extended_path() {
+  add_to_path "$HOME/.pyenv/shims"
+  add_to_path "$HOME/.rbenv/shims"
+  add_to_path "$HOME/.cargo/bin"
+  add_to_path "$HOME/.local/bin"
+
+  # fnm latest active shell
+  if [[ -d "$HOME/.local/state/fnm_multishells" ]]; then
+    local fnm_latest=$(ls -1t "$HOME/.local/state/fnm_multishells" 2>/dev/null | head -1)
+    [[ -n "$fnm_latest" ]] && add_to_path "$HOME/.local/state/fnm_multishells/$fnm_latest/bin"
+  fi
+}

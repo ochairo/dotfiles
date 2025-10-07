@@ -1,0 +1,44 @@
+name: jupyterlab
+description: "JupyterLab computational environment"
+tags: [development, python]
+parallelSafe: true
+critical: false
+healthCheck: "jupyter-lab --version"
+requires: [pipx]
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: jupyterlab
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: python3-jupyterlab
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: python3-jupyterlab
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: python3-jupyterlab
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: python3-jupyterlab
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: python3-jupyterlab
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: python3-jupyterlab

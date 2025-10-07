@@ -1,0 +1,21 @@
+name: homebrew
+description: "The Missing Package Manager for macOS"
+platforms:
+  macos:
+    installMethod: script
+    scriptUrl: "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+    preInstall: "command -v curl >/dev/null 2>&1 || { echo 'curl is required for Homebrew installation'; exit 1; }"
+    postInstall: |
+      if [[ -f /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      elif [[ -f /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+      fi
+      brew update && brew upgrade && brew cleanup
+parallelSafe: false
+critical: true
+requires: []
+provides: [brew]
+healthCheck: "brew --version"
+tags: [core, package-manager]
+files: []

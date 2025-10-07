@@ -1,0 +1,47 @@
+name: wezterm
+description: GPU-accelerated cross-platform terminal emulator
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew-cask
+    packageName: wezterm
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: wezterm
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: wezterm
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: wezterm
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: wezterm
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: wezterm
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: wezterm
+  opensuse:
+    installMethod: package
+    packageManager: zypper
+    packageName: wezterm
+  alpine:
+    installMethod: package
+    packageManager: apk
+    packageName: wezterm
+parallelSafe: true
+critical: false
+requires: [fonts]
+provides: [terminal]
+healthCheck: "wezterm ls-fonts >/dev/null 2>&1 || wezterm --version >/dev/null 2>&1"
+tags: [terminal, productivity]
+files:
+  - ~/.config/wezterm/

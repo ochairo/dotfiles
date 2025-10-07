@@ -1,0 +1,36 @@
+name: ollama
+description: "Run large language models locally"
+platforms:
+  macos:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+  ubuntu:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+  debian:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+  fedora:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+  rhel:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+  centos:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+  arch:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+  opensuse:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+  alpine:
+    installMethod: script
+    scriptUrl: "https://ollama.com/install.sh"
+parallelSafe: true
+critical: false
+requires: []
+provides: []
+healthCheck: "ollama --version"
+tags: [ml]

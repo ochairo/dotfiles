@@ -1,0 +1,44 @@
+name: fd
+description: Fast and user-friendly alternative to find
+tags: [development, search]
+parallelSafe: true
+critical: false
+healthCheck: "fd --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: fd
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: fd-find
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: fd-find
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: fd-find
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: fd-find
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: fd-find
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: fd-find

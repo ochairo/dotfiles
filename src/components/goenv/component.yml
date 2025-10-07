@@ -1,0 +1,54 @@
+name: goenv
+description: "Go version management"
+platforms:
+  macos:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+  ubuntu:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+  debian:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+  fedora:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+  rhel:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+  centos:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+  arch:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+  opensuse:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+  alpine:
+    installMethod: git
+    gitUrl: "https://github.com/go-nv/goenv.git"
+    targetDir: "$HOME/.goenv"
+    depth: 1
+parallelSafe: true
+critical: false
+requires: []
+provides: []
+healthCheck: "goenv --version"
+tags: [development, go]

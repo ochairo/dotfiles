@@ -1,0 +1,44 @@
+name: dircolors
+description: "Color setup for ls"
+tags: [shell]
+parallelSafe: true
+critical: false
+healthCheck: "test -L $HOME/.config/dircolors/dircolors -o -f $HOME/.config/dircolors/dircolors"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: coreutils
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: coreutils
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: coreutils
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: coreutils
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: coreutils
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: coreutils
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: coreutils

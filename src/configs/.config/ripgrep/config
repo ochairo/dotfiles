@@ -1,0 +1,7 @@
+--type-add
+--hidden
+--follow
+--smart-case
+--glob=!node_modules
+--glob=!.git
+--max-columns=250

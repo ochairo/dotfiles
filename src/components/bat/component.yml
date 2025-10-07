@@ -1,0 +1,44 @@
+name: bat
+description: "A cat clone with syntax highlighting and Git integration"
+tags: [development]
+parallelSafe: true
+critical: false
+healthCheck: "bat --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: bat
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: bat
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: bat
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: bat
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: bat
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: bat
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: bat

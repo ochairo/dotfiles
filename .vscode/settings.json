@@ -1,0 +1,231 @@
+{
+  // Editor Configuration
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": true,
+  "editor.trimAutoWhitespace": true,
+  "editor.rulers": [
+    120
+  ],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 120,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  // Files Configuration
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.git": true,
+    "**/state/**": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.git/objects/**": true,
+    "**/state/**": true
+  },
+  // Language Specific Settings
+  "[yaml]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "vscode.markdown-language-features",
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  "[shellscript]": {
+    "editor.tabSize": 2
+  },
+  // Shell & Bash Configuration
+  "shellcheck.enable": true,
+  "shellcheck.run": "onType",
+  "shellcheck.executablePath": "",
+  "shellformat.effectLanguages": [
+    "shellscript",
+    "dockerfile",
+    "dotenv",
+    "hosts",
+    "jvmoptions",
+    "ignore",
+    "gitignore",
+    "spring-boot-properties",
+    "azcli"
+  ],
+  "shellformat.flag": "-i 2 -ci",
+  // YAML Configuration
+  "yaml.format.enable": true,
+  "yaml.format.singleQuote": false,
+  "yaml.format.bracketSpacing": true,
+  "yaml.validate": true,
+  "yaml.hover": true,
+  "yaml.completion": true,
+  "yaml.schemas": {
+    ".vscode/schemas/component.schema.json": [
+      "**/components/**/component.yml",
+      "**/components/**/component.yaml"
+    ]
+  },
+  // Markdown Configuration
+  "markdown.preview.breaks": true,
+  "markdown.preview.linkify": true,
+  "markdown.preview.typographer": true,
+  "markdownlint.config": {
+    "MD013": {
+      "line_length": 120,
+      "code_blocks": false,
+      "tables": false
+    },
+    "MD033": false,
+    "MD041": false
+  },
+  // Git Configuration
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.showPushSuccessNotification": true,
+  "gitlens.codeLens.enabled": true,
+  "gitlens.currentLine.enabled": true,
+  "gitlens.hovers.currentLine.over": "line",
+  // Search Configuration
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.git": true,
+    "**/state/**": true
+  },
+  // Terminal Configuration
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fontFamily": "MesloLGS NF, Monaco, 'Courier New', monospace",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "terminal.integrated.cwd": "${workspaceFolder}",
+  // Code Spell Checker
+  "cSpell.words": [
+    "atim",
+    "autosuggestions",
+    "bnext",
+    "bprevious",
+    "btop",
+    "completions",
+    "containerd",
+    "copilot",
+    "copr",
+    "devel",
+    "dircolors",
+    "direnv",
+    "distros",
+    "dotfiles",
+    "editorconfig",
+    "ensurepath",
+    "envrc",
+    "eza",
+    "fnm",
+    "fzf",
+    "gdbm",
+    "gitlens",
+    "goenv",
+    "groupinstall",
+    "gsub",
+    "hjkl",
+    "hkps",
+    "homebrew",
+    "huggingface",
+    "jupyterlab",
+    "keyid",
+    "keymap",
+    "keymaps",
+    "keyserver",
+    "langinfo",
+    "lazydocker",
+    "ledgerv",
+    "libbz",
+    "libgdbm",
+    "libncurses",
+    "libncursesw",
+    "libreadline",
+    "libsqlite",
+    "libxmlsec",
+    "libyaml",
+    "lima",
+    "limactl",
+    "linuxbrew",
+    "Linuxbrew",
+    "markdownlint",
+    "noconfirm",
+    "nohl",
+    "nohlsearch",
+    "NOTSYMLINK",
+    "nvim",
+    "ochairo",
+    "ohmyzsh",
+    "ollama",
+    "Ollama",
+    "openpgp",
+    "pacman",
+    "pipefail",
+    "pipx",
+    "podman",
+    "pycache",
+    "pyenv",
+    "rbenv",
+    "reqs",
+    "ripgrep",
+    "rustup",
+    "sdkman",
+    "SDKMAN",
+    "shellcheck",
+    "shfmt",
+    "snowsql",
+    "starship",
+    "tabclose",
+    "tabfirst",
+    "tablast",
+    "tabnew",
+    "tabnext",
+    "tabprevious",
+    "tealdeer",
+    "tlsv",
+    "tokyonight",
+    "tolower",
+    "wezterm",
+    "wincmd",
+    "xlong",
+    "Yazi",
+    "zellij",
+    "zstd"
+  ],
+  "cSpell.enableFiletypes": [
+    "shellscript",
+    "yaml",
+    "markdown"
+  ],
+  // Explorer Configuration
+  "explorer.sortOrder": "type",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  // Workbench Configuration
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.startupEditor": "readme"
+}

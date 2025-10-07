@@ -1,0 +1,60 @@
+name: azure-cli
+description: "Azure command-line interface"
+tags: [cli, cloud]
+parallelSafe: true
+critical: false
+healthCheck: "command -v az >/dev/null 2>&1 && az version >/dev/null 2>&1"
+requires: []
+provides: [cloud-cli]
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: azure-cli
+
+  ubuntu:
+    installMethod: script
+    scriptUrl: https://aka.ms/InstallAzureCLIDeb
+
+  debian:
+    installMethod: script
+    scriptUrl: https://aka.ms/InstallAzureCLIDeb
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: azure-cli
+    repositorySetup:
+      type: microsoft
+      keyUrl: https://packages.microsoft.com/keys/microsoft.asc
+      repoUrl: https://packages.microsoft.com/yumrepos/azure-cli
+      repoName: "Azure CLI"
+      repoId: azure-cli
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: azure-cli
+    repositorySetup:
+      type: microsoft
+      keyUrl: https://packages.microsoft.com/keys/microsoft.asc
+      repoUrl: https://packages.microsoft.com/yumrepos/azure-cli
+      repoName: "Azure CLI"
+      repoId: azure-cli
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: azure-cli
+    repositorySetup:
+      type: microsoft
+      keyUrl: https://packages.microsoft.com/keys/microsoft.asc
+      repoUrl: https://packages.microsoft.com/yumrepos/azure-cli
+      repoName: "Azure CLI"
+      repoId: azure-cli
+
+  arch:
+    installMethod: package
+    packageManager: yay
+    packageName: azure-cli

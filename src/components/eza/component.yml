@@ -1,0 +1,44 @@
+name: eza
+description: "A modern replacement for ls"
+tags: [development]
+parallelSafe: true
+critical: false
+healthCheck: "eza --version"
+requires: []
+provides: []
+
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: eza
+
+  ubuntu:
+    installMethod: package
+    packageManager: apt
+    packageName: eza
+
+  debian:
+    installMethod: package
+    packageManager: apt
+    packageName: eza
+
+  fedora:
+    installMethod: package
+    packageManager: dnf
+    packageName: eza
+
+  rhel:
+    installMethod: package
+    packageManager: dnf
+    packageName: eza
+
+  centos:
+    installMethod: package
+    packageManager: dnf
+    packageName: eza
+
+  arch:
+    installMethod: package
+    packageManager: pacman
+    packageName: eza

@@ -1,0 +1,54 @@
+name: zsh-autosuggestions
+description: "Fish-like autosuggestions for zsh"
+platforms:
+  macos:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+  ubuntu:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+  debian:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+  fedora:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+  rhel:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+  centos:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+  arch:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+  opensuse:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+  alpine:
+    installMethod: git
+    gitUrl: "https://github.com/zsh-users/zsh-autosuggestions"
+    targetDir: "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+    depth: 1
+parallelSafe: true
+critical: false
+requires: [ohmyzsh]
+provides: []
+healthCheck: "test -f $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh || grep -q 'zsh-autosuggestions' $HOME/.zshrc || typeset -f _zsh_autosuggest_start >/dev/null 2>&1"
+tags: [shell, cli]
