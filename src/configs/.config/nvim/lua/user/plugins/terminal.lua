@@ -25,9 +25,8 @@ local function open_floating_terminal()
     title_pos = 'center'
   })
 
-  -- Start terminal with ultra-fast configuration
+  -- Start terminal with optimized configuration
   local env = {
-    FAST_TERMINAL = '1',
     SHELL = vim.o.shell,  -- Preserve user's shell choice
     GIT_PAGER = '',  -- Disable git pager to prevent stuck less processes
     PAGER = '',  -- Disable general pager

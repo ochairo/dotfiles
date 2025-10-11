@@ -1,44 +1,46 @@
--- Ultra-minimal working Wezterm configuration
+-- Minimal WezTerm config that preserves copy/paste functionality
 
 local wezterm = require 'wezterm'
 local config = {}
 
--- Basic settings
+-- Detect OS (macOS and Linux only)
+local is_macos = wezterm.target_triple:find("apple")
+local is_linux = wezterm.target_triple:find("linux")
+
+-- Theme and appearance
+config.color_scheme = 'Tokyo Night'
 config.font = wezterm.font('JetBrainsMono Nerd Font')
 config.font_size = 14
-config.color_scheme = 'Tokyo Night'
 
--- Disable non-essential features
-config.check_for_updates = false
-config.automatically_reload_config = false
+-- Minimal UI customization
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
-config.window_padding = { left = 4, right = 4, top = 4, bottom = 4 }
 
--- Performance settings
+-- Performance optimizations
+config.check_for_updates = false
 config.scrollback_lines = 500
-config.animation_fps = 1
-config.cursor_blink_rate = 0
 
--- Shell configuration (create fresh sessions each time)
-config.default_prog = {
-  "/bin/zsh",
-  "-c",
-  "export FAST_TERMINAL=1; exec zellij -l dev"
-}
+-- OS-specific settings (macOS and Linux)
+if is_macos or is_linux then
+  -- Shared settings for macOS and Linux
+  config.window_close_confirmation = "NeverPrompt"
 
--- macOS settings
-config.native_macos_fullscreen_mode = true
-config.window_close_confirmation = "NeverPrompt"
+  -- Shell integration for Unix-like systems
+  -- config.default_prog = { "/bin/zsh", "-c", "exec zellij -l dev" }
 
--- Restore dedicated desktop functionality
-wezterm.on("gui-startup", function(cmd)
-  local mux = wezterm.mux
-  if mux then
-    local tab, pane, window = mux.spawn_window(cmd or {})
-    -- Enter native fullscreen immediately for dedicated desktop
-    window:gui_window():toggle_fullscreen()
+  -- Fullscreen on startup
+  wezterm.on("gui-startup", function(cmd)
+    local mux = wezterm.mux
+    if mux then
+      local tab, pane, window = mux.spawn_window(cmd or {})
+      window:gui_window():toggle_fullscreen()
+    end
+  end)
+
+  -- macOS-only settings
+  if is_macos then
+    config.native_macos_fullscreen_mode = true
   end
-end)
+end
 
 return config

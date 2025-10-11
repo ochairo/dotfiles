@@ -1,13 +1,27 @@
-# Lazy loading utilities for zsh performance
+#!/bin/bash
+# Lazy loading utilities for bash and zsh compatibility
 # Source this file to enable lazy loading of heavy tools
 
-# Lazy load function generator
+# Function to add paths only if they exist
+add_to_path() {
+  [[ -d "$1" ]] && case ":$PATH:" in
+    *":$1:"*) ;;
+    *) export PATH="$1:$PATH" ;;
+  esac
+}
+
+# Lazy load function generator (bash/zsh compatible)
 lazy_load() {
   local command="$1"
   local init_command="$2"
 
   eval "$command() {
-    unfunction $command
+    # Remove function (bash/zsh compatible)
+    if [[ -n \"\$ZSH_VERSION\" ]]; then
+      unfunction $command
+    else
+      unset -f $command
+    fi
     $init_command
     $command \"\$@\"
   }"
@@ -25,24 +39,31 @@ lazy_load rbenv 'eval "$(rbenv init -)"'
 # Lazy load fnm
 lazy_load fnm 'eval "$(fnm env --use-on-cd)"'
 
-# Function to add paths only if they exist
-add_to_path() {
-  [[ -d "$1" ]] && case ":$PATH:" in
-    *":$1:"*) ;;
-    *) export PATH="$1:$PATH" ;;
-  esac
-}
+# Lazy load cargo and rustup
+lazy_load cargo 'add_to_path "$HOME/.cargo/bin"'
+
+# OS-specific package managers
+if [[ "$(uname)" == "Darwin" ]]; then
+  # macOS - Homebrew
+  [[ -f "/opt/homebrew/bin/brew" ]] && lazy_load brew 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+  [[ -f "/usr/local/bin/brew" ]] && lazy_load brew 'eval "$(/usr/local/bin/brew shellenv)"'
+elif [[ "$(uname)" == "Linux" ]]; then
+  # Linux - Linuxbrew if available
+  [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] && lazy_load brew 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+fi
 
 # Setup PATH with common directories
 setup_extended_path() {
   add_to_path "$HOME/.pyenv/shims"
   add_to_path "$HOME/.rbenv/shims"
   add_to_path "$HOME/.cargo/bin"
+  add_to_path "$HOME/.sdkman/bin"
   add_to_path "$HOME/.local/bin"
 
   # fnm latest active shell
   if [[ -d "$HOME/.local/state/fnm_multishells" ]]; then
-    local fnm_latest=$(ls -1t "$HOME/.local/state/fnm_multishells" 2>/dev/null | head -1)
+    local fnm_latest
+    fnm_latest=$(ls -1t "$HOME/.local/state/fnm_multishells" 2>/dev/null | head -1)
     [[ -n "$fnm_latest" ]] && add_to_path "$HOME/.local/state/fnm_multishells/$fnm_latest/bin"
   fi
 }

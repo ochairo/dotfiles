@@ -1,5 +1,7 @@
-# Ultra-performance optimizations for macOS and development tools
-# Source this file from .zshrc for maximum speed improvements
+#!/bin/bash
+
+# Ultra-performance optimizations for macOS and Linux
+# Source this file from shell config for maximum speed improvements
 
 # Disable unnecessary macOS features for better terminal performance
 export DISABLE_AUTO_TITLE="true"

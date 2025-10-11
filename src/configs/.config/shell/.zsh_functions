@@ -1,5 +1,7 @@
-# shellcheck shell=bash
-# functions (XDG)
+#!/bin/bash
+# Shell functions for macOS and Linux compatibility
+
+# Cross-platform functions
 mkcd() { mkdir -p "$1" && cd "$1" || return 1; }
 
 extract() {

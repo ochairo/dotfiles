@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Safety mechanisms to prevent stuck processes and performance issues
 
 # Function to kill stuck less processes consuming high CPU

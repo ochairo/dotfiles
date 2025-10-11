@@ -1,26 +1,32 @@
-# Optimized Zsh configuration
+#!/bin/bash
 
-# Ultra-fast mode for floating terminals
-if [[ "$FAST_TERMINAL" == "1" ]]; then
-  source "$HOME/.zshrc-fast"
-  return
+# Shell configuration for macOS and Linux compatibility
+# Optimized shell configuration with performance optimizations
+
+# Detect shell for compatibility
+if [[ -n "$ZSH_VERSION" ]]; then
+  # Zsh-specific settings
+  HISTFILE=${HISTFILE:-$HOME/.zsh_history}
+  HISTSIZE=50000
+  SAVEHIST=50000
+  setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS HIST_FIND_NO_DUPS SHARE_HISTORY INC_APPEND_HISTORY
+elif [[ -n "$BASH_VERSION" ]]; then
+  # Bash-specific settings
+  HISTFILE=${HISTFILE:-$HOME/.bash_history}
+  HISTSIZE=50000
+  HISTFILESIZE=50000
+  shopt -s histappend
+  export HISTCONTROL=ignoredups:erasedups
 fi
 
-# Normal shell configuration with performance optimizations
-# History settings
-HISTFILE=${HISTFILE:-$HOME/.zsh_history}
-HISTSIZE=50000
-SAVEHIST=50000
-setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS HIST_FIND_NO_DUPS SHARE_HISTORY INC_APPEND_HISTORY
-
-# Load lazy loading utilities
-source "$HOME/.zsh_lazy"
+# Load shell utilities (cross-platform paths)
+[[ -f "$HOME/.config/shell/.zsh_lazy" ]] && source "$HOME/.config/shell/.zsh_lazy"
 
 # Load performance optimizations
-[[ -f "$HOME/.zsh_performance" ]] && source "$HOME/.zsh_performance"
+[[ -f "$HOME/.config/shell/.zsh_performance" ]] && source "$HOME/.config/shell/.zsh_performance"
 
 # Load safety mechanisms (process monitoring and cleanup)
-[[ -f "$HOME/.zsh_safety" ]] && source "$HOME/.zsh_safety"
+[[ -f "$HOME/.config/shell/.zsh_safety" ]] && source "$HOME/.config/shell/.zsh_safety"
 
 # Setup extended PATH if deferred
 [[ "$DEFER_PATH_SETUP" == "1" ]] && setup_extended_path
@@ -96,6 +102,3 @@ fi
 
 # Conditional tool initialization
 command -v direnv >/dev/null 2>&1 && eval "$(direnv hook zsh)"
-
-# SDKMAN (lazy loaded - use 'sdk' command to activate)
-export SDKMAN_DIR="$HOME/.sdkman"
