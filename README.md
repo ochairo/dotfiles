@@ -8,7 +8,7 @@
   <a href="https://github.com/ochairo/dotfiles/tree/main/src/components" style="text-decoration: none;"><img src="https://img.shields.io/github/directory-file-count/ochairo/dotfiles/src%2Fcomponents?type=dir&style=flat-square&label=Components&color=orange" alt="Components" /></a>
 </p>
 
-<h3>Personal Configuration as Code for Dotfiles</h3>
+<h3>Personal dotfiles CaC for Unix-like Systems</h3>
 
 <p><em>Declarative, modular development environment with automatic dependency management</em></p>
 
