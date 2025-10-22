@@ -12,31 +12,91 @@ platforms:
     installMethod: package
     packageManager: brew
     packageName: coreutils
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/dircolors"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/dircolors" "dircolors"
+        log_success "dircolors configuration linked"
+      fi
 
   ubuntu:
     installMethod: package
     packageManager: apt
     packageName: coreutils
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/dircolors"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/dircolors" "dircolors"
+        log_success "dircolors configuration linked"
+      fi
 
   debian:
     installMethod: package
     packageManager: apt
     packageName: coreutils
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/dircolors"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/dircolors" "dircolors"
+        log_success "dircolors configuration linked"
+      fi
 
   fedora:
     installMethod: package
     packageManager: dnf
     packageName: coreutils
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/dircolors"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/dircolors" "dircolors"
+        log_success "dircolors configuration linked"
+      fi
 
   rhel:
     installMethod: package
     packageManager: dnf
     packageName: coreutils
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/dircolors"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/dircolors" "dircolors"
+        log_success "dircolors configuration linked"
+      fi
 
   centos:
     installMethod: package
     packageManager: dnf
     packageName: coreutils
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/dircolors"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/dircolors" "dircolors"
+        log_success "dircolors configuration linked"
+      fi
 
   arch:
     installMethod: package

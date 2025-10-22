@@ -48,7 +48,7 @@ platforms:
     depth: 1
 parallelSafe: true
 critical: false
-requires: [ohmyzsh]
+requires: [ohmyzsh, fzf]
 provides: []
 healthCheck: "test -d $HOME/.oh-my-zsh/custom/plugins/fzf-tab"
 tags: [shell, productivity]

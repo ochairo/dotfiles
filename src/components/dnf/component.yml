@@ -2,7 +2,7 @@ name: dnf
 description: "DNF package manager for Fedora/RHEL systems"
 tags: [core, system]
 parallelSafe: false
-critical: true
+critical: false
 healthCheck: "command -v dnf >/dev/null 2>&1"
 requires: []
 provides: [package-manager]

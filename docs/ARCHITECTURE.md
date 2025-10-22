@@ -25,12 +25,25 @@ dotfiles/
 ├── src/
 │   ├── bin/
 │   │   └── dot                    # Main CLI dispatcher
-│   ├── commands/                  # CLI subcommands
-│   │   ├── install.sh             # Installation logic
-│   │   ├── health.sh              # Health check command
-│   │   ├── status.sh              # Status reporting
-│   │   ├── validate.sh            # Component validation
-│   │   └── ...
+│   ├── commands/                  # CLI subcommands (organized by purpose)
+│   │   ├── setup/                 # Setup & installation commands
+│   │   │   ├── init.sh            # Interactive wizard
+│   │   │   ├── install.sh         # Installation logic
+│   │   │   └── update.sh          # Update command
+│   │   ├── diagnostic/            # Health & validation commands
+│   │   │   ├── health.sh          # Health check command
+│   │   │   ├── status.sh          # Status reporting
+│   │   │   ├── validate.sh        # Component validation
+│   │   │   └── doctor.sh          # System diagnostics
+│   │   ├── component/             # Component management
+│   │   │   ├── component.sh       # Component CLI
+│   │   │   ├── dependency-graph.sh
+│   │   │   └── selection-rebuild.sh
+│   │   └── maintenance/           # Maintenance utilities
+│   │       ├── ledger.sh          # Ledger management
+│   │       ├── compact-log.sh     # Log compaction
+│   │       ├── nvim-reset.sh      # Neovim reset
+│   │       └── secrets-init.sh    # Secrets initialization
 │   ├── components/                # Component definitions (one per directory)
 │   │   ├── git/
 │   │   │   └── component.yml      # Component metadata and install config
@@ -42,15 +55,34 @@ dotfiles/
 │   │   │   ├── shell/             # Shell configurations
 │   │   │   ├── nvim/              # Neovim config
 │   │   │   ├── starship/          # Starship config
+│   │   │   ├── wezterm/           # WezTerm config
+│   │   │   ├── zellij/            # Zellij config
 │   │   │   └── ...
 │   │   └── .ssh/                  # SSH configurations
-│   └── core/                      # Shared libraries
-│       ├── bootstrap.sh           # Core library loader
-│       ├── log.sh                 # Logging functions
-│       ├── fs.sh                  # Filesystem operations
-│       ├── registry.sh            # Component tracking
-│       ├── dependency.sh          # Dependency resolution
-│       └── ...
+│   └── core/                      # Shared libraries (organized by responsibility)
+│       ├── init/                  # Bootstrap & initialization
+│       │   ├── bootstrap.sh       # Core library loader
+│       │   └── constants.sh       # Constants and paths
+│       ├── io/                    # I/O & user interaction
+│       │   ├── log.sh             # Logging functions
+│       │   ├── ui.sh              # UI utilities (colors, prompts, formatting)
+│       │   └── term.sh            # Terminal utilities
+│       ├── fs/                    # Filesystem operations
+│       │   ├── fs.sh              # File operations, symlinks
+│       │   └── transactional.sh   # Transactional operations
+│       ├── component/             # Component management
+│       │   ├── registry.sh        # Component tracking
+│       │   ├── categories.sh      # Component categorization
+│       │   ├── validation.sh      # Component validation
+│       │   └── dependency.sh      # Dependency resolution
+│       ├── install/               # Installation logic
+│       │   ├── install_helpers.sh # Installation helpers
+│       │   └── parallel.sh        # Parallel execution
+│       ├── system/                # System utilities
+│       │   ├── os.sh              # OS detection
+│       │   └── error.sh           # Error handling
+│       └── wizard/                # Interactive wizards
+│           └── presets.sh         # Installation presets & selections
 ├── tests/                         # Test suite
 │   └── bats/                      # Bats test files
 ├── .vscode/                       # VS Code configuration
@@ -59,6 +91,8 @@ dotfiles/
 │   └── ...
 ├── .github/
 │   └── copilot-instructions.md    # GitHub Copilot instructions
+├── docs/
+│   └── ARCHITECTURE.md            # This file
 ├── AGENTS.md                      # AI agent instructions
 └── README.md                      # Project documentation
 ```

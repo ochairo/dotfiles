@@ -9,22 +9,6 @@ This is a **modular dotfiles management system** for Unix-like systems (macOS an
 - Auto dependency management
 - Centralized configuration
 
-## Repository Structure
-
-```
-dotfiles/
-├── src/
-│   ├── bin/dot              # Main CLI dispatcher
-│   ├── commands/            # CLI subcommands (install, health, status, etc.)
-│   ├── components/          # Installable components (one per directory)
-│   │   └── {name}/
-│   │       └── component.yml
-│   ├── configs/             # Configuration files
-│   │   └── .config/         # XDG-compliant configs
-│   └── core/                # Shared libraries (log, fs, registry, etc.)
-└── .vscode/                 # VS Code workspace configuration
-```
-
 ## Code Style & Standards
 
 ### Shell Scripts (Bash/Zsh)
@@ -44,7 +28,7 @@ dotfiles/
 set -euo pipefail
 
 # shellcheck source=/dev/null
-source "${DOTFILES_ROOT}/core/bootstrap.sh"
+source "${DOTFILES_ROOT}/core/init/bootstrap.sh"
 core_require log fs registry  # Load only needed modules
 
 # Use descriptive function names

@@ -2,7 +2,8 @@
 
 This document provides AI-specific instructions for working with this dotfiles repository.
 
-> **📚 For detailed technical documentation**, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) which covers directory structure, component creation, code style, and testing.
+> **📚 For detailed technical documentation**, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+which covers directory structure, component creation, code style, and testing.
 
 ## Quick Reference
 
@@ -14,11 +15,11 @@ This document provides AI-specific instructions for working with this dotfiles r
 ## Core Principles
 
 1. **Configuration as Code** - Declarative, version-controlled, reproducible
-2. **Modularity First** - Each tool/application is a separate component
-2. **Cross-Platform** - Support macOS and Linux equally
-3. **Safety** - Transactional installs, backups, validation
-4. **Centralization** - All configs in repository, minimal home directory pollution
-5. **Dependencies** - Automatic resolution and ordering
+1. **Modularity First** - Each tool/application is a separate component
+1. **Cross-Platform** - Support macOS and Linux equally
+1. **Safety** - Transactional installs, backups, validation
+1. **Centralization** - All configs in repository, minimal home directory pollution
+1. **Dependencies** - Automatic resolution and ordering
 
 ## AI-Specific Guidelines
 

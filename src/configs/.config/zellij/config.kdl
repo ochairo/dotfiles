@@ -3,7 +3,7 @@ theme "tokyonight"
 auto_layout true
 
 default_shell "zsh"
-mouse_mode false
+mouse_mode true
 copy_command "pbcopy"
 scroll_buffer_size 1000
 

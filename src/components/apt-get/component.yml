@@ -2,7 +2,7 @@ name: apt-get
 description: "APT package manager for Debian/Ubuntu systems"
 tags: [core, system]
 parallelSafe: false
-critical: true
+critical: false
 healthCheck: "command -v apt-get >/dev/null 2>&1"
 requires: []
 provides: [package-manager]

@@ -1,0 +1,9 @@
+name: list
+description: list installation and configuration
+parallelSafe: true
+requires: []
+provides: []
+tags: []
+critical: false
+healthCheck: "command -v list >/dev/null 2>&1"
+files: []

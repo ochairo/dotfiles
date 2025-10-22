@@ -12,33 +12,103 @@ platforms:
     installMethod: package
     packageManager: brew
     packageName: lima
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.lima"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.lima" "lima"
+        log_success "Lima configuration linked"
+      fi
 
   ubuntu:
     installMethod: package
     packageManager: apt
     packageName: lima
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.lima"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.lima" "lima"
+        log_success "Lima configuration linked"
+      fi
 
   debian:
     installMethod: package
     packageManager: apt
     packageName: lima
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.lima"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.lima" "lima"
+        log_success "Lima configuration linked"
+      fi
 
   fedora:
     installMethod: package
     packageManager: dnf
     packageName: lima
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.lima"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.lima" "lima"
+        log_success "Lima configuration linked"
+      fi
 
   rhel:
     installMethod: package
     packageManager: dnf
     packageName: lima
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.lima"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.lima" "lima"
+        log_success "Lima configuration linked"
+      fi
 
   centos:
     installMethod: package
     packageManager: dnf
     packageName: lima
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.lima"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.lima" "lima"
+        log_success "Lima configuration linked"
+      fi
 
   arch:
     installMethod: package
     packageManager: pacman
     packageName: lima
+    postInstall: |
+      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
+        source "${DOTFILES_ROOT}/src/core/fs.sh"
+      fi
+
+      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.lima"
+      if [[ -d "$CONFIG_SOURCE" ]]; then
+        fs_symlink "$CONFIG_SOURCE" "$HOME/.lima" "lima"
+        log_success "Lima configuration linked"
+      fi

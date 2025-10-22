@@ -11,7 +11,7 @@ platforms:
   macos:
     installMethod: package
     packageManager: brew
-    packageName: huggingface
+    packageName: huggingface-cli
 
   ubuntu:
     installMethod: package

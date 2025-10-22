@@ -10,11 +10,7 @@ local is_linux = wezterm.target_triple:find("linux")
 -- Theme and appearance
 config.color_scheme = 'Tokyo Night'
 config.font = wezterm.font('JetBrainsMono Nerd Font')
-config.font_size = 14
-
--- Minimal UI customization
-config.enable_tab_bar = false
-config.window_decorations = "RESIZE"
+config.font_size = 16.0
 
 -- Performance optimizations
 config.check_for_updates = false
@@ -42,5 +38,9 @@ if is_macos or is_linux then
     config.native_macos_fullscreen_mode = true
   end
 end
+
+-- Tab bar
+config.enable_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
 
 return config

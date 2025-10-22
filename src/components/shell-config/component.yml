@@ -9,7 +9,9 @@ provides: []
 
 platforms:
   macos:
-    installMethod: script
+    installMethod: package
+    packageManager: brew
+    packageName: zsh
     postInstall: |
       # Source filesystem helpers
       if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
@@ -53,7 +55,9 @@ platforms:
       log_info "Note: Other files (.zsh_lazy, etc.) are sourced directly from repository"
 
   ubuntu:
-    installMethod: script
+    installMethod: package
+    packageManager: apt
+    packageName: zsh
     postInstall: |
       if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
         source "${DOTFILES_ROOT}/src/core/fs.sh"
@@ -78,7 +82,9 @@ platforms:
       log_success "Shell configuration complete"
 
   debian:
-    installMethod: script
+    installMethod: package
+    packageManager: apt
+    packageName: zsh
     postInstall: |
       if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
         source "${DOTFILES_ROOT}/src/core/fs.sh"
@@ -103,7 +109,9 @@ platforms:
       log_success "Shell configuration complete"
 
   fedora:
-    installMethod: script
+    installMethod: package
+    packageManager: dnf
+    packageName: zsh
     postInstall: |
       if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
         source "${DOTFILES_ROOT}/src/core/fs.sh"
@@ -128,7 +136,9 @@ platforms:
       log_success "Shell configuration complete"
 
   rhel:
-    installMethod: script
+    installMethod: package
+    packageManager: dnf
+    packageName: zsh
     postInstall: |
       if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
         source "${DOTFILES_ROOT}/src/core/fs.sh"
@@ -153,7 +163,9 @@ platforms:
       log_success "Shell configuration complete"
 
   centos:
-    installMethod: script
+    installMethod: package
+    packageManager: dnf
+    packageName: zsh
     postInstall: |
       if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
         source "${DOTFILES_ROOT}/src/core/fs.sh"
@@ -178,7 +190,9 @@ platforms:
       log_success "Shell configuration complete"
 
   arch:
-    installMethod: script
+    installMethod: package
+    packageManager: pacman
+    packageName: zsh
     postInstall: |
       if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
         source "${DOTFILES_ROOT}/src/core/fs.sh"

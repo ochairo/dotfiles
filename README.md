@@ -32,20 +32,15 @@
 
 ## Quick Start
 
+### Interactive Installation (Recommended)
+
 ```bash
 # Clone the repository
 git clone https://github.com/ochairo/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
-# Install all components (PATH is automatically configured)
-./src/bin/dot install
-
-# Check system health
-./src/bin/dot health
-
-# After installation, restart your shell to use 'dot' command directly
-# See available Commands
-dot --help
+# Run the interactive setup wizard
+./src/bin/dot init
 ```
 
 ## Documentation
