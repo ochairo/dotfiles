@@ -18,12 +18,14 @@
 
 ## Overview
 
-- **Configuration as Code**: YAML-defined components for reproducible environments
-- **Modular Architecture**: Component-based system for selective installation
-- **Transactional**: Safe installation with rollback capabilities
-- **Cross-Platform**: macOS and Linux support with automatic package manager detection
-- **Shell Enhancement**: Zsh with Oh My Zsh, Starship, plugins, and custom configurations
-- **Development Ready**: Neovim with LSP, language version managers, modern CLI tools
+- **Interactive Wizard**: UI for component selection with multiselect and descriptions
+- **Configuration as Code**: YAML-defined components with automatic dependency resolution
+- **Modular Architecture**: 60+ components for selective installation - install all or pick what you need
+- **Smart Installation**: Parallel execution with dependency-aware batching for faster setup
+- **Cross-Platform**: Native package manager detection (Homebrew, apt, dnf) with platform-specific configs
+- **Shell Enhancement**: Zsh with Oh My Zsh, Starship prompt, syntax highlighting, and autosuggestions
+- **Development Tools**: Neovim with LSP, language version managers (pyenv, fnm, rustup), and modern CLI tools
+- **Safe & Traceable**: Transactional operations with rollback, backup, and ledger tracking
 
 ## Platform Support
 
