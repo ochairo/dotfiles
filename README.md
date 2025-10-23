@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔧 Dotfiles
+# 🔧 Dotfiles CLI
 
 <p>
   <a href="https://github.com/ochairo/dotfiles/actions/workflows/ci.yml" style="text-decoration: none;"><img src="https://github.com/ochairo/dotfiles/actions/workflows/ci.yml/badge.svg?style=flat-square" alt="CI Status" /></a>
