@@ -1,0 +1,6 @@
+name: independent2
+description: Test component independent2
+requires: []
+parallelSafe: true
+critical: false
+healthCheck: "echo 'OK'"

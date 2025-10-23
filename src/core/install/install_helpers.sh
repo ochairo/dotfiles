@@ -772,7 +772,7 @@ update_state() {
 		echo unknown
 		return 0
 	fi
-	if [[ $cur == $remote ]]; then echo up-to-date; else echo out-of-date; fi
+	if [[ $cur == "$remote" ]]; then echo up-to-date; else echo out-of-date; fi
 }
 
 # Pull latest changes from remote

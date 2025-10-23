@@ -10,6 +10,7 @@ UI_CYAN='\033[0;36m'
 UI_BLUE='\033[0;34m'
 UI_GREEN='\033[0;32m'
 UI_YELLOW='\033[1;33m'
+# shellcheck disable=SC2034 # Used in other files
 UI_MAGENTA='\033[0;35m'
 UI_RED='\033[0;31m'
 UI_BOLD='\033[1m'

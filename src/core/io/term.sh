@@ -4,6 +4,7 @@ set -euo pipefail
 
 TERM_TRUECOLOR=0
 TERM_EMOJI=1
+export TERM_TRUECOLOR TERM_EMOJI
 
 _term_detect() {
 	if [[ ${COLORTERM:-} == *truecolor* ]] || grep -qi 'truecolor' <<<"${TERM:-}"; then

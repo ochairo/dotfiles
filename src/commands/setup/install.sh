@@ -11,15 +11,22 @@ if [[ ${BASH_VERSION%%.*} -lt 4 ]]; then
 fi
 
 set -euo pipefail
+
+# Auto-detect core directory if not set by dot wrapper
+if [[ -z "${CORE_DIR:-}" ]]; then
+    SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+    CORE_DIR="$SCRIPT_DIR/../../core"
+fi
+
 # All constants and paths are now provided by the dot script via environment variables
 # ROOT points to src/ directory, PROJECT_ROOT points to project root
 # shellcheck disable=SC1091
 source "$CORE_DIR/init/bootstrap.sh"
 core_require log registry selection fs parallel transactional dependency
 # shellcheck disable=SC1091
-source "$CORE_DIR/constants.sh" 2>/dev/null || true
+source "$CORE_DIR/init/constants.sh" 2>/dev/null || true
 # shellcheck disable=SC1091
-source "$CORE_DIR/install_helpers.sh"
+source "$CORE_DIR/install/install_helpers.sh"
 
 # Precompute a portable PATH once (macOS + Linux) to avoid per-health variance
 _DOT_PORTABLE_PATH=""
@@ -99,7 +106,12 @@ filtered=()
 if [[ -n $ONLY_LIST ]]; then
 	IFS=',' read -r -a reqs <<<"$ONLY_LIST"
 	for c in "${reqs[@]}"; do
-		if [[ -d "$COMPONENTS_DIR/$c" ]]; then filtered+=("$c"); else log_warn "Unknown component $c (skipped)"; fi
+		if [[ -d "$COMPONENTS_DIR/$c" ]]; then
+			filtered+=("$c")
+		else
+			log_error "Unknown component $c"
+			exit 1
+		fi
 	done
 elif [[ $REPEAT == 1 ]]; then
 	sel=$(selection_load || true)
@@ -108,7 +120,8 @@ elif [[ $REPEAT == 1 ]]; then
 			if [[ -d "$COMPONENTS_DIR/$c" ]]; then
 				filtered+=("$c")
 			else
-				log_warn "Component in selection not found: $c"
+				log_error "Component in selection not found: $c"
+				exit 1
 			fi
 		done
 	fi

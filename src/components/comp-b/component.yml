@@ -1,0 +1,6 @@
+name: comp-b
+description: Test component comp-b
+requires: [comp-a]
+parallelSafe: true
+critical: false
+healthCheck: "echo 'OK'"

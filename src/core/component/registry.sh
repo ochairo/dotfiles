@@ -21,7 +21,8 @@ registry_get_field() {
 
 registry_requires() {
 	local name=$1
-	local file=$(registry_meta_path "$name")
+	local file
+	file=$(registry_meta_path "$name")
 	[[ -f $file ]] || return 0
 	# Support two forms:
 	# requires: [a, b]

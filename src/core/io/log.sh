@@ -16,7 +16,8 @@ __LOG_THRESHOLD=$(_log_level_rank "$DOTFILES_LOG_LEVEL")
 log_at() {
 	local lvl="$1"
 	shift || true
-	local rank=$(_log_level_rank "$lvl")
+	local rank
+	rank=$(_log_level_rank "$lvl")
 	[ "$rank" -le "$__LOG_THRESHOLD" ] || return 0
 	if [[ $DOTFILES_LOG_FORMAT == json ]]; then
 		local msg component phase

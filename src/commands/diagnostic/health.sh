@@ -8,7 +8,7 @@ set -euo pipefail
 source "$CORE_DIR/init/bootstrap.sh"
 core_require log registry selection
 # shellcheck disable=SC1091
-source "$CORE_DIR/constants.sh" 2>/dev/null || true
+source "$CORE_DIR/init/constants.sh" 2>/dev/null || true
 
 _ONLY=""
 while [[ $# -gt 0 ]]; do
@@ -30,7 +30,7 @@ if command -v env_portable_path >/dev/null 2>&1; then
 	export PATH="$_DOT_PORTABLE_PATH:$PATH"
 fi
 
-components=($(registry_list_components))
+mapfile -t components < <(registry_list_components)
 if [[ -n $_ONLY ]]; then
 	IFS=',' read -r -a only_arr <<<"$_ONLY"
 	components=()

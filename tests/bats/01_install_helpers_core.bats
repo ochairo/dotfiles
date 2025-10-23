@@ -7,17 +7,15 @@
 
 setup() {
     # Set up test environment
-    export DOTFILES_ROOT="$(cd "$BATS_TEST_DIRNAME/../.." && pwd)"
+    local dotfiles_root
+    dotfiles_root="$(cd "$BATS_TEST_DIRNAME/../.." && pwd)"
+    export DOTFILES_ROOT="$dotfiles_root"
     export MOCK_DIR="$BATS_TMPDIR/mocks"
     mkdir -p "$MOCK_DIR"
     export PATH="$MOCK_DIR:$PATH"
 
-    # Mock the bootstrap functions that are required
-    log_info() { echo "INFO: $*"; }
-    log_warn() { echo "WARN: $*"; }
-    log_error() { echo "ERROR: $*"; }
-
     # Source just the platform detection function manually
+    # shellcheck disable=SC2329  # Function called indirectly by BATS
     get_current_platform() {
         local platform=""
 
@@ -52,6 +50,7 @@ setup() {
     }
 
     # Source the read_platform_field function manually (fixed version)
+    # shellcheck disable=SC2329  # Function called indirectly by BATS
     read_platform_field() {
         local component_name="$1"
         local platform="$2"

@@ -10,11 +10,11 @@ set -euo pipefail
 
 # Get the core directory relative to this script
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-CORE_DIR="$SCRIPT_DIR/../core"
+INITIAL_CORE_DIR="$SCRIPT_DIR/../core"
 
 # Source central constants
 # shellcheck disable=SC1091
-source "$CORE_DIR/init/constants.sh"
+source "$INITIAL_CORE_DIR/init/constants.sh"
 
 # =============================================================================
 # CLI FUNCTIONS
@@ -44,8 +44,8 @@ usage() {
     for f in "${files[@]}"; do
       local name summary group
       name="$(basename "$f" .sh)"
-      summary="$(grep -E '^# summary:' "$f" | head -1 | sed 's/# summary:[[:space:]]*//')"
-      group="$(grep -E '^# group:' "$f" | head -1 | sed 's/# group:[[:space:]]*//')"
+      summary="$(grep -E '^# summary:' "$f" | head -1 | sed 's/# summary:[[:space:]]*//' || true)"
+      group="$(grep -E '^# group:' "$f" | head -1 | sed 's/# group:[[:space:]]*//' || true)"
       printf "    %-18s %s\n" "$name" "${summary:-}" >&2
     done
   }

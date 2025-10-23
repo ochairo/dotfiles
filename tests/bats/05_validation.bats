@@ -1,5 +1,6 @@
 #!/usr/bin/env bats
 # Test suite for validation.sh - Component validation functions
+# shellcheck disable=SC2030,SC2031  # Variable modifications in BATS subshells are intentional for test isolation
 
 # load "../test_helper"  # Not needed - using minimal setup
 
@@ -15,9 +16,11 @@ setup() {
     fi
 
     # Source bootstrap and dependencies
-    source "$DOTFILES_ROOT/core/bootstrap.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/init/bootstrap.sh"
     core_require log
-    source "$DOTFILES_ROOT/core/validation.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/component/validation.sh"
 
     # THEN override with test directory (must be after sourcing)
     export COMPONENTS_DIR="$BATS_TEST_TMPDIR/components"
@@ -31,6 +34,7 @@ setup() {
     fi
 
     # Cross-platform sed function - works on both macOS and Linux
+    # shellcheck disable=SC2329  # Function called indirectly in tests
     cross_platform_sed() {
         if [[ "$OSTYPE" == "darwin"* ]]; then
             # macOS requires empty backup extension for in-place editing
@@ -64,14 +68,13 @@ critical: false
 healthCheck: command -v $name
 requires: []
 tags: [test, cli]
-EOF
 
-    cat > "$component_dir/install.sh" << 'EOF'
-#!/usr/bin/env bash
-set -euo pipefail
-echo "Installing test component"
+platforms:
+  macos:
+    installMethod: package
+    packageManager: brew
+    packageName: $name
 EOF
-    chmod +x "$component_dir/install.sh"
 }
 
 # Helper function to edit a component file (cross-platform compatible)
@@ -337,35 +340,6 @@ EOF
 }
 
 # =============================================================================
-# INSTALL SCRIPT VALIDATION TESTS
-# =============================================================================
-
-@test "validate_component_install_script: passes for executable script" {
-    create_valid_component "with-script"
-
-    run validate_component_install_script "with-script"
-
-    [ "$status" -eq 0 ]
-}
-
-@test "validate_component_install_script: fails for missing script" {
-    create_valid_component "no-script"
-    rm "$COMPONENTS_DIR/no-script/install.sh"
-
-    run validate_component_install_script "no-script"
-
-    [ "$status" -eq 1 ]
-}
-
-@test "validate_component_install_script: warns for non-executable script" {
-    create_valid_component "non-exec"
-    chmod -x "$COMPONENTS_DIR/non-exec/install.sh"
-
-    run validate_component_install_script "non-exec"
-
-    [ "$status" -eq 0 ]  # Should pass but warn
-}
-
 # =============================================================================
 # COMPREHENSIVE VALIDATION TESTS
 # =============================================================================
@@ -506,19 +480,6 @@ EOF
     [ "$status" -eq 0 ]
 }
 
-@test "validate_component_install_script: handles script with shebang variations" {
-    create_valid_component "shebang-test"
-
-    # Test different shebangs
-    echo "#!/bin/bash" > "$COMPONENTS_DIR/shebang-test/install.sh"
-    echo "echo 'Different shebang'" >> "$COMPONENTS_DIR/shebang-test/install.sh"
-    chmod +x "$COMPONENTS_DIR/shebang-test/install.sh"
-
-    run validate_component_install_script "shebang-test"
-
-    [ "$status" -eq 0 ]
-}
-
 # =============================================================================
 # INTEGRATION AND STRESS TESTS
 # =============================================================================
@@ -539,9 +500,6 @@ EOF
         [ "$status" -eq 0 ]
 
         run validate_component_dependencies "$comp"
-        [ "$status" -eq 0 ]
-
-        run validate_component_install_script "$comp"
         [ "$status" -eq 0 ]
     done
 

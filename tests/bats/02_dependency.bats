@@ -21,7 +21,8 @@ setup() {
     fi
 
     # Source the dependency module
-    source "$DOTFILES_ROOT/core/dependency.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/component/dependency.sh"
 
     # Create test component directories and metadata
     create_test_component "comp-a" "[]" "true"
@@ -292,7 +293,7 @@ EOF
     # Batch 1: comp-b
     # Batch 2: comp-c
     local batch_count
-    batch_count=$(echo "$output" | grep "^BATCH_" | wc -l)
+    batch_count=$(echo "$output" | grep -c "^BATCH_")
     [ "$batch_count" -ge 2 ]
 }
 

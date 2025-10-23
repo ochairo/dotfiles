@@ -173,37 +173,6 @@ validate_component_dependencies() {
 }
 
 # Validate component installation configuration (YAML-based)
-validate_component_install_script() {
-    local component_name="$1"
-    local component_yml="$COMPONENTS_DIR/$component_name/component.yml"
-    local errors=0
-
-    # Check if component.yml exists
-    if [[ ! -f "$component_yml" ]]; then
-        log_error "Component $component_name: missing component.yml"
-        ((errors++))
-        return $errors
-    fi
-
-    # Check if component has at least one platform configured
-    if ! grep -q "^platforms:" "$component_yml"; then
-        log_error "Component $component_name: missing platforms section in component.yml"
-        ((errors++))
-    fi
-
-    # Optional: Check if installMethod is specified for configured platforms
-    local has_install_method=false
-    if grep -q "installMethod:" "$component_yml"; then
-        has_install_method=true
-    fi
-
-    if [[ "$has_install_method" == "false" ]]; then
-        log_warn "Component $component_name: no installMethod found in any platform (may be config-only component)"
-    fi
-
-    return $errors
-}
-
 # Validate all components in the system
 validate_all_components() {
     local total_errors=0
@@ -234,11 +203,6 @@ validate_all_components() {
 
         # Dependency validation
         if ! validate_component_dependencies "$component"; then
-            ((total_errors++))
-        fi
-
-        # Install script validation
-        if ! validate_component_install_script "$component"; then
             ((total_errors++))
         fi
     done

@@ -1,0 +1,6 @@
+name: leaf2
+description: Test component leaf2
+requires: [mid1]
+parallelSafe: true
+critical: false
+healthCheck: "echo 'OK'"

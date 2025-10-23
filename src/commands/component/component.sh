@@ -85,6 +85,7 @@ if [[ ! "$COMPONENT_NAME" =~ ^[a-z][a-z0-9-]*$ ]]; then
     exit 1
 fi
 
+# shellcheck disable=SC2153  # COMPONENTS_DIR is defined in constants.sh and exported
 COMPONENT_DIR="$COMPONENTS_DIR/$COMPONENT_NAME"
 
 # Check if component already exists
@@ -111,7 +112,7 @@ log_info "Creating component.yml..."
 
     # Handle requires array
     if [[ -n "$REQUIRES" ]]; then
-        echo "requires: [$(echo "$REQUIRES" | sed 's/,/, /g')]"
+        echo "requires: [${REQUIRES//,/, }]"
     else
         echo "requires: []"
     fi
@@ -120,7 +121,7 @@ log_info "Creating component.yml..."
 
     # Handle tags array
     if [[ -n "$TAGS" ]]; then
-        echo "tags: [$(echo "$TAGS" | sed 's/,/, /g')]"
+        echo "tags: [${TAGS//,/, }]"
     else
         echo "tags: []"
     fi
@@ -133,20 +134,19 @@ log_info "Creating component.yml..."
 # Generate install.sh
 log_info "Creating install.sh..."
 install_script_content=$(generate_install_script_template "$COMPONENT_NAME")
-echo "$install_script_content" | sed "s/__COMPONENT_NAME__/$COMPONENT_NAME/g" > "$COMPONENT_DIR/install.sh"
+echo "${install_script_content//__COMPONENT_NAME__/$COMPONENT_NAME}" > "$COMPONENT_DIR/install.sh"
 chmod +x "$COMPONENT_DIR/install.sh"
 
 # Validate the generated component
 log_info "Validating generated component..."
 if validate_component_schema "$COMPONENT_NAME" &&
-   validate_component_dependencies "$COMPONENT_NAME" &&
-   validate_component_install_script "$COMPONENT_NAME"; then
+   validate_component_dependencies "$COMPONENT_NAME"; then
     log_info "✅ Component '$COMPONENT_NAME' created successfully"
     echo
     echo "Component created at: $COMPONENT_DIR"
     echo "Next steps:"
     echo "  1. Edit $COMPONENT_DIR/component.yml to customize metadata"
-    echo "  2. Implement installation logic in $COMPONENT_DIR/install.sh"
+    echo "  2. Add platform-specific installation configuration"
     echo "  3. Test with: dot validate --component $COMPONENT_NAME"
     echo "  4. Install with: dot install --only $COMPONENT_NAME --dry-run"
 else

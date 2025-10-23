@@ -1,0 +1,6 @@
+name: root
+description: Test component root
+requires: []
+parallelSafe: true
+critical: false
+healthCheck: "echo 'OK'"

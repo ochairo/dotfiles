@@ -1,0 +1,6 @@
+name: self-dep
+description: Test component self-dep
+requires: [self-dep]
+parallelSafe: true
+critical: false
+healthCheck: "echo 'OK'"

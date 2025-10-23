@@ -38,8 +38,8 @@ teardown() {
     unset DOTFILES_ROOT PROJECT_ROOT CORE_DIR COMMANDS_DIR CONFIGS_DIR
     unset STATE_DIR LEDGER_FILE LAST_SELECTION_FILE COMPONENTS_DIR DOTFILES_LOG_LEVEL
 
-    # Clean up mock git repository
-    rm -rf "$PROJECT_ROOT/.git" 2>/dev/null || true
+    # NOTE: Do NOT remove real .git directory - this was dangerous!
+    # rm -rf "$PROJECT_ROOT/.git" 2>/dev/null || true
 }
 
 # Tests use real components from src/components/ instead of creating fake ones
@@ -59,7 +59,7 @@ EOF
 
 @test "install: runs with --dry-run flag" {
     # Test the install command with dry-run flag using dependency-free components
-    run "$COMMANDS_DIR/install.sh" --dry-run --only git,bat
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only git,bat
 
     [ "$status" -eq 0 ]
     # Command should succeed with dry-run (the actual output may be minimal for successful dry runs)
@@ -67,7 +67,7 @@ EOF
 
 @test "install: handles --only flag with single component" {
     # Should only process git component
-    run "$COMMANDS_DIR/install.sh" --dry-run --only git
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only git
 
     echo "Exit status: $status" >&3
     echo "Output: '$output'" >&3
@@ -78,7 +78,7 @@ EOF
 }
 
 @test "install: handles --only flag with multiple components" {
-    run "$COMMANDS_DIR/install.sh" --dry-run --only git,bat
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only git,bat
 
     [ "$status" -eq 0 ]
     # Command should succeed - the fact that it processes only git,bat
@@ -86,7 +86,7 @@ EOF
 }
 
 @test "install: validates component existence with --only" {
-    run "$COMMANDS_DIR/install.sh" --dry-run --only nonexistent-comp
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only nonexistent-comp
 
     echo "Exit status: $status" >&3
     echo "Output: '$output'" >&3
@@ -102,7 +102,7 @@ EOF
     export COMPONENTS_DIR="$BATS_TEST_TMPDIR/empty_components"
     mkdir -p "$COMPONENTS_DIR"
 
-    run "$COMMANDS_DIR/install.sh" --dry-run
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run
     [ "$status" -eq 0 ]
 }
 
@@ -115,7 +115,7 @@ EOF
 # =============================================================================
 
 @test "status: basic execution without arguments" {
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     echo "Exit status: $status" >&3
     echo "Output: '$output'" >&3
@@ -126,7 +126,7 @@ EOF
 
 @test "status: handles empty ledger file" {
     # No ledger file exists
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     [ "$status" -eq 0 ]
     # Should handle gracefully, not crash
@@ -135,7 +135,7 @@ EOF
 @test "status: reads and processes ledger file" {
     create_test_ledger
 
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     [ "$status" -eq 0 ]
     # Should show some status information
@@ -145,7 +145,7 @@ EOF
 @test "status: supports --json output format" {
     create_test_ledger
 
-    run "$COMMANDS_DIR/status.sh" --json
+    run "$COMMANDS_DIR/diagnostic/status.sh" --json
 
     [ "$status" -eq 0 ]
     [[ "$output" =~ "{" ]] || [[ "$output" =~ "\"" ]]  # JSON-like output
@@ -154,7 +154,7 @@ EOF
 @test "status: supports --quiet mode" {
     create_test_ledger
 
-    run "$COMMANDS_DIR/status.sh" --quiet
+    run "$COMMANDS_DIR/diagnostic/status.sh" --quiet
 
     [ "$status" -eq 0 ]
     # Quiet mode should produce minimal output
@@ -171,7 +171,7 @@ invalid-line-without-tabs
 /empty/component		comp3
 EOF
 
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     [ "$status" -eq 0 ]
     # Should process valid entries and skip invalid ones
@@ -186,7 +186,7 @@ EOF
     test_dir="$BATS_TEST_TMPDIR/no_git"
     mkdir -p "$test_dir"
 
-    PROJECT_ROOT="$test_dir" run "$COMMANDS_DIR/update.sh"
+    PROJECT_ROOT="$test_dir" run "$COMMANDS_DIR/setup/update.sh"
 
     # Should handle gracefully - exit status 0 when not a git repository
     [ "$status" -eq 0 ]
@@ -197,7 +197,7 @@ EOF
 # =============================================================================
 
 @test "doctor: runs basic diagnostics" {
-    run "$COMMANDS_DIR/doctor.sh"
+    run "$COMMANDS_DIR/diagnostic/doctor.sh"
 
     echo "Exit status: $status" >&3
     echo "Output: '$output'" >&3
@@ -213,7 +213,7 @@ EOF
 
 @test "validate: processes component validation" {
     # Test validation with a specific real component
-    run "$COMMANDS_DIR/validate.sh" --component git
+    run "$COMMANDS_DIR/diagnostic/validate.sh" --component git
 
     # Validation may fail if components are incomplete (missing install.sh, etc.)
     # This is expected behavior for a validation tool
@@ -229,7 +229,7 @@ EOF
 
 @test "health: runs health checks" {
     # Test with specific dependency-free components to avoid hanging
-    run "$COMMANDS_DIR/health.sh" --only git,jq
+    run "$COMMANDS_DIR/diagnostic/health.sh" --only git,jq
 
     # Health checks may fail if components have issues (e.g., missing dependencies)
     # This is expected behavior - the health command should run and report status
@@ -244,7 +244,7 @@ EOF
 
 @test "component: lists available components" {
     # Test with real components - should show git, bat, etc.
-    run "$COMMANDS_DIR/component.sh"
+    run "$COMMANDS_DIR/component/component.sh"
 
     [ "$status" -eq 0 ]
     [[ "$output" =~ "git" ]]
@@ -261,7 +261,7 @@ EOF
     # Test what happens when core modules can't be loaded
     export CORE_DIR="/nonexistent/path"
 
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     # Should fail but not crash catastrophically
     [ "$status" -ne 0 ]
@@ -269,12 +269,12 @@ EOF
 
 @test "commands: handle invalid command line arguments" {
     # Test various commands with invalid flags
-    run "$COMMANDS_DIR/install.sh" --invalid-flag
+    run "$COMMANDS_DIR/setup/install.sh" --invalid-flag
     [ "$status" -ne 0 ]
 
-    run "$COMMANDS_DIR/status.sh" --invalid-flag
+    run "$COMMANDS_DIR/diagnostic/status.sh" --invalid-flag
     [[ "$status" -eq 0 || "$status" -ne 0 ]]  # May warn but continue
 
-    run "$COMMANDS_DIR/update.sh" --invalid-flag
+    run "$COMMANDS_DIR/setup/update.sh" --invalid-flag
     [[ "$status" -eq 0 || "$status" -ne 0 ]]  # May warn but continue
 }

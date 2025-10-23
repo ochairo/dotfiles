@@ -30,7 +30,7 @@ rows=()
 
 # Read ledger and check symlink status
 if [[ -f "$LEDGER_FILE" ]]; then
-	while IFS=$'\t' read -r dest src comp; do
+	while IFS=$'\t' read -r dest src _comp; do
 		[[ -z "$dest" || "$dest" == \#* ]] && continue
 
 		status=""
@@ -67,7 +67,7 @@ if [[ $JSON == 1 ]]; then
 	for i in "${!rows[@]}"; do
 		IFS=$'\t' read -r st d s <<<"${rows[$i]}"
 		printf '%s{"status":"%s","dest":%s,"src":%s}' \
-			$([[ $i -gt 0 ]] && echo ',') \
+			"$([[ $i -gt 0 ]] && echo ',')" \
 			"$st" \
 			"$(printf '%s' "$d" | jq -R '.')" \
 			"$(printf '%s' "$s" | jq -R '.')"

@@ -115,8 +115,7 @@ categories_get_all_components() {
   done
 
   # Sort alphabetically
-  IFS=$'\n' all_components=($(sort <<<"${all_components[*]}"))
-  unset IFS
+  mapfile -t all_components < <(sort <<<"${all_components[*]}")
 
   printf "%s\n" "${all_components[@]}"
 }
@@ -135,8 +134,7 @@ categories_get_by_category() {
   done
 
   # Sort alphabetically
-  IFS=$'\n' components=($(sort <<<"${components[*]}"))
-  unset IFS
+  mapfile -t components < <(sort <<<"${components[*]}")
 
   printf "%s " "${components[@]}"
 }
@@ -167,14 +165,13 @@ categories_get_all_categories() {
   local categories=()
   for category in "${COMPONENT_CATEGORY[@]}"; do
     # Add to array if not already present
-    if [[ ! " ${categories[*]} " =~ " ${category} " ]]; then
+    if [[ ! " ${categories[*]} " =~ \ ${category}\  ]]; then
       categories+=("$category")
     fi
   done
 
   # Sort alphabetically
-  IFS=$'\n' categories=($(sort <<<"${categories[*]}"))
-  unset IFS
+  mapfile -t categories < <(sort <<<"${categories[*]}")
 
   printf "%s\n" "${categories[@]}"
 }

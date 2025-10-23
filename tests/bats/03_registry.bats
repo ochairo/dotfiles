@@ -18,10 +18,13 @@ setup() {
     unset COMPONENTS_DIR
 
     # Source bootstrap and dependencies
-    source "$DOTFILES_ROOT/core/bootstrap.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/init/bootstrap.sh"
     core_require log
-    source "$DOTFILES_ROOT/core/constants.sh"
-    source "$DOTFILES_ROOT/core/registry.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/init/constants.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/component/registry.sh"
 }
 
 @test "registry_list_components: lists existing components" {

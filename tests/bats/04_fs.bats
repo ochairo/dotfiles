@@ -20,9 +20,11 @@ setup() {
     export DOTFILES_TRANSACTIONAL=0  # Default to non-transactional
 
     # Source bootstrap and dependencies
-    source "$DOTFILES_ROOT/core/bootstrap.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/init/bootstrap.sh"
     core_require log
-    source "$DOTFILES_ROOT/core/fs.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/fs/fs.sh"
 
     # Create test files and directories
     mkdir -p "$BATS_TEST_TMPDIR"/{source,target,backup}
@@ -118,6 +120,7 @@ teardown() {
 # =============================================================================
 
 @test "fs_remove_or_backup: removes file when backup disabled" {
+    # shellcheck disable=SC2030  # Variable modification local to test subshell is intentional
     export DOTFILES_BACKUP=0
     local target="$BATS_TEST_TMPDIR/target/existing.txt"
 
@@ -136,6 +139,7 @@ teardown() {
 }
 
 @test "fs_remove_or_backup: backs up file when backup enabled" {
+    # shellcheck disable=SC2030,SC2031  # Variable modification local to test subshell is intentional
     export DOTFILES_BACKUP=1
     local target="$BATS_TEST_TMPDIR/target/existing.txt"
 
@@ -158,6 +162,7 @@ teardown() {
     mkdir -p "$target/subdir"
     echo "dir content" > "$target/file.txt"
 
+    # shellcheck disable=SC2030,SC2031  # Variable modification local to test subshell is intentional
     export DOTFILES_BACKUP=0
     run fs_remove_or_backup "$target"
 
@@ -245,6 +250,7 @@ teardown() {
 }
 
 @test "fs_symlink_record: creates ledger directory" {
+    # shellcheck disable=SC2030,SC2031  # Variable modification local to test subshell is intentional
     export LEDGER_FILE="$BATS_TEST_TMPDIR/deep/nested/ledger.log"
     local dest="$BATS_TEST_TMPDIR/target/link.txt"
     local src="$BATS_TEST_TMPDIR/source/test.txt"
@@ -252,7 +258,9 @@ teardown() {
     run fs_symlink_record "$dest" "$src" "test-component"
 
     [ "$status" -eq 0 ]
+    # shellcheck disable=SC2031  # Variable was set in this test context
     [ -f "$LEDGER_FILE" ]
+    # shellcheck disable=SC2031  # Variable was set in this test context
     [ -d "$BATS_TEST_TMPDIR/deep/nested" ]
 }
 
@@ -274,7 +282,9 @@ teardown() {
     [ "$(readlink "$dest")" = "$src" ]
 
     # Should be recorded in ledger
+    # shellcheck disable=SC2031  # Variable was set in setup for this test
     [ -f "$LEDGER_FILE" ]
+    # shellcheck disable=SC2031  # Variable was set in setup for this test
     [[ "$(cat "$LEDGER_FILE")" =~ "$dest"$'\t'"$src"$'\t'"test-component" ]]
 }
 
@@ -317,6 +327,7 @@ teardown() {
     local dest="$BATS_TEST_TMPDIR/target/existing.txt"
 
     # existing.txt is a regular file
+    # shellcheck disable=SC2030,SC2031  # Variable modification local to test subshell is intentional
     export DOTFILES_BACKUP=0
     run fs_symlink "$src" "$dest" "test-component"
 
@@ -410,6 +421,7 @@ teardown() {
 # =============================================================================
 
 @test "integration: full symlink workflow with backup" {
+    # shellcheck disable=SC2030,SC2031  # Variable modification local to test subshell is intentional
     export DOTFILES_BACKUP=1
     local src="$BATS_TEST_TMPDIR/source/test.txt"
     local dest="$BATS_TEST_TMPDIR/target/existing.txt"
@@ -435,7 +447,9 @@ teardown() {
     [ "$(readlink "$dest")" = "$src" ]
 
     # Should be recorded in ledger
+    # shellcheck disable=SC2031  # Variable was set in this test context
     [ -f "$LEDGER_FILE" ]
+    # shellcheck disable=SC2031  # Variable was set in this test context
     [[ "$(cat "$LEDGER_FILE")" =~ "$dest"$'\t'"$src"$'\t'"integration-test" ]]
 }
 
@@ -453,8 +467,10 @@ teardown() {
     done
 
     # Verify all recorded in ledger
+    # shellcheck disable=SC2031  # Variable was set in setup for this test
     [ -f "$LEDGER_FILE" ]
     local record_count
+    # shellcheck disable=SC2031  # Variable was set in setup for this test
     record_count=$(grep -c "stress-test-" "$LEDGER_FILE")
     [ "$record_count" -eq 20 ]
 }

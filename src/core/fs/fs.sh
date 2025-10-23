@@ -12,7 +12,8 @@ source "${DOTFILES_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}/core/
 fs_backup_if_exists() {
 	local target=$1
 	if [[ -e $target || -L $target ]]; then
-		local backup="${target}.bak.$(date +%s)"
+		local backup
+		backup="${target}.bak.$(date +%s)"
 		mv "$target" "$backup"
 		log_warn "Backup created: $backup"
 	fi

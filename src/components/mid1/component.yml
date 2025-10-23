@@ -1,0 +1,6 @@
+name: mid1
+description: Test component mid1
+requires: [root]
+parallelSafe: true
+critical: false
+healthCheck: "echo 'OK'"

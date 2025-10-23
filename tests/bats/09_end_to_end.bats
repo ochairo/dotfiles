@@ -42,7 +42,7 @@ teardown() {
     # Test that commands execute without errors using dependency-free real components
 
     # Run complete installation with specific components (dry run for safety)
-    run "$COMMANDS_DIR/install.sh" --dry-run --only git,jq
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only git,jq
 
     [ "$status" -eq 0 ]
     # Should complete without errors
@@ -50,7 +50,7 @@ teardown() {
 
 @test "e2e: status check basic functionality" {
     # Check status command works
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     [ "$status" -eq 0 ]
     # Status should work without errors
@@ -58,7 +58,7 @@ teardown() {
 
 @test "e2e: health check basic functionality" {
     # Run health check on specific components to avoid hanging
-    run "$COMMANDS_DIR/health.sh" --only git,jq
+    run "$COMMANDS_DIR/diagnostic/health.sh" --only git,jq
 
     # Should work or gracefully handle issues
     [[ $status -eq 0 || $status -eq 1 ]]
@@ -68,7 +68,7 @@ teardown() {
     # Run validation on specific real components to avoid timeout
 
     # Run validation on a lightweight component
-    run "$COMMANDS_DIR/validate.sh" --component git
+    run "$COMMANDS_DIR/diagnostic/validate.sh" --component git
 
     # Should validate real component configurations
     # May fail if component is incomplete - this is expected
@@ -77,7 +77,7 @@ teardown() {
 
 @test "e2e: component inspection workflow with real components" {
     # Test component command with real components - it lists all components
-    run "$COMMANDS_DIR/component.sh"
+    run "$COMMANDS_DIR/component/component.sh"
 
     # Should handle real components and list them
     [ "$status" -eq 0 ]
@@ -87,7 +87,7 @@ teardown() {
 
 @test "e2e: doctor diagnostic workflow" {
     # Test doctor command - may fail due to platform-specific components
-    run "$COMMANDS_DIR/doctor.sh"
+    run "$COMMANDS_DIR/diagnostic/doctor.sh"
 
     # Doctor may return non-zero if health checks fail (platform-specific components)
     [[ $status -eq 0 || $status -eq 2 ]]
@@ -102,24 +102,24 @@ teardown() {
     # Test that all commands can be invoked with real components
 
     # 1. Validate specific component to avoid timeout
-    run "$COMMANDS_DIR/validate.sh" --component git
+    run "$COMMANDS_DIR/diagnostic/validate.sh" --component git
     # Validation may fail if component is incomplete - this is expected
     [[ $status -eq 0 || $status -eq 1 ]]
 
     # 2. Check status
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
     [ "$status" -eq 0 ]
 
     # 3. Test install with dry-run
-    run "$COMMANDS_DIR/install.sh" --dry-run --only git,jq
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only git,jq
     [ "$status" -eq 0 ]
 
     # 4. Check health
-    run "$COMMANDS_DIR/health.sh" --only git,jq
+    run "$COMMANDS_DIR/diagnostic/health.sh" --only git,jq
     [[ $status -eq 0 || $status -eq 1 ]]
 
     # 5. Run diagnostics
-    run "$COMMANDS_DIR/doctor.sh"
+    run "$COMMANDS_DIR/diagnostic/doctor.sh"
     # Doctor may return non-zero if health checks fail (platform-specific components)
     [[ $status -eq 0 || $status -eq 2 ]]
 }
@@ -127,10 +127,10 @@ teardown() {
 @test "e2e: commands handle missing arguments gracefully" {
     # Test commands without required arguments
 
-    run "$COMMANDS_DIR/install.sh" --help 2>/dev/null
+    run "$COMMANDS_DIR/setup/install.sh" --help 2>/dev/null
     [[ $status -eq 0 || $status -eq 1 ]]
 
-    run "$COMMANDS_DIR/component.sh" 2>/dev/null
+    run "$COMMANDS_DIR/component/component.sh" 2>/dev/null
     [[ $status -eq 0 || $status -eq 1 ]]
 }
 
@@ -141,6 +141,6 @@ teardown() {
     [ -d "$STATE_DIR" ]
 
     # Commands should handle empty state gracefully
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
     [ "$status" -eq 0 ]
 }

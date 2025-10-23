@@ -22,7 +22,7 @@ for a in "$@"; do
 done
 
 # Component inventory & critical presence
-components=($(registry_list_components))
+mapfile -t components < <(registry_list_components)
 critical_missing=()
 for c in "${components[@]}"; do
 	if registry_is_critical "$c"; then
@@ -43,10 +43,11 @@ REMOTE_REF=""
 if [[ -d "$PROJECT_ROOT/.git" ]]; then
 	CURRENT_REF=$(git -C "$PROJECT_ROOT" rev-parse --short HEAD 2>/dev/null || true)
 	branch=$(git -C "$PROJECT_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)
-	git -C "$PROJECT_ROOT" fetch --quiet origin "$branch" || true
+	# Use timeout to prevent hanging on git fetch
+	timeout 5s git -C "$PROJECT_ROOT" fetch --quiet origin "$branch" 2>/dev/null || true
 	REMOTE_REF=$(git -C "$PROJECT_ROOT" rev-parse --short "origin/$branch" 2>/dev/null || true)
 	if [[ -n $CURRENT_REF && -n $REMOTE_REF ]]; then
-		if [[ $CURRENT_REF == $REMOTE_REF ]]; then UPDATE_STATE="up-to-date"; else UPDATE_STATE="out-of-date"; fi
+		if [[ $CURRENT_REF == "$REMOTE_REF" ]]; then UPDATE_STATE="up-to-date"; else UPDATE_STATE="out-of-date"; fi
 	fi
 fi
 
@@ -57,7 +58,7 @@ if [[ $JSON == 1 ]]; then
 	printf '"update":{"state":"%s","current":"%s","remote":"%s"},' "$UPDATE_STATE" "$CURRENT_REF" "$REMOTE_REF"
 	printf '"critical":{"missing":['
 	for i in "${!critical_missing[@]}"; do
-		printf '%s"%s"' $([[ $i -gt 0 ]] && echo ',') "${critical_missing[$i]}"
+		printf '%s"%s"' "$([[ $i -gt 0 ]] && echo ',')" "${critical_missing[$i]}"
 	done
 	printf ']},'
 	printf '"selection":%s' "$(printf '%s' "$last_selection" | jq -R 'split(" ")|map(select(length>0))')"

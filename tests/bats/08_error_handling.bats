@@ -76,7 +76,7 @@ critical: false
 healthCheck: "echo 'OK'"
 EOF
 
-    echo '#!/bin/bash\necho "Installing $name"' > "$component_dir/install.sh"
+    printf '#!/bin/bash\necho "Installing %s"\n' "$name" > "$component_dir/install.sh"
     chmod +x "$component_dir/install.sh"
 }
 
@@ -106,7 +106,7 @@ healthCheck: "echo 'OK'"
 EOF
 
     for comp in "$comp1" "$comp2"; do
-        echo '#!/bin/bash\necho "Installing $comp"' > "$COMPONENTS_DIR/$comp/install.sh"
+        printf '#!/bin/bash\necho "Installing %s"\n' "$comp" > "$COMPONENTS_DIR/$comp/install.sh"
         chmod +x "$COMPONENTS_DIR/$comp/install.sh"
     done
 }
@@ -121,7 +121,7 @@ EOF
     echo "# missing header" >> "$LEDGER_FILE"
     echo "invalid	entry	format" >> "$LEDGER_FILE"
 
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     # Should handle gracefully, not crash
     [[ $status -eq 0 || $status -eq 1 ]]
@@ -131,7 +131,7 @@ EOF
     # Make state directory unwritable
     chmod 444 "$STATE_DIR"
 
-    run "$COMMANDS_DIR/install.sh" --dry-run
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run
 
     # Should handle permission errors gracefully
     [[ $status -eq 0 || $status -eq 1 ]]
@@ -144,7 +144,7 @@ EOF
     # Remove components directory
     rm -rf "$COMPONENTS_DIR"
 
-    run "$COMMANDS_DIR/install.sh" --dry-run
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run
 
     [ "$status" -eq 0 ]
     # Should handle missing directory gracefully
@@ -157,7 +157,7 @@ EOF
 /tmp/broken-symlink	/nonexistent/source	test-comp
 EOF
 
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     [ "$status" -eq 0 ]
     # Should report broken symlink status without crashing
@@ -171,7 +171,7 @@ EOF
 @test "error: handles malformed component.yml files" {
     create_malformed_component "broken-comp"
 
-    run "$COMMANDS_DIR/validate.sh"
+    run "$COMMANDS_DIR/diagnostic/validate.sh"
 
     # Should detect and report validation errors
     [ "$status" -ne 0 ]
@@ -181,7 +181,7 @@ EOF
 @test "error: handles components with missing dependencies" {
     create_component_with_missing_deps "comp-with-missing-deps"
 
-    run "$COMMANDS_DIR/install.sh" --dry-run --only comp-with-missing-deps
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only comp-with-missing-deps
 
     # Should detect missing dependencies
     [ "$status" -ne 0 ]
@@ -191,7 +191,7 @@ EOF
 @test "error: handles circular dependencies" {
     create_circular_dependency "circular1" "circular2"
 
-    run "$COMMANDS_DIR/install.sh" --dry-run --only circular1
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only circular1
 
     # Should detect circular dependencies
     [[ $status -eq 0 || $status -eq 1 ]]
@@ -210,7 +210,7 @@ healthCheck: "echo 'OK'"
 EOF
     # No install.sh file created
 
-    run "$COMMANDS_DIR/install.sh" --dry-run --only no-install-script
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only no-install-script
 
     # Should handle missing install script
     [[ $status -eq 0 || $status -eq 1 ]]
@@ -221,17 +221,18 @@ EOF
 # =============================================================================
 
 @test "error: handles malformed --only component list" {
-    run "$COMMANDS_DIR/install.sh" --dry-run --only ""
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only ""
 
     # Should handle empty component list gracefully
     [ "$status" -eq 0 ]
 }
 
 @test "error: handles non-existent component in --only" {
-    run "$COMMANDS_DIR/install.sh" --dry-run --only nonexistent-component
+    run "$COMMANDS_DIR/setup/install.sh" --dry-run --only nonexistent-component
 
-    # Should handle missing component gracefully
-    [ "$status" -eq 0 ]
+    # Should fail when given non-existent component
+    [ "$status" -ne 0 ]
+    [[ "$output" =~ "ERROR" || "$output" =~ "not found" || "$output" =~ "Unknown component" ]]
 }
 
 # =============================================================================
@@ -258,7 +259,7 @@ exit 1
 EOF
     chmod +x "$COMPONENTS_DIR/failing-test/install.sh"
 
-    run "$COMMANDS_DIR/install.sh" --only failing-test
+    run "$COMMANDS_DIR/setup/install.sh" --only failing-test
 
     # Should handle installation failures - may return 0 in dry-run or graceful handling
     # The important thing is it doesn't crash
@@ -277,7 +278,7 @@ description: "Unterminated string
 requires: [unclosed-bracket
 EOF
 
-    run "$COMMANDS_DIR/validate.sh" 2>/dev/null
+    run "$COMMANDS_DIR/diagnostic/validate.sh" 2>/dev/null
 
     # Should detect YAML syntax errors
     [[ $status -eq 0 || $status -eq 1 ]]
@@ -290,7 +291,7 @@ EOF
 description: Incomplete component
 EOF
 
-    run "$COMMANDS_DIR/validate.sh" 2>/dev/null
+    run "$COMMANDS_DIR/diagnostic/validate.sh" 2>/dev/null
 
     # Should detect missing required fields
     [[ $status -eq 0 || $status -eq 1 ]]
@@ -305,7 +306,7 @@ EOF
     echo "invalid json content" > "$STATE_DIR/install-timing.json"
     echo "corrupted selection data" > "$LAST_SELECTION_FILE"
 
-    run "$COMMANDS_DIR/status.sh"
+    run "$COMMANDS_DIR/diagnostic/status.sh"
 
     # Should handle corrupted state files without crashing
     [ "$status" -eq 0 ]

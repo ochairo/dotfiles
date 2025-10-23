@@ -1,5 +1,6 @@
 #!/usr/bin/env bats
 # Test suite for transactional.sh - Transactional operations and state management
+# shellcheck disable=SC2030,SC2031  # Variable modifications in BATS subshells are intentional for test isolation
 
 # load "../test_helper"  # Not needed - using minimal setup
 
@@ -15,8 +16,10 @@ setup() {
     fi
 
     # Source required modules first (these will set STATE_DIR from constants.sh)
-    source "$DOTFILES_ROOT/core/fs.sh"
-    source "$DOTFILES_ROOT/core/transactional.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/fs/fs.sh"
+    # shellcheck disable=SC1091  # Path is set dynamically in test environment
+    source "$DOTFILES_ROOT/core/fs/transactional.sh"
 
     # THEN override with test directories (must be after sourcing)
     export STATE_DIR="$BATS_TEST_TMPDIR/state"
