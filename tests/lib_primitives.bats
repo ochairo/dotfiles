@@ -9,7 +9,9 @@ setup() {
 
   # shellcheck source=../src/lib/index.sh
   source "$LIB_DIR/index.sh"
-}# =============================================================================
+}
+
+# =============================================================================
 # msg.sh tests
 # =============================================================================
 
@@ -42,20 +44,17 @@ setup() {
 # =============================================================================
 
 @test "array_contains finds element in array" {
-  local arr=("apple" "banana" "cherry")
-  run array_contains arr "banana"
+  run array_contains "banana" "apple" "banana" "cherry"
   [ "$status" -eq 0 ]
 }
 
 @test "array_contains returns 1 when element not found" {
-  local arr=("apple" "banana" "cherry")
-  run array_contains arr "orange"
+  run array_contains "orange" "apple" "banana" "cherry"
   [ "$status" -eq 1 ]
 }
 
 @test "array_join joins array with delimiter" {
-  local arr=("one" "two" "three")
-  result=$(array_join arr ",")
+  result=$(array_join "," "one" "two" "three")
   [ "$result" = "one,two,three" ]
 }
 
@@ -111,30 +110,30 @@ setup() {
 # files.sh tests
 # =============================================================================
 
-@test "file_exists detects existing file" {
-  # Create temp file
-  temp_file="$BATS_TMPDIR/test_file_$$"
-  touch "$temp_file"
-
-  run file_exists "$temp_file"
-  [ "$status" -eq 0 ]
-
-  # Cleanup
-  rm -f "$temp_file"
-}
-
-@test "file_exists returns 1 for non-existent file" {
-  run file_exists "/nonexistent/path/file.txt"
-  [ "$status" -eq 1 ]
-}
-
-@test "file_is_readable checks file permissions" {
+@test "file_readable checks file permissions" {
   temp_file="$BATS_TMPDIR/readable_test_$$"
   touch "$temp_file"
   chmod 644 "$temp_file"
 
-  run file_is_readable "$temp_file"
+  run file_readable "$temp_file"
   [ "$status" -eq 0 ]
 
+  rm -f "$temp_file"
+}
+
+@test "file_writable checks write permissions" {
+  temp_file="$BATS_TMPDIR/writable_test_$$"
+  touch "$temp_file"
+  chmod 644 "$temp_file"
+
+  run file_writable "$temp_file"
+  [ "$status" -eq 0 ]
+
+  rm -f "$temp_file"
+}
+
+@test "file_temp creates temporary file" {
+  temp_file=$(file_temp)
+  [ -f "$temp_file" ]
   rm -f "$temp_file"
 }

@@ -32,15 +32,38 @@
 
 ## Quick Start
 
-### Interactive Installation (Recommended)
+### 1. Clone the Repository
 
 ```bash
-# Clone the repository
-git clone https://github.com/ochairo/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone https://github.com/ochairo/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+```
 
-# Run the interactive setup wizard
-./src/bin/dot init
+### 2. Add to PATH
+
+Add the `dot` CLI to your PATH:
+
+**For Zsh (macOS default):**
+
+```bash
+echo 'export PATH="$HOME/.dotfiles/src/cli/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**For Bash:**
+
+```bash
+echo 'export PATH="$HOME/.dotfiles/src/cli/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### 3. Use the CLI
+
+Now you can use the `dot` command from anywhere:
+
+```bash
+# Interactive setup wizard
+dot init
 ```
 
 ---
