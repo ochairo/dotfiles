@@ -5,9 +5,7 @@
 
 set -euo pipefail
 
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log validation registry
+# All modules loaded by bin/dot validation registry
 
 COMPONENT_NAME=""
 DESCRIPTION=""

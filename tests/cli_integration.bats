@@ -7,7 +7,9 @@ setup() {
 
   # Ensure dot is executable
   [ -x "$DOT_BIN" ]
-}# =============================================================================
+}
+
+# =============================================================================
 # Basic CLI tests
 # =============================================================================
 
@@ -77,13 +79,13 @@ setup() {
 @test "dot finds lib directory" {
   run bash -c "DOTFILES_DEBUG=1 '$DOT_BIN' --version 2>&1 | grep LIB_DIR"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"/src2/lib"* ]]
+  [[ "$output" == *"/src/lib"* ]]
 }
 
 @test "dot finds core directory" {
   run bash -c "DOTFILES_DEBUG=1 '$DOT_BIN' --version 2>&1 | grep CORE_DIR"
   [ "$status" -eq 0 ]
-  [[ "$output" == *"/src2/core"* ]]
+  [[ "$output" == *"/src/core"* ]]
 }
 
 @test "dot finds components directory" {

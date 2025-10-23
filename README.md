@@ -8,7 +8,7 @@
   <a href="https://github.com/ochairo/dotfiles/tree/main/src/components" style="text-decoration: none;"><img src="https://img.shields.io/github/directory-file-count/ochairo/dotfiles/src%2Fcomponents?type=dir&style=flat-square&label=Components&color=orange" alt="Components" /></a>
 </p>
 
-<h3>Personal dotfiles CaC for Unix-like Systems</h3>
+<h3>Personal dotfiles CLI for Unix-like Systems</h3>
 
 <p><em>Declarative, modular development environment with automatic dependency management</em></p>
 
@@ -18,7 +18,7 @@
 
 ## Overview
 
-- **Configuration as Code (CaC)**: YAML-defined components for reproducible environments
+- **Configuration as Code**: YAML-defined components for reproducible environments
 - **Modular Architecture**: Component-based system for selective installation
 - **Transactional**: Safe installation with rollback capabilities
 - **Cross-Platform**: macOS and Linux support with automatic package manager detection
@@ -41,11 +41,9 @@ cd ~/.dotfiles
 
 ### 2. Add to PATH
 
-Add the `dot` CLI to your PATH:
-
 **For Zsh (macOS default):**
 
-```bash
+```zsh
 echo 'export PATH="$HOME/.dotfiles/src/cli/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 ```

@@ -66,7 +66,7 @@ teardown() {
   ledger_add "symlink" "comp1" "/target1" "/source1"
   ledger_add "symlink" "comp2" "/target2" "/source2"
 
-  result=$(ledger_entries | wc -l)
+  result=$(ledger_count)
   [ "$result" -ge 2 ]
 }
 

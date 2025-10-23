@@ -8,9 +8,7 @@
 
 set -euo pipefail
 
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log validation
+# All modules loaded by bin/dot
 
 # Use PROJECT_ROOT from environment (provided by dot script)
 cd "$PROJECT_ROOT"

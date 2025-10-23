@@ -4,11 +4,7 @@
 # group: maintenance
 set -euo pipefail
 
-# All constants and paths are now provided by the dot script via environment variables
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log fs
-LEDGER_FILE="${LEDGER_FILE:-$LEDGER_FILE}" # from constants via fs
+# All modules loaded by bin/dot
 
 cmd=${1:-}
 case "$cmd" in

@@ -10,7 +10,9 @@ setup() {
 
   # shellcheck source=../src/lib/index.sh
   source "$LIB_DIR/index.sh"
-}# =============================================================================
+}
+
+# =============================================================================
 # os.sh tests
 # =============================================================================
 
@@ -87,12 +89,6 @@ setup() {
 # term.sh tests
 # =============================================================================
 
-@test "term_supports_color returns valid result" {
-  run term_supports_color
-  # Should return 0 (yes) or 1 (no)
-  [[ "$status" -eq 0 || "$status" -eq 1 ]]
-}
-
 @test "term_width returns positive number" {
   result=$(term_width)
   # Should be a positive integer
@@ -111,15 +107,15 @@ setup() {
 # env.sh tests
 # =============================================================================
 
-@test "env_has_var detects existing variable" {
+@test "env_is_set detects existing variable" {
   export TEST_VAR="test_value"
-  run env_has_var "TEST_VAR"
+  run env_is_set "TEST_VAR"
   [ "$status" -eq 0 ]
   unset TEST_VAR
 }
 
-@test "env_has_var returns 1 for non-existent variable" {
-  run env_has_var "NONEXISTENT_VAR_12345"
+@test "env_is_set returns 1 for non-existent variable" {
+  run env_is_set "NONEXISTENT_VAR_12345"
   [ "$status" -eq 1 ]
 }
 

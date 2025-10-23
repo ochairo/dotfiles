@@ -3,9 +3,8 @@
 # summary: Show repo status (--json for structured output, --pull to update)
 # group: core
 set -euo pipefail
-# All constants and paths are now provided by the dot script via environment variables
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log update
+
+# All modules loaded by bin/dot
 
 JSON=0 PULL=0
 for a in "$@"; do

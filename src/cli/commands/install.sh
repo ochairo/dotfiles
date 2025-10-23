@@ -12,19 +12,7 @@ fi
 
 set -euo pipefail
 
-# Auto-detect core directory if not set by dot wrapper
-if [[ -z "${CORE_DIR:-}" ]]; then
-    SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-    CORE_DIR="$SCRIPT_DIR/../../core"
-fi
-
-# All constants and paths are now provided by the dot script via environment variables
-# ROOT points to src/ directory, PROJECT_ROOT points to project root
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log registry selection fs parallel transactional dependency
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/constants.sh" 2>/dev/null || true
+# All modules are loaded by bin/dot, environment variables exported
 # shellcheck disable=SC1091
 source "$CORE_DIR/install/install_helpers.sh"
 

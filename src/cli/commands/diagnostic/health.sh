@@ -3,12 +3,8 @@
 # summary: Run health checks for components (use --only comp1,comp2 for specific ones)
 # group: core
 set -euo pipefail
-# All constants and paths are now provided by the dot script via environment variables
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log registry selection
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/constants.sh" 2>/dev/null || true
+
+# All modules loaded by bin/dot
 
 _ONLY=""
 while [[ $# -gt 0 ]]; do

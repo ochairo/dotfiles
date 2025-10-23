@@ -5,9 +5,8 @@
 
 set -euo pipefail
 
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log registry dependency ui categories presets
+# All modules are loaded by bin/dot, so we just need the environment variables
+# which are exported by the main script
 
 # Main entry point
 function main() {

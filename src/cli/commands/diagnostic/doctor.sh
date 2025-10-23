@@ -4,10 +4,7 @@
 # group: core
 set -euo pipefail
 
-# All constants and paths are now provided by the dot script via environment variables
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log registry selection
+# All modules loaded by bin/dot
 
 JSON=0
 for a in "$@"; do

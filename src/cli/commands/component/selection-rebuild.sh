@@ -3,10 +3,8 @@
 # summary: Reconstruct last selection from ledger component column
 # group: maintenance
 set -euo pipefail
-# All constants and paths are now provided by the dot script via environment variables
-# shellcheck disable=SC1091
-source "$CORE_DIR/init/bootstrap.sh"
-core_require log selection
+
+# All modules loaded by bin/dot
 
 if [[ ! -f $LEDGER_FILE ]]; then
 	log_error "No ledger file present"

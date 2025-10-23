@@ -33,5 +33,17 @@ if [[ -f "$DOTFILES_CORE_DIR/resolver.sh" ]]; then
     source "$DOTFILES_CORE_DIR/resolver.sh"
 fi
 
+# Load wizard module (interactive installation)
+if [[ -f "$DOTFILES_CORE_DIR/wizard.sh" ]]; then
+    # shellcheck source=./wizard.sh
+    source "$DOTFILES_CORE_DIR/wizard.sh"
+fi
+
+# Load git utilities module
+if [[ -f "$DOTFILES_CORE_DIR/git_utils.sh" ]]; then
+    # shellcheck source=./git_utils.sh
+    source "$DOTFILES_CORE_DIR/git_utils.sh"
+fi
+
 # Export DOTFILES_CORE_DIR for other scripts
 export DOTFILES_CORE_DIR
