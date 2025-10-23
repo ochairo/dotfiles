@@ -1,6 +1,0 @@
-name: comp-not-parallel
-description: Test component comp-not-parallel
-requires: []
-parallelSafe: false
-critical: false
-healthCheck: "echo 'OK'"

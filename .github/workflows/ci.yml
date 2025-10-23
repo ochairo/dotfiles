@@ -2,37 +2,56 @@ name: CI
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, develop]
   pull_request:
-    branches: [main, master]
+    branches: [main, master, develop]
 
 jobs:
   test:
+    name: Run Tests
+    runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+      fail-fast: false
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Install BATS and ensure bash 4+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install bats
         run: |
-          if command -v apt-get >/dev/null 2>&1; then
-            # Ubuntu - install modern bash and bats
+          if [ "$RUNNER_OS" == "macOS" ]; then
+            brew install bats-core
+          elif [ "$RUNNER_OS" == "Linux" ]; then
             sudo apt-get update
-            sudo apt-get install -y bats bash
-            echo "Ubuntu bash version: $(bash --version | head -1)"
-            # Ensure bash is in PATH
-            echo "/bin" >> $GITHUB_PATH
-          else
-            # macOS - install modern bash and bats via homebrew
-            brew install bash bats-core
-            echo "macOS system bash version: $(/bin/bash --version | head -1)"
-            echo "macOS homebrew bash version: $(/opt/homebrew/bin/bash --version | head -1)"
-            # Update PATH to use modern bash
-            echo "/opt/homebrew/bin" >> $GITHUB_PATH
+            sudo apt-get install -y bats
           fi
-      - name: Run tests
+
+      - name: Verify bats installation
+        run: bats --version
+
+      - name: Run test suite
+        run: ./tests/run_tests.sh
+
+      - name: Test dot CLI
         run: |
-          # Ensure we're using bash 4+
-          bash --version
-          bats tests/bats/
+          ./src/cli/bin/dot --version
+          ./src/cli/bin/dot --help
+
+  lint:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: "./src"
+          severity: warning
+          ignore_paths: |
+            src/components

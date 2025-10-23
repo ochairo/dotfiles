@@ -1,6 +1,0 @@
-name: comp-circular1
-description: Test component comp-circular1
-requires: [comp-circular2]
-parallelSafe: true
-critical: false
-healthCheck: "echo 'OK'"

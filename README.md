@@ -43,8 +43,4 @@ cd ~/dotfiles
 ./src/bin/dot init
 ```
 
-## Documentation
-
-For detailed technical documentation and component development guide, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md):
-
 ---

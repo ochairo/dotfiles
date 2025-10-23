@@ -74,3 +74,4 @@ secrets/
 lazy-lock.json
 
 .state/
+.snapshots/*

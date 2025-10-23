@@ -1,6 +1,0 @@
-name: comp-missing-dep
-description: Test component comp-missing-dep
-requires: [non-existent]
-parallelSafe: true
-critical: false
-healthCheck: "echo 'OK'"

@@ -1,6 +1,0 @@
-name: comp-d
-description: Test component comp-d
-requires: [comp-a, comp-c]
-parallelSafe: true
-critical: false
-healthCheck: "echo 'OK'"

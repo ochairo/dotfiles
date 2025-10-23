@@ -1,6 +1,0 @@
-name: parallel2
-description: Test component parallel2
-requires: []
-parallelSafe: true
-critical: false
-healthCheck: "echo 'OK'"
