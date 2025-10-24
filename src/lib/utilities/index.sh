@@ -4,7 +4,11 @@
 
 UTILITIES_LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 
-# Load system detection utilities first (needed by others)
+# Load I/O utilities first (needed by everything)
+source "${UTILITIES_LIB_DIR}/msg.sh"
+source "${UTILITIES_LIB_DIR}/errors.sh"
+
+# Load system detection utilities (needed by others)
 source "${UTILITIES_LIB_DIR}/systemdetections/index.sh"
 
 # Load validation and file utilities (needed by others)

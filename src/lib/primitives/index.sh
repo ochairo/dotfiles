@@ -4,15 +4,9 @@
 
 PRIMITIVES_LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 
-# Source all primitive utilities in dependency order
-# shellcheck source=./msg.sh
-source "${PRIMITIVES_LIB_DIR}/msg.sh"
-
+# Source all primitive utilities (data operations only)
 # shellcheck source=./strings.sh
 source "${PRIMITIVES_LIB_DIR}/strings.sh"
 
 # shellcheck source=./arrays.sh
 source "${PRIMITIVES_LIB_DIR}/arrays.sh"
-
-# shellcheck source=./errors.sh
-source "${PRIMITIVES_LIB_DIR}/errors.sh"
