@@ -14,13 +14,13 @@ readonly MSG_LEVEL_DEBUG=4
 
 # Current log level (can be overridden)
 MSG_LEVEL=${MSG_LEVEL:-INFO}
-MSG_THRESHOLD=$(case "$MSG_LEVEL" in
-    ERROR) echo $MSG_LEVEL_ERROR ;;
-    WARN)  echo $MSG_LEVEL_WARN ;;
-    INFO)  echo $MSG_LEVEL_INFO ;;
-    DEBUG) echo $MSG_LEVEL_DEBUG ;;
-    *) echo $MSG_LEVEL_INFO ;;
-esac)
+case "$MSG_LEVEL" in
+    ERROR) MSG_THRESHOLD=$MSG_LEVEL_ERROR ;;
+    WARN)  MSG_THRESHOLD=$MSG_LEVEL_WARN ;;
+    INFO)  MSG_THRESHOLD=$MSG_LEVEL_INFO ;;
+    DEBUG) MSG_THRESHOLD=$MSG_LEVEL_DEBUG ;;
+    *) MSG_THRESHOLD=$MSG_LEVEL_INFO ;;
+esac
 
 # Terminal width detection
 _msg_get_width() {
