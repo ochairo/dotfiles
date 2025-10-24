@@ -55,3 +55,7 @@ jobs:
           severity: warning
           ignore_paths: |
             src/components
+            src/configs
+          ignore_names: |
+            *.zsh
+            .zshrc
