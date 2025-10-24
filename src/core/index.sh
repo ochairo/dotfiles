@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # index.sh - Load all dotfiles domain-specific modules
-# This file loads the dotfiles management utilities
+# This file loads services and orchestrators
 
 # Prevent double loading
 [[ -n "${DOTFILES_INDEX_LOADED:-}" ]] && return 0
@@ -9,41 +9,17 @@ readonly DOTFILES_INDEX_LOADED=1
 # Determine script directory
 DOTFILES_CORE_DIR="${BASH_SOURCE[0]%/*}"
 
-# Load register module (component registry)
-if [[ -f "$DOTFILES_CORE_DIR/register.sh" ]]; then
-    # shellcheck source=./register.sh
-    source "$DOTFILES_CORE_DIR/register.sh"
-fi
+# Load services (business logic)
+for service in "$DOTFILES_CORE_DIR/services"/*.sh; do
+    # shellcheck source=/dev/null
+    [[ -f "$service" ]] && source "$service"
+done
 
-# Load ledger module (installation tracking)
-if [[ -f "$DOTFILES_CORE_DIR/ledger.sh" ]]; then
-    # shellcheck source=./ledger.sh
-    source "$DOTFILES_CORE_DIR/ledger.sh"
-fi
-
-# Load linker module (symlink management)
-if [[ -f "$DOTFILES_CORE_DIR/linker.sh" ]]; then
-    # shellcheck source=./linker.sh
-    source "$DOTFILES_CORE_DIR/linker.sh"
-fi
-
-# Load resolver module (dependency resolution)
-if [[ -f "$DOTFILES_CORE_DIR/resolver.sh" ]]; then
-    # shellcheck source=./resolver.sh
-    source "$DOTFILES_CORE_DIR/resolver.sh"
-fi
-
-# Load wizard module (interactive installation)
-if [[ -f "$DOTFILES_CORE_DIR/wizard.sh" ]]; then
-    # shellcheck source=./wizard.sh
-    source "$DOTFILES_CORE_DIR/wizard.sh"
-fi
-
-# Load git utilities module
-if [[ -f "$DOTFILES_CORE_DIR/git_utils.sh" ]]; then
-    # shellcheck source=./git_utils.sh
-    source "$DOTFILES_CORE_DIR/git_utils.sh"
-fi
+# Load orchestrators (domain workflows)
+for orchestrator in "$DOTFILES_CORE_DIR/orchestrators"/*.sh; do
+    # shellcheck source=/dev/null
+    [[ -f "$orchestrator" ]] && source "$orchestrator"
+done
 
 # Export DOTFILES_CORE_DIR for other scripts
 export DOTFILES_CORE_DIR
