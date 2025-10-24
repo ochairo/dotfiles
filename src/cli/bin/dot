@@ -152,10 +152,9 @@ usage() {
     fi
 
     for f in "${files[@]}"; do
-      local name summary group
+      local name summary
       name="$(basename "$f" .sh)"
       summary="$(grep -E '^# summary:' "$f" | head -1 | sed 's/# summary:[[:space:]]*//' || true)"
-      group="$(grep -E '^# group:' "$f" | head -1 | sed 's/# group:[[:space:]]*//' || true)"
       printf "    %-18s %s\n" "$name" "${summary:-}" >&2
     done
   }

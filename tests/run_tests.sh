@@ -83,9 +83,9 @@ else
       echo ""
 
       if bats "$test_file"; then
-        ((passed++))
+        passed=$((passed + 1))
       else
-        ((failed++))
+        failed=$((failed + 1))
       fi
     fi
   done
@@ -100,5 +100,6 @@ else
     exit 1
   else
     echo -e "${C_GREEN}All tests passed! ✓${C_RESET}"
+    exit 0
   fi
 fi
