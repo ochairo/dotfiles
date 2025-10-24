@@ -18,8 +18,8 @@ setup() {
 
 @test "os_detect returns valid OS name" {
   result=$(os_detect)
-  # Should be one of: macos, ubuntu, debian, fedora, rhel, arch, alpine, unknown
-  [[ "$result" =~ ^(macos|ubuntu|debian|fedora|rhel|arch|alpine|unknown)$ ]]
+  # os_detect returns: macos, linux, or unknown
+  [[ "$result" =~ ^(macos|linux|unknown)$ ]]
 }
 
 @test "os_is_macos works on macOS" {

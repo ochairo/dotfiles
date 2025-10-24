@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+# shellcheck disable=SC1090
 # fzf integration placeholder
 # fzf.zsh - fzf integration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

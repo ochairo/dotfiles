@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC1073,SC1036,SC1072
+# Disabled: test expression parsing (zsh globbing syntax not compatible with bash)
 
 # Shell configuration for macOS and Linux compatibility
 # Optimized shell configuration with performance optimizations

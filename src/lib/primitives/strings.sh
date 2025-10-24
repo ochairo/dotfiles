@@ -22,14 +22,16 @@ string_trim() {
 # Args: string
 # Output: uppercase string
 string_upper() {
-    printf '%s\n' "${1^^}"
+    # Use tr for bash 3.2 compatibility
+    printf '%s\n' "$1" | tr '[:lower:]' '[:upper:]'
 }
 
 # Convert string to lowercase
 # Args: string
 # Output: lowercase string
 string_lower() {
-    printf '%s\n' "${1,,}"
+    # Use tr for bash 3.2 compatibility
+    printf '%s\n' "$1" | tr '[:upper:]' '[:lower:]'
 }
 
 # Check if string starts with prefix
