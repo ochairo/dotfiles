@@ -66,4 +66,8 @@ Now you can use the `dot` command from anywhere:
 dot init
 ```
 
+![wizard](docs/images/wizard.png)
+
+![wizard_multiselect](docs/images/wizard_multiselect.png)
+
 ---

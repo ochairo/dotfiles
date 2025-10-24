@@ -1,10 +1,8 @@
 # AI Agent Instructions
 
-> **📚 Full technical documentation**: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
-
 ## Quick Reference
 
-- **Type**: Modular dotfiles management system  
+- **Type**: Modular dotfiles management system
 - **Language**: Bash/Shell (bash 3.2+ for macOS compatibility)
 - **Platforms**: macOS, Linux (Ubuntu, Debian, Fedora, RHEL)
 - **CLI**: `./src/cli/bin/dot` (commands in `src/commands/`)
@@ -45,11 +43,18 @@ platforms:
 ## Key APIs (src/lib/)
 
 ```bash
-# Messaging (NOT echo!)
-msg_info "Message"
-msg_warn "Warning" 
-msg_error "Error"
-msg_success "Done"
+# Messaging (NOT echo for errors/warnings/info!)
+msg_info "Message"      # Use for user-facing informational messages
+msg_warn "Warning"      # Use for warnings (e.g., "No results found")
+msg_error "Error"       # Use for errors (e.g., "Invalid input")
+msg_success "Done"      # Use for success messages
+msg_dim "Status"        # Use for dimmed/muted text (status displays, no icon)
+
+# Primitives (building blocks)
+msg_print "fmt" args... # Flexible printf to stderr
+msg_blank               # Print blank line to stderr
+msg_with_icon "✓" "$C_GREEN" "text"  # Icon + color + text
+msg_prompt              # Print ❯ prompt without newline
 
 # Components
 components_list              # List all components
@@ -64,6 +69,34 @@ ui_select "prompt" "${options[@]}"
 ui_multi_select "prompt" "${options[@]}"
 ui_confirm "prompt"
 ```
+
+## Library Dependency Architecture
+
+**Principle**: Higher-level libraries depend on lower-level ones.
+
+```text
+src/lib/
+├── colors.sh           # Base: Color constants (C_RED, C_GREEN, etc.)
+├── primitives/         # Level 1: Basic operations using colors
+│   └── msg.sh          # msg_info, msg_warn, msg_error (for messages)
+├── userinterfaces/     # Level 2: Interactive UI (depends on primitives)
+│   ├── input.sh        # Use msg_* for errors/warnings
+│   ├── select.sh       # Use msg_* for errors/warnings
+│   └── multiselect.sh  # Use msg_* for errors/warnings
+│                       # BUT: Use colors directly for UI elements (checkboxes, titles)
+└── utilities/          # Level 2: Business logic (depends on primitives)
+```
+
+**Rule of thumb:**
+
+- **User messages** (errors, warnings, info) → Use `msg_*` functions
+  - Examples: "No options provided", "Invalid selection", "Component not found"
+- **UI display elements** (checkboxes, titles, state displays) → Use colors directly (`C_*`)
+  - Examples: Checkboxes (☑/☐), page numbers, selection count, empty state displays
+
+**Why?** The `msg_*` functions format complete messages with `[ERROR]`/`[WARN]` prefixes and
+icons, meant for application messages. UI components need fine-grained control for interactive
+displays without prefixes.
 
 ## Testing
 

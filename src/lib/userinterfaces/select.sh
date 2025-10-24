@@ -23,25 +23,25 @@ ui_select() {
 
     # Validate input
     if [[ ${#options[@]} -eq 0 ]]; then
-        echo -e "${C_RED}✗${C_RESET} No options provided" >&2
+        msg_error "No options provided"
         return 1
     fi
 
     # Display options
-    echo -e "${C_BOLD}${prompt_text}${C_RESET}" >&2
-    echo "" >&2
+    msg_print "${C_BOLD}%s${C_RESET}\n" "$prompt_text"
+    msg_blank
 
     local i=1
     for option in "${options[@]}"; do
-        echo -e "  ${C_CYAN}${i})${C_RESET} ${option}" >&2
+        msg_print "  ${C_CYAN}%d)${C_RESET} %s\n" "$i" "$option"
         ((i++))
     done
 
-    echo "" >&2
+    msg_blank
 
     # Get user selection
     while true; do
-        echo -ne "${C_BLUE}❯${C_RESET} Select option (1-${#options[@]}): " >&2
+        msg_print "${C_BLUE}❯${C_RESET} Select option (1-%d): " "${#options[@]}"
         read -r choice
 
         # Validate input
@@ -50,7 +50,7 @@ ui_select() {
             echo "${options[$selected_index]}"
             return 0
         else
-            echo -e "${C_RED}✗${C_RESET} Invalid selection. Please choose 1-${#options[@]}" >&2
+            msg_error "Invalid selection. Please choose 1-${#options[@]}"
         fi
     done
 }

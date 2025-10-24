@@ -14,11 +14,5 @@ source "${PRIMITIVES_LIB_DIR}/strings.sh"
 # shellcheck source=./arrays.sh
 source "${PRIMITIVES_LIB_DIR}/arrays.sh"
 
-# shellcheck source=./validation.sh
-source "${PRIMITIVES_LIB_DIR}/validation.sh"
-
 # shellcheck source=./errors.sh
 source "${PRIMITIVES_LIB_DIR}/errors.sh"
-
-# shellcheck source=./files.sh
-source "${PRIMITIVES_LIB_DIR}/files.sh"

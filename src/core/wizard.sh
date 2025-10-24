@@ -8,7 +8,7 @@ readonly DOTFILES_WIZARD_LOADED=1
 # Welcome screen
 presets_show_welcome() {
     clear
-    msg_header "Dotfiles Installation Wizard"
+    msg_header "🔧 Dotfiles Installation Wizard"
     echo ""
     msg_info "This wizard will help you install and configure your dotfiles."
     msg_info "You can choose to install all components or select specific ones."
@@ -51,15 +51,16 @@ presets_select_custom() {
         return 1
     fi
 
-    # Build options array with descriptions
+    # Build options array with short descriptions
     local -a options=()
     for comp in "${all_components[@]}"; do
         local desc
         desc=$(components_description "$comp" 2>/dev/null || echo "")
         if [[ -n "$desc" ]]; then
-            # Truncate long descriptions
-            if [[ ${#desc} -gt 50 ]]; then
-                desc="${desc:0:47}..."
+            # Remove quotes and truncate for compact display
+            desc=$(echo "$desc" | tr -d '"')
+            if [[ ${#desc} -gt 30 ]]; then
+                desc="${desc:0:27}..."
             fi
             options+=("$comp - $desc")
         else

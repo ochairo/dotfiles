@@ -70,30 +70,68 @@ _msg_should_print() {
     [[ "$level_num" -le "$MSG_THRESHOLD" ]]
 }
 
+# ============================================================================
+# Base Primitives (DRY - reusable building blocks)
+# ============================================================================
+
+# Flexible print to stderr (most general)
+# Interprets backslash escapes in the format string
+msg_print() {
+    # shellcheck disable=SC2059
+    printf "$@" >&2
+}
+
+# Blank line to stderr
+msg_blank() {
+    printf "\n" >&2
+}
+
+# Print with icon and color
+msg_with_icon() {
+    local icon="$1"
+    local color="$2"
+    shift 2
+    printf "${color}${icon}${C_RESET} %s\n" "$*" >&2
+}
+
+# Prompt without newline
+msg_prompt() {
+    printf "${C_BLUE}❯${C_RESET} " >&2
+}
+
+# Dimmed text without prefix/icon (for UI elements and status displays)
+msg_dim() {
+    printf "${C_DIM}%s${C_RESET}\n" "$*" >&2
+}
+
+# ============================================================================
+# Application Messages (use base primitives)
+# ============================================================================
+
 # Basic message functions
 msg_error() {
     _msg_should_print "$MSG_LEVEL_ERROR" || return 0
-    printf "${C_RED}✗ [ERROR]${C_RESET} %s\n" "$*" >&2
+    msg_with_icon "✗ [ERROR]" "$C_RED" "$@"
 }
 
 msg_warn() {
     _msg_should_print "$MSG_LEVEL_WARN" || return 0
-    printf "${C_YELLOW}⚠ [WARN]${C_RESET} %s\n" "$*"
+    msg_with_icon "⚠ [WARN]" "$C_YELLOW" "$@"
 }
 
 msg_info() {
     _msg_should_print "$MSG_LEVEL_INFO" || return 0
-    printf "${C_BLUE}ℹ [INFO]${C_RESET} %s\n" "$*"
+    msg_with_icon "ℹ [INFO]" "$C_BLUE" "$@"
 }
 
 msg_success() {
     _msg_should_print "$MSG_LEVEL_INFO" || return 0
-    printf "${C_GREEN}✓ [SUCCESS]${C_RESET} %s\n" "$*"
+    msg_with_icon "✓ [SUCCESS]" "$C_GREEN" "$@"
 }
 
 msg_debug() {
     _msg_should_print "$MSG_LEVEL_DEBUG" || return 0
-    printf "${C_DIM}⚬ [DEBUG]${C_RESET} %s\n" "$*"
+    msg_with_icon "⚬ [DEBUG]" "$C_DIM" "$@"
 }
 
 # Header with terminal-wide colored lines
@@ -105,40 +143,28 @@ msg_header() {
     width=$(_msg_get_width)
 
     # Print top line
-    printf "\n${C_CYAN}"
+    printf "\n${C_PURPLE}"
     printf "%*s\n" "$width" "" | tr ' ' '─'
-    printf "${C_RESET}"
+    printf "${C_RESET}\n"
 
-    # Print empty line above text
-    printf "${C_CYAN}║${C_RESET}"
-    printf "%*s" "$((width - 2))" ""
-    printf "${C_CYAN}║${C_RESET}\n"
-
-    # Print centered text
+    # Print centered text with padding
     local text_len=${#text}
 
     # If text is too long, truncate it
-    if [[ $text_len -gt $((width - 6)) ]]; then
-        text="${text:0:$((width - 9))}..."
+    if [[ $text_len -gt $((width - 4)) ]]; then
+        text="${text:0:$((width - 7))}..."
         text_len=${#text}
     fi
 
-    local padding=$(( (width - text_len - 4) / 2 ))  # -4 for "║ " and " ║"
-    local right_padding=$(( width - text_len - 4 - padding ))  # Handle odd widths
+    local padding=$(( (width - text_len) / 2 ))
+    local right_padding=$(( width - text_len - padding ))
 
-    printf "${C_CYAN}║${C_RESET} "
     printf "%*s" "$padding" ""
-    printf "${C_BOLD}${C_CYAN}%s${C_RESET}" "$text"
-    printf "%*s" "$right_padding" ""
-    printf " ${C_CYAN}║${C_RESET}\n"
-
-    # Print empty line below text
-    printf "${C_CYAN}║${C_RESET}"
-    printf "%*s" "$((width - 2))" ""
-    printf "${C_CYAN}║${C_RESET}\n"
+    printf "${C_BOLD}${C_PURPLE}%s${C_RESET}" "$text"
+    printf "%*s\n" "$right_padding" ""
 
     # Print bottom line
-    printf "${C_CYAN}"
+    printf "${C_PURPLE}"
     printf "%*s\n" "$width" "" | tr ' ' '─'
     printf "${C_RESET}\n"
 }

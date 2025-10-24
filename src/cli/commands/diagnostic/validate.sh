@@ -82,17 +82,17 @@ if [[ -n "$COMPONENT_NAME" ]]; then
     fi
 
     if [[ $errors -eq 0 ]]; then
-        echo "✅ Component '$COMPONENT_NAME' validation passed"
+        msg_success "Component '$COMPONENT_NAME' validation passed"
     else
-        echo "❌ Component '$COMPONENT_NAME' validation failed with $errors errors"
+        msg_error "Component '$COMPONENT_NAME' validation failed with $errors errors"
         exit 1
     fi
 else
     # Validate all components
     if validate_all_components; then
-        echo "✅ Component schema validation passed"
+        msg_success "Component schema validation passed"
     else
-        echo "❌ Component schema validation failed"
+        msg_error "Component schema validation failed"
         exit 1
     fi
 fi
@@ -165,11 +165,11 @@ else
 fi
 
 # Run dotfiles verification
-echo "🔍 Running dotfiles verification..."
+msg_info "Running dotfiles verification..."
 if "$PROJECT_ROOT/src/bin/dot" verify 2>/dev/null; then
-	echo "✅ Verification passed"
+	msg_success "Verification passed"
 else
-	echo "⚠️ Verification completed with warnings/errors (may be expected)"
+	msg_warn "Verification completed with warnings/errors (may be expected)"
 fi
 
 # Run doctor check

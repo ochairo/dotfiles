@@ -5,8 +5,8 @@
 
 # Ensure we're using bash 4+ for associative arrays
 if [[ ${BASH_VERSION%%.*} -lt 4 ]]; then
-    echo "Error: This script requires bash 4.0 or later for associative arrays"
-    echo "Current bash version: $BASH_VERSION"
+    msg_error "This script requires bash 4.0 or later for associative arrays"
+    msg_error "Current bash version: $BASH_VERSION"
     exit 1
 fi
 

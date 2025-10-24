@@ -37,7 +37,7 @@ migrate)
 	log_info "Ledger migrated to v1"
 	;;
 *)
-	echo "Usage: dot ledger migrate [--dry-run]" >&2
+	msg_error "Usage: dot ledger migrate [--dry-run]"
 	exit 1
 	;;
 esac

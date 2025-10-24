@@ -5,16 +5,14 @@
 
 # Ensure we're using bash 4+ for associative arrays
 if [[ ${BASH_VERSION%%.*} -lt 4 ]]; then
-    echo "Error: This script requires bash 4.0 or later for associative arrays"
-    echo "Current bash version: $BASH_VERSION"
+    msg_error "This script requires bash 4.0 or later for associative arrays"
+    msg_error "Current bash version: $BASH_VERSION"
     exit 1
 fi
 
 set -euo pipefail
 
 # All modules are loaded by bin/dot, environment variables exported
-# shellcheck disable=SC1091
-source "$CORE_DIR/install/install_helpers.sh"
 
 # Precompute a portable PATH once (macOS + Linux) to avoid per-health variance
 _DOT_PORTABLE_PATH=""
@@ -62,7 +60,7 @@ while [[ $# -gt 0 ]]; do
 		shift
 		;;
 	*)
-		echo "Unknown option: $1" >&2
+		msg_error "Unknown option: $1"
 		exit 1
 		;;
 	esac
@@ -125,13 +123,13 @@ fi
 log_info "Resolving dependencies and determining installation order..."
 
 # Validate dependency graph first
-if ! validate_dependency_graph "${filtered[@]}"; then
+if ! deps_validate "${filtered[@]}"; then
     log_error "Dependency validation failed"
     exit 1
 fi
 
-# Use topological sort for proper dependency ordering
-mapfile -t ordered < <(topological_sort "${filtered[@]}")
+# Use dependency resolver for proper dependency ordering
+mapfile -t ordered < <(deps_install_order "${filtered[@]}")
 
 if [[ ${#ordered[@]} -eq 0 ]]; then
     log_error "Failed to resolve installation order"

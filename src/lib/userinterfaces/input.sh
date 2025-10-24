@@ -17,9 +17,9 @@ ui_confirm() {
     local response
 
     if [[ "$default" == "y" || "$default" == "Y" ]]; then
-        echo -ne "${C_GREEN}❯${C_RESET} ${prompt_text} ${C_DIM}(${C_BOLD}Y${C_RESET}${C_DIM}/n)${C_RESET}: " >&2
+        msg_print "${C_GREEN}❯${C_RESET} %s ${C_DIM}(${C_BOLD}Y${C_RESET}${C_DIM}/n)${C_RESET}: " "$prompt_text"
     else
-        echo -ne "${C_BLUE}❯${C_RESET} ${prompt_text} ${C_DIM}(y/${C_BOLD}N${C_RESET}${C_DIM})${C_RESET}: " >&2
+        msg_print "${C_BLUE}❯${C_RESET} %s ${C_DIM}(y/${C_BOLD}N${C_RESET}${C_DIM})${C_RESET}: " "$prompt_text"
     fi
 
     read -r response
@@ -39,11 +39,11 @@ ui_input_text() {
     local input_text
 
     if [[ "$hidden" == "true" ]]; then
-        echo -ne "${C_YELLOW}❯${C_RESET} ${prompt_text}: " >&2
+        msg_print "${C_YELLOW}❯${C_RESET} %s: " "$prompt_text"
         read -r -s input_text
-        echo "" >&2  # New line after hidden input
+        msg_blank
     else
-        echo -ne "${C_BLUE}❯${C_RESET} ${prompt_text}: " >&2
+        msg_print "${C_BLUE}❯${C_RESET} %s: " "$prompt_text"
         read -r input_text
     fi
 
@@ -61,34 +61,34 @@ ui_input_number() {
     local number
 
     while true; do
-        echo -ne "${C_BLUE}❯${C_RESET} ${prompt_text}" >&2
+        msg_print "${C_BLUE}❯${C_RESET} %s" "$prompt_text"
 
         # Add range info if provided
         if [[ -n "$min_value" && -n "$max_value" ]]; then
-            echo -ne " ${C_DIM}(${min_value}-${max_value})${C_RESET}" >&2
+            msg_print " ${C_DIM}(%s-%s)${C_RESET}" "$min_value" "$max_value"
         elif [[ -n "$min_value" ]]; then
-            echo -ne " ${C_DIM}(min: ${min_value})${C_RESET}" >&2
+            msg_print " ${C_DIM}(min: %s)${C_RESET}" "$min_value"
         elif [[ -n "$max_value" ]]; then
-            echo -ne " ${C_DIM}(max: ${max_value})${C_RESET}" >&2
+            msg_print " ${C_DIM}(max: %s)${C_RESET}" "$max_value"
         fi
 
-        echo -ne ": " >&2
+        msg_print ": "
         read -r number
 
         # Validate numeric input
         if ! [[ "$number" =~ ^-?[0-9]+$ ]]; then
-            echo -e "${C_RED}✗${C_RESET} Please enter a valid number" >&2
+            msg_error "Please enter a valid number"
             continue
         fi
 
         # Validate range
         if [[ -n "$min_value" ]] && [ "$number" -lt "$min_value" ]; then
-            echo -e "${C_RED}✗${C_RESET} Number must be at least ${min_value}" >&2
+            msg_error "Number must be at least ${min_value}"
             continue
         fi
 
         if [[ -n "$max_value" ]] && [ "$number" -gt "$max_value" ]; then
-            echo -e "${C_RED}✗${C_RESET} Number must be at most ${max_value}" >&2
+            msg_error "Number must be at most ${max_value}"
             continue
         fi
 

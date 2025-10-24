@@ -12,8 +12,8 @@ file_backup() {
     local file="${1}"
     local backup_suffix="${2:-backup}"
 
-    [[ -z "$file" ]] && { echo "Error: file_backup requires file path" >&2; return 1; }
-    [[ ! -f "$file" ]] && { echo "Error: file does not exist: $file" >&2; return 1; }
+    [[ -z "$file" ]] && { msg_error "file_backup requires file path"; return 1; }
+    [[ ! -f "$file" ]] && { msg_error "file does not exist: $file"; return 1; }
 
     local timestamp
     timestamp=$(date '+%Y%m%d_%H%M%S')
@@ -23,7 +23,7 @@ file_backup() {
         echo "$backup_file"
         return 0
     else
-        echo "Error: failed to create backup of $file" >&2
+        msg_error "failed to create backup of $file"
         return 1
     fi
 }
@@ -33,14 +33,14 @@ file_restore() {
     local file="${1}"
     local backup_pattern="${2:-backup}"
 
-    [[ -z "$file" ]] && { echo "Error: file_restore requires file path" >&2; return 1; }
+    [[ -z "$file" ]] && { msg_error "file_restore requires file path"; return 1; }
 
     # Find most recent backup
     local backup_file
     backup_file=$(find "$(dirname "$file")" -name "$(basename "$file").${backup_pattern}_*" -type f 2>/dev/null | sort -r | head -n1)
 
     if [[ -z "$backup_file" ]]; then
-        echo "Error: no backup found for $file with pattern $backup_pattern" >&2
+        msg_error "no backup found for $file with pattern $backup_pattern"
         return 1
     fi
 
@@ -48,7 +48,7 @@ file_restore() {
         echo "Restored $file from $backup_file"
         return 0
     else
-        echo "Error: failed to restore $file from $backup_file" >&2
+        msg_error "failed to restore $file from $backup_file"
         return 1
     fi
 }
@@ -58,8 +58,8 @@ file_copy_safe() {
     local source="${1}"
     local dest="${2}"
 
-    [[ -z "$source" || -z "$dest" ]] && { echo "Error: file_copy_safe requires source and destination" >&2; return 1; }
-    [[ ! -f "$source" ]] && { echo "Error: source file does not exist: $source" >&2; return 1; }
+    [[ -z "$source" || -z "$dest" ]] && { msg_error "file_copy_safe requires source and destination"; return 1; }
+    [[ ! -f "$source" ]] && { msg_error "source file does not exist: $source"; return 1; }
 
     # Create destination directory if needed
     local dest_dir
@@ -76,12 +76,12 @@ file_copy_safe() {
         if [[ "$source_size" == "$dest_size" ]]; then
             return 0
         else
-            echo "Error: copy verification failed - size mismatch" >&2
+            msg_error "copy verification failed - size mismatch"
             rm -f "$dest"
             return 1
         fi
     else
-        echo "Error: failed to copy $source to $dest" >&2
+        msg_error "failed to copy $source to $dest"
         return 1
     fi
 }
@@ -91,8 +91,8 @@ file_move_safe() {
     local source="${1}"
     local dest="${2}"
 
-    [[ -z "$source" || -z "$dest" ]] && { echo "Error: file_move_safe requires source and destination" >&2; return 1; }
-    [[ ! -f "$source" ]] && { echo "Error: source file does not exist: $source" >&2; return 1; }
+    [[ -z "$source" || -z "$dest" ]] && { msg_error "file_move_safe requires source and destination"; return 1; }
+    [[ ! -f "$source" ]] && { msg_error "source file does not exist: $source"; return 1; }
 
     # First copy safely
     if file_copy_safe "$source" "$dest"; then
@@ -100,7 +100,7 @@ file_move_safe() {
         if rm "$source" 2>/dev/null; then
             return 0
         else
-            echo "Error: failed to remove source file after copy: $source" >&2
+            msg_error "failed to remove source file after copy: $source"
             return 1
         fi
     else
@@ -114,8 +114,8 @@ file_chmod_safe() {
     local permissions="${2}"
     local create_backup="${3:-true}"
 
-    [[ -z "$file" || -z "$permissions" ]] && { echo "Error: file_chmod_safe requires file and permissions" >&2; return 1; }
-    [[ ! -f "$file" ]] && { echo "Error: file does not exist: $file" >&2; return 1; }
+    [[ -z "$file" || -z "$permissions" ]] && { msg_error "file_chmod_safe requires file and permissions"; return 1; }
+    [[ ! -f "$file" ]] && { msg_error "file does not exist: $file"; return 1; }
 
     # Create backup of current permissions if requested
     if [[ "$create_backup" == "true" ]]; then
@@ -128,7 +128,7 @@ file_chmod_safe() {
     if chmod "$permissions" "$file" 2>/dev/null; then
         return 0
     else
-        echo "Error: failed to change permissions on $file" >&2
+        msg_error "failed to change permissions on $file"
         return 1
     fi
 }
@@ -152,7 +152,7 @@ file_temp() {
         echo "$temp_file"
         return 0
     else
-        echo "Error: failed to create temporary file" >&2
+        msg_error "failed to create temporary file"
         return 1
     fi
 }
@@ -160,22 +160,22 @@ file_temp() {
 # Check if file is readable
 file_readable() {
     local file="${1}"
-    [[ -z "$file" ]] && { echo "Error: file_readable requires file path" >&2; return 1; }
+    [[ -z "$file" ]] && { msg_error "file_readable requires file path"; return 1; }
     [[ -r "$file" ]]
 }
 
 # Check if file is writable
 file_writable() {
     local file="${1}"
-    [[ -z "$file" ]] && { echo "Error: file_writable requires file path" >&2; return 1; }
+    [[ -z "$file" ]] && { msg_error "file_writable requires file path"; return 1; }
     [[ -w "$file" ]]
 }
 
 # Get file size in bytes
 file_size() {
     local file="${1}"
-    [[ -z "$file" ]] && { echo "Error: file_size requires file path" >&2; return 1; }
-    [[ ! -f "$file" ]] && { echo "Error: file does not exist: $file" >&2; return 1; }
+    [[ -z "$file" ]] && { msg_error "file_size requires file path"; return 1; }
+    [[ ! -f "$file" ]] && { msg_error "file does not exist: $file"; return 1; }
 
     # Cross-platform file size
     stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null
@@ -184,8 +184,8 @@ file_size() {
 # Get file modification time (epoch)
 file_mtime() {
     local file="${1}"
-    [[ -z "$file" ]] && { echo "Error: file_mtime requires file path" >&2; return 1; }
-    [[ ! -f "$file" ]] && { echo "Error: file does not exist: $file" >&2; return 1; }
+    [[ -z "$file" ]] && { msg_error "file_mtime requires file path"; return 1; }
+    [[ ! -f "$file" ]] && { msg_error "file does not exist: $file"; return 1; }
 
     # Cross-platform modification time
     stat -f%m "$file" 2>/dev/null || stat -c%Y "$file" 2>/dev/null

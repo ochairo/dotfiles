@@ -1,0 +1,29 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "davidanson.vscode-markdownlint",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "enkia.tokyo-night",
+    "foxundermoon.shell-format",
+    "github.copilot",
+    "github.copilot-chat",
+    "jetmartin.bats",
+    "ms-azuretools.vscode-containers",
+    "ms-python.black-formatter",
+    "ms-python.debugpy",
+    "ms-python.isort",
+    "ms-python.pylint",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.vscode-python-envs",
+    "redhat.vscode-yaml",
+    "rust-lang.rust-analyzer",
+    "snowflake.snowflake-vsc",
+    "streetsidesoftware.code-spell-checker",
+    "tamasfe.even-better-toml",
+    "timonwong.shellcheck",
+    "wayou.vscode-todo-highlight"
+  ]
+}
