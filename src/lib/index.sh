@@ -16,5 +16,7 @@ source "${LIB_DIR}/colors.sh"
 
 # Load all utility libraries
 source "${LIB_DIR}/primitives/index.sh"
-source "${LIB_DIR}/userinterfaces/index.sh"
-source "${LIB_DIR}/utilities/index.sh"
+source "${LIB_DIR}/ui/index.sh"
+source "${LIB_DIR}/utils/index.sh"
+
+# (Removed options.sh legacy loader; DOT_OPT_* system deprecated)

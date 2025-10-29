@@ -5,133 +5,55 @@ platforms:
     installMethod: package
     packageManager: brew-cask
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      else
-        log_warn "WezTerm config directory not found: $CONFIG_SOURCE"
-      fi
+    postInstall: "true"
 
   ubuntu:
     installMethod: package
     packageManager: apt
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      fi
+    postInstall: "true"
 
   debian:
     installMethod: package
     packageManager: apt
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      fi
+    postInstall: "true"
 
   fedora:
     installMethod: package
     packageManager: dnf
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      fi
+    postInstall: "true"
 
   rhel:
     installMethod: package
     packageManager: dnf
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      fi
+    postInstall: "true"
 
   centos:
     installMethod: package
     packageManager: dnf
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      fi
+    postInstall: "true"
 
   arch:
     installMethod: package
     packageManager: pacman
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      fi
+    postInstall: "true"
 
   opensuse:
     installMethod: package
     packageManager: zypper
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      fi
+    postInstall: "true"
 
   alpine:
     installMethod: package
     packageManager: apk
     packageName: wezterm
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/wezterm"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/wezterm" "wezterm"
-        log_success "WezTerm configuration linked"
-      fi
+    postInstall: "true"
 
 parallelSafe: true
 critical: false

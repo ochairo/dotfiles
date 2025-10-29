@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# input.sh - User input helpers (renamed from ui_input.sh)
+[[ -n "${UI_INPUT_LOADED:-}" ]] && return 0
+readonly UI_INPUT_LOADED=1
+ui_confirm() { local prompt_text="$1" default="${2:-n}" response; if [[ "$default" == [yY] ]]; then msg_print "${C_GREEN}❯${C_RESET} %s ${C_DIM}(${C_BOLD}Y${C_RESET}${C_DIM}/n)${C_RESET}: " "$prompt_text"; else msg_print "${C_BLUE}❯${C_RESET} %s ${C_DIM}(y/${C_BOLD}N${C_RESET}${C_DIM})${C_RESET}: " "$prompt_text"; fi; read -r response; response="${response:-$default}"; [[ "$response" =~ ^[Yy] ]]; }
+ui_input_text() { local prompt_text="${1:-Enter text}" hidden="${2:-false}" input_text; if [[ "$hidden" == true ]]; then msg_print "${C_YELLOW}❯${C_RESET} %s: " "$prompt_text"; read -r -s input_text; msg_blank; else msg_print "${C_BLUE}❯${C_RESET} %s: " "$prompt_text"; read -r input_text; fi; echo "$input_text"; }
+ui_input_number() { local prompt_text="$1" min_value="${2:-}" max_value="${3:-}" number; while true; do msg_print "${C_BLUE}❯${C_RESET} %s" "$prompt_text"; if [[ -n "$min_value" && -n "$max_value" ]]; then msg_print " ${C_DIM}(%s-%s)${C_RESET}" "$min_value" "$max_value"; elif [[ -n "$min_value" ]]; then msg_print " ${C_DIM}(min: %s)${C_RESET}" "$min_value"; elif [[ -n "$max_value" ]]; then msg_print " ${C_DIM}(max: %s)${C_RESET}" "$max_value"; fi; msg_print ": "; read -r number; [[ "$number" =~ ^-?[0-9]+$ ]] || { msg_error "Please enter a valid number"; continue; }; [[ -n "$min_value" && $number -lt $min_value ]] && { msg_error "Number must be at least ${min_value}"; continue; }; [[ -n "$max_value" && $number -gt $max_value ]] && { msg_error "Number must be at most ${max_value}"; continue; }; echo "$number"; return 0; done; }
+export -f ui_confirm ui_input_text ui_input_number

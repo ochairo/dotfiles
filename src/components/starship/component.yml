@@ -12,103 +12,40 @@ platforms:
     installMethod: package
     packageManager: brew
     packageName: starship
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/starship"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/starship" "starship"
-        log_success "Starship configuration linked"
-      fi
+    postInstall: "true"
 
   ubuntu:
     installMethod: package
     packageManager: apt
     packageName: starship
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/starship"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/starship" "starship"
-        log_success "Starship configuration linked"
-      fi
+    postInstall: "true"
 
   debian:
     installMethod: package
     packageManager: apt
     packageName: starship
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/starship"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/starship" "starship"
-        log_success "Starship configuration linked"
-      fi
+    postInstall: "true"
 
   fedora:
     installMethod: package
     packageManager: dnf
     packageName: starship
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/starship"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/starship" "starship"
-        log_success "Starship configuration linked"
-      fi
+    postInstall: "true"
 
   rhel:
     installMethod: package
     packageManager: dnf
     packageName: starship
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/starship"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/starship" "starship"
-        log_success "Starship configuration linked"
-      fi
+    postInstall: "true"
 
   centos:
     installMethod: package
     packageManager: dnf
     packageName: starship
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/starship"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/starship" "starship"
-        log_success "Starship configuration linked"
-      fi
+    postInstall: "true"
 
   arch:
     installMethod: package
     packageManager: pacman
     packageName: starship
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/starship"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/starship" "starship"
-        log_success "Starship configuration linked"
-      fi
+    postInstall: "true"

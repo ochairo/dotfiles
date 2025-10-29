@@ -12,131 +12,40 @@ platforms:
     installMethod: package
     packageManager: brew
     packageName: fzf
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      # Install fzf shell integration
-      if command -v fzf >/dev/null 2>&1; then
-        "$(brew --prefix)/opt/fzf/install" --key-bindings --completion --no-update-rc --no-bash --no-fish
-        log_info "fzf shell integration installed"
-      fi
-
-      # Symlink fzf config
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/fzf"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        mkdir -p "$HOME/.config/fzf"
-        if [[ -f "$CONFIG_SOURCE/fzf.zsh" ]]; then
-          fs_symlink "$CONFIG_SOURCE/fzf.zsh" "$HOME/.config/fzf/fzf.zsh" "fzf"
-          log_success "fzf configuration linked"
-        fi
-      fi
+    postInstall: "true"
 
   ubuntu:
     installMethod: package
     packageManager: apt
     packageName: fzf
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/fzf"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        mkdir -p "$HOME/.config/fzf"
-        if [[ -f "$CONFIG_SOURCE/fzf.zsh" ]]; then
-          fs_symlink "$CONFIG_SOURCE/fzf.zsh" "$HOME/.config/fzf/fzf.zsh" "fzf"
-          log_success "fzf configuration linked"
-        fi
-      fi
+    postInstall: "true"
 
   debian:
     installMethod: package
     packageManager: apt
     packageName: fzf
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/fzf"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        mkdir -p "$HOME/.config/fzf"
-        if [[ -f "$CONFIG_SOURCE/fzf.zsh" ]]; then
-          fs_symlink "$CONFIG_SOURCE/fzf.zsh" "$HOME/.config/fzf/fzf.zsh" "fzf"
-          log_success "fzf configuration linked"
-        fi
-      fi
+    postInstall: "true"
 
   fedora:
     installMethod: package
     packageManager: dnf
     packageName: fzf
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/fzf"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        mkdir -p "$HOME/.config/fzf"
-        if [[ -f "$CONFIG_SOURCE/fzf.zsh" ]]; then
-          fs_symlink "$CONFIG_SOURCE/fzf.zsh" "$HOME/.config/fzf/fzf.zsh" "fzf"
-          log_success "fzf configuration linked"
-        fi
-      fi
+    postInstall: "true"
 
   rhel:
     installMethod: package
     packageManager: dnf
     packageName: fzf
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/fzf"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        mkdir -p "$HOME/.config/fzf"
-        if [[ -f "$CONFIG_SOURCE/fzf.zsh" ]]; then
-          fs_symlink "$CONFIG_SOURCE/fzf.zsh" "$HOME/.config/fzf/fzf.zsh" "fzf"
-          log_success "fzf configuration linked"
-        fi
-      fi
+    postInstall: "true"
 
   centos:
     installMethod: package
     packageManager: dnf
     packageName: fzf
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/fzf"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        mkdir -p "$HOME/.config/fzf"
-        if [[ -f "$CONFIG_SOURCE/fzf.zsh" ]]; then
-          fs_symlink "$CONFIG_SOURCE/fzf.zsh" "$HOME/.config/fzf/fzf.zsh" "fzf"
-          log_success "fzf configuration linked"
-        fi
-      fi
+    postInstall: "true"
 
   arch:
     installMethod: package
     packageManager: pacman
     packageName: fzf
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/fzf"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        mkdir -p "$HOME/.config/fzf"
-        if [[ -f "$CONFIG_SOURCE/fzf.zsh" ]]; then
-          fs_symlink "$CONFIG_SOURCE/fzf.zsh" "$HOME/.config/fzf/fzf.zsh" "fzf"
-          log_success "fzf configuration linked"
-        fi
-      fi
+    postInstall: "true"

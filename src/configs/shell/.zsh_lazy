@@ -1,0 +1,38 @@
+#!/bin/bash
+# Lazy loading utilities for bash and zsh compatibility
+# Source this file to enable lazy loading of heavy tools
+
+# Function to add paths only if they exist
+add_to_path() {
+  [[ -d "$1" ]] && case ":$PATH:" in
+    *":$1:"*) ;;
+    *) export PATH="$1:$PATH" ;;
+  esac
+}
+
+# Lazy load function generator (bash/zsh compatible)
+lazy_load() {
+  local command="$1"
+  local init_command="$2"
+
+  eval "$command() {
+    # Remove function (bash/zsh compatible)
+    if [[ -n \"\$ZSH_VERSION\" ]]; then
+      unfunction $command
+    else
+      unset -f $command
+    fi
+    $init_command
+    $command \"\$@\"
+  }"
+}
+
+# OS-specific package managers
+if [[ "$(uname)" == "Darwin" ]]; then
+  # macOS - Homebrew
+  [[ -f "/opt/homebrew/bin/brew" ]] && lazy_load brew 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+  [[ -f "/usr/local/bin/brew" ]] && lazy_load brew 'eval "$(/usr/local/bin/brew shellenv)"'
+elif [[ "$(uname)" == "Linux" ]]; then
+  # Linux - Linuxbrew if available
+  [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] && lazy_load brew 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+fi

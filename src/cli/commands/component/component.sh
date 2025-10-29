@@ -1,153 +1,78 @@
 #!/usr/bin/env bash
-# usage: dot component <name> [--description <desc>] [--requires <dep1,dep2>] [--tags <tag1,tag2>] [--critical]
-# summary: Generate a new component with standardized structure and templates
-# group: development
+# usage: dot component list | rebuild <name> [--force] [--no-deps]
+# summary: Component operations (list, rebuild)
+# group: core
 
 set -euo pipefail
 
+
 # All modules loaded by bin/dot validation registry
 
-COMPONENT_NAME=""
-DESCRIPTION=""
-REQUIRES=""
-TAGS=""
-CRITICAL="false"
+ACTION="$1" || ACTION="list"
+[[ $# -gt 0 ]] && shift || true
 
-if [[ $# -eq 0 ]]; then
-    # List available components when no arguments provided
-    log_info "Available components:"
-    registry_list_components | while read -r component; do
-        echo "  $component"
-    done
-    exit 0
-fi
-
-# Check for help flag first
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then
-    grep '^# usage:' "$0" | sed 's/^# //'
-    echo
-    echo "Generate a new component with standardized structure."
-    echo
-    echo "Arguments:"
-    echo "  <name>              Component name (required)"
-    echo
-    echo "Options:"
-    echo "  --description <desc> Component description"
-    echo "  --requires <deps>   Comma-separated list of dependencies"
-    echo "  --tags <tags>       Comma-separated list of tags"
-    echo "  --critical          Mark component as critical"
-    echo
-    echo "Examples:"
-    echo "  dot component vim --description 'Vim editor configuration'"
-    echo "  dot component docker --requires 'system-essentials' --tags 'containers,development'"
-    echo
-    exit 0
-fi
-
-COMPONENT_NAME="$1"
-shift
-
-while [[ $# -gt 0 ]]; do
-    case $1 in
-    --description)
-        DESCRIPTION="$2"
-        shift 2
-        ;;
-    --requires)
-        REQUIRES="$2"
-        shift 2
-        ;;
-    --tags)
-        TAGS="$2"
-        shift 2
-        ;;
-    --critical)
-        CRITICAL="true"
-        shift
-        ;;
-    *)
-        log_error "Unknown option: $1"
-        exit 1
-        ;;
-    esac
-done
-
-# Validate component name
-if [[ -z "$COMPONENT_NAME" ]]; then
-    log_error "Component name is required"
-    exit 1
-fi
-
-if [[ ! "$COMPONENT_NAME" =~ ^[a-z][a-z0-9-]*$ ]]; then
-    log_error "Component name must start with a letter and contain only lowercase letters, numbers, and hyphens"
-    exit 1
-fi
-
-# shellcheck disable=SC2153  # COMPONENTS_DIR is defined in constants.sh and exported
-COMPONENT_DIR="$COMPONENTS_DIR/$COMPONENT_NAME"
-
-# Check if component already exists
-if [[ -d "$COMPONENT_DIR" ]]; then
-    log_error "Component '$COMPONENT_NAME' already exists at $COMPONENT_DIR"
-    exit 1
-fi
-
-log_info "Creating new component: $COMPONENT_NAME"
-
-# Create component directory
-mkdir -p "$COMPONENT_DIR"
-
-# Generate component.yml
-log_info "Creating component.yml..."
-{
-    echo "name: $COMPONENT_NAME"
-    if [[ -n "$DESCRIPTION" ]]; then
-        echo "description: $DESCRIPTION"
-    else
-        echo "description: $COMPONENT_NAME installation and configuration"
-    fi
-    echo "parallelSafe: true"
-
-    # Handle requires array
-    if [[ -n "$REQUIRES" ]]; then
-        echo "requires: [${REQUIRES//,/, }]"
-    else
-        echo "requires: []"
-    fi
-
-    echo "provides: []"
-
-    # Handle tags array
-    if [[ -n "$TAGS" ]]; then
-        echo "tags: [${TAGS//,/, }]"
-    else
-        echo "tags: []"
-    fi
-
-    echo "critical: $CRITICAL"
-    echo "healthCheck: \"command -v $COMPONENT_NAME >/dev/null 2>&1\""
-    echo "files: []"
-} > "$COMPONENT_DIR/component.yml"
-
-# Generate install.sh
-log_info "Creating install.sh..."
-install_script_content=$(generate_install_script_template "$COMPONENT_NAME")
-echo "${install_script_content//__COMPONENT_NAME__/$COMPONENT_NAME}" > "$COMPONENT_DIR/install.sh"
-chmod +x "$COMPONENT_DIR/install.sh"
-
-# Validate the generated component
-log_info "Validating generated component..."
-if validate_component_schema "$COMPONENT_NAME" &&
-   validate_component_dependencies "$COMPONENT_NAME"; then
-    log_info "✅ Component '$COMPONENT_NAME' created successfully"
-    echo
-    echo "Component created at: $COMPONENT_DIR"
-    echo "Next steps:"
-    echo "  1. Edit $COMPONENT_DIR/component.yml to customize metadata"
-    echo "  2. Add platform-specific installation configuration"
-    echo "  3. Test with: dot validate --component $COMPONENT_NAME"
-    echo "  4. Install with: dot install --only $COMPONENT_NAME --dry-run"
-else
-    log_error "Generated component failed validation"
-    exit 1
-fi
+case "$ACTION" in
+        list)
+                msg_info "Available components:";
+                registry_list_components | while read -r component; do printf '  %s\n' "$component"; done
+                exit 0 ;;
+    rebuild)
+        COMPONENT_TARGET="$1" || true
+    [[ -z ${COMPONENT_TARGET:-} ]] && { msg_error "Usage: dot component rebuild <name> [--force] [--no-deps]"; exit 1; }
+        shift || true
+        FORCE=0 NODEPS=0
+        while [[ $# -gt 0 ]]; do
+            case $1 in
+                --force) FORCE=1; shift ;;
+                --no-deps) NODEPS=1; shift ;;
+                --help|-h)
+                    echo "Usage: dot component rebuild <name> [--force] [--no-deps]"
+                    exit 0 ;;
+                *) msg_error "Unknown flag $1"; exit 1 ;;
+            esac
+        done
+        if [[ ! -d "$COMPONENTS_DIR/$COMPONENT_TARGET" ]]; then
+            msg_error "Component not found: $COMPONENT_TARGET"; exit 1
+        fi
+        # Resolve dependency chain unless --no-deps
+        if [[ $NODEPS == 1 ]]; then
+            chain=("$COMPONENT_TARGET")
+        else
+            # Build minimal set: target + its dependencies via resolver
+            mapfile -t ordered < <(deps_install_order "$COMPONENT_TARGET")
+            chain=("${ordered[@]}")
+        fi
+    msg_info "Rebuild chain: ${chain[*]} (force=$FORCE deps=$((1-NODEPS)))"
+        # Iterate chain
+            for comp in "${chain[@]}"; do
+                hc=$(registry_health_check "$comp" || true)
+                # Pre-check health only if FORCE=0 and health check exists
+                if [[ $FORCE == 0 && -n ${hc// /} ]]; then
+                    if bash -c "$hc" >/dev/null 2>&1; then
+                        msg_dim "Skip (healthy): $comp"
+                        continue
+                    fi
+                fi
+            msg_info "Reinstalling: $comp"
+            if ! install_component "$comp"; then
+                msg_error "Failed reinstall: $comp"
+                if registry_is_critical "$comp"; then msg_error "Critical failure aborting"; exit 2; fi
+            fi
+            # Post health re-check
+            if [[ -n ${hc// /} ]]; then
+                if bash -c "$hc" >/dev/null 2>&1; then
+                    msg_success "Health OK after rebuild: $comp"
+                else
+                    msg_warn "Health still failing after rebuild: $comp"
+                fi
+            fi
+        done
+        # Mini doctor subset (JSON disabled here; user should call full doctor if needed)
+    msg_success "Rebuild complete"
+        exit 0 ;;
+    -h|--help|help)
+        grep '^# usage:' "$0" | sed 's/^# //' ; exit 0 ;;
+            *)
+                    msg_error "Unknown component action: $ACTION"
+                    exit 1 ;;
+esac

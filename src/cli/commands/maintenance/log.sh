@@ -14,12 +14,12 @@ for a in "$@"; do
 		grep '^# usage:' "$0" | sed 's/# usage: //'
 		exit 0
 		;;
-	*) log_warn "Unknown flag $a" ;;
+	*) if declare -F msg_warn >/dev/null 2>&1; then msg_warn "Unknown flag $a"; else echo "[WARN] Unknown flag $a" >&2; fi ;;
 	esac
 done
 
 [[ -f $LEDGER_FILE ]] || {
-	log_warn "No ledger present"
+	if declare -F msg_warn >/dev/null 2>&1; then msg_warn "No ledger present"; else echo "[WARN] No ledger present" >&2; fi
 	exit 0
 }
 
@@ -44,7 +44,7 @@ orig_lines=$(wc -l <"$LEDGER_FILE" | tr -d ' ')
 new_lines=$(wc -l <"$tmp" | tr -d ' ')
 
 if [[ $DRY == 1 ]]; then
-	log_info "Dry-run: would reduce lines $orig_lines -> $new_lines"
+	if declare -F msg_info >/dev/null 2>&1; then msg_info "Dry-run: would reduce lines $orig_lines -> $new_lines"; else echo "[INFO] Dry-run: would reduce lines $orig_lines -> $new_lines" >&2; fi
 	if command -v diff >/dev/null 2>&1; then diff -u "$LEDGER_FILE" "$tmp" || true; fi
 	rm -f "$tmp"
 	exit 0
@@ -52,4 +52,4 @@ fi
 
 cp "$LEDGER_FILE" "$LEDGER_FILE.bak.$(date +%s)"
 mv "$tmp" "$LEDGER_FILE"
-log_info "Compacted ledger lines $orig_lines -> $new_lines"
+if declare -F msg_success >/dev/null 2>&1; then msg_success "Compacted ledger lines $orig_lines -> $new_lines"; else echo "[INFO] Compacted ledger lines $orig_lines -> $new_lines" >&2; fi

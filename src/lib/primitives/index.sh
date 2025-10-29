@@ -5,8 +5,8 @@
 PRIMITIVES_LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 
 # Source all primitive utilities (data operations only)
-# shellcheck source=./strings.sh
-source "${PRIMITIVES_LIB_DIR}/strings.sh"
+# shellcheck source=./strings/strings.sh
+source "${PRIMITIVES_LIB_DIR}/strings/strings.sh"
 
-# shellcheck source=./arrays.sh
-source "${PRIMITIVES_LIB_DIR}/arrays.sh"
+# shellcheck source=./arrays/arrays.sh
+source "${PRIMITIVES_LIB_DIR}/arrays/arrays.sh"

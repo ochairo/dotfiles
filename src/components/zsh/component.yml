@@ -5,40 +5,47 @@ parallelSafe: true
 critical: true
 healthCheck: "command -v zsh >/dev/null 2>&1 && zsh -fc 'echo ok' >/dev/null 2>&1"
 requires: []
-provides: []
+provides: [shell]
 
 platforms:
   macos:
     installMethod: package
     packageManager: brew
     packageName: zsh
+    postInstall: "true"
 
   ubuntu:
     installMethod: package
     packageManager: apt
     packageName: zsh
+    postInstall: "true"
 
   debian:
     installMethod: package
     packageManager: apt
     packageName: zsh
+    postInstall: "true"
 
   fedora:
     installMethod: package
     packageManager: dnf
     packageName: zsh
+    postInstall: "true"
 
   rhel:
     installMethod: package
     packageManager: dnf
     packageName: zsh
+    postInstall: "true"
 
   centos:
     installMethod: package
     packageManager: dnf
     packageName: zsh
+    postInstall: "true"
 
   arch:
     installMethod: package
     packageManager: pacman
     packageName: zsh
+    postInstall: "true"

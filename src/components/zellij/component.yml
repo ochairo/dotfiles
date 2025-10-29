@@ -12,103 +12,40 @@ platforms:
     installMethod: package
     packageManager: brew
     packageName: zellij
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/zellij"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/zellij" "zellij"
-        log_success "Zellij configuration linked"
-      fi
+    postInstall: "true"
 
   ubuntu:
     installMethod: package
     packageManager: apt
     packageName: zellij
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/zellij"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/zellij" "zellij"
-        log_success "Zellij configuration linked"
-      fi
+    postInstall: "true"
 
   debian:
     installMethod: package
     packageManager: apt
     packageName: zellij
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/zellij"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/zellij" "zellij"
-        log_success "Zellij configuration linked"
-      fi
+    postInstall: "true"
 
   fedora:
     installMethod: package
     packageManager: dnf
     packageName: zellij
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/zellij"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/zellij" "zellij"
-        log_success "Zellij configuration linked"
-      fi
+    postInstall: "true"
 
   rhel:
     installMethod: package
     packageManager: dnf
     packageName: zellij
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/zellij"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/zellij" "zellij"
-        log_success "Zellij configuration linked"
-      fi
+    postInstall: "true"
 
   centos:
     installMethod: package
     packageManager: dnf
     packageName: zellij
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/zellij"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/zellij" "zellij"
-        log_success "Zellij configuration linked"
-      fi
+    postInstall: "true"
 
   arch:
     installMethod: package
     packageManager: pacman
     packageName: zellij
-    postInstall: |
-      if [[ -f "${DOTFILES_ROOT}/src/core/fs.sh" ]]; then
-        source "${DOTFILES_ROOT}/src/core/fs.sh"
-      fi
-
-      CONFIG_SOURCE="${DOTFILES_ROOT}/src/configs/.config/zellij"
-      if [[ -d "$CONFIG_SOURCE" ]]; then
-        fs_symlink "$CONFIG_SOURCE" "$HOME/.config/zellij" "zellij"
-        log_success "Zellij configuration linked"
-      fi
+    postInstall: "true"

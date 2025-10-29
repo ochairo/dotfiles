@@ -11,58 +11,23 @@ platforms:
   ubuntu:
     installMethod: script
     scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    postInstall: |
-      tmpdir=$(mktemp -d)
-      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
-      mkdir -p "$HOME/.local/share/fonts"
-      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
-      fc-cache -fv
-      rm -rf "$tmpdir"
+    postInstall: "true"
   debian:
     installMethod: script
     scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    postInstall: |
-      tmpdir=$(mktemp -d)
-      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
-      mkdir -p "$HOME/.local/share/fonts"
-      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
-      fc-cache -fv
-      rm -rf "$tmpdir"
+    postInstall: "true"
   fedora:
     installMethod: script
     scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    postInstall: |
-      tmpdir=$(mktemp -d)
-      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
-      mkdir -p "$HOME/.local/share/fonts"
-      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
-      fc-cache -fv
-      rm -rf "$tmpdir"
+    postInstall: "true"
   rhel:
     installMethod: script
     scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    postInstall: |
-      tmpdir=$(mktemp -d)
-      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
-      mkdir -p "$HOME/.local/share/fonts"
-      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
-      fc-cache -fv
-      rm -rf "$tmpdir"
+    postInstall: "true"
   centos:
     installMethod: script
     scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    postInstall: |
-      tmpdir=$(mktemp -d)
-      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
-      mkdir -p "$HOME/.local/share/fonts"
-      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
-      fc-cache -fv
-      rm -rf "$tmpdir"
+    postInstall: "true"
   arch:
     installMethod: package
     packageManager: yay
@@ -70,25 +35,11 @@ platforms:
   opensuse:
     installMethod: script
     scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    postInstall: |
-      tmpdir=$(mktemp -d)
-      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
-      mkdir -p "$HOME/.local/share/fonts"
-      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
-      fc-cache -fv
-      rm -rf "$tmpdir"
+    postInstall: "true"
   alpine:
     installMethod: script
     scriptUrl: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-    postInstall: |
-      tmpdir=$(mktemp -d)
-      curl -fsSL -o "$tmpdir/font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-      unzip -q "$tmpdir/font.zip" -d "$tmpdir"
-      mkdir -p "$HOME/.local/share/fonts"
-      find "$tmpdir" -name "*.ttf" -exec cp {} "$HOME/.local/share/fonts/" \;
-      fc-cache -fv
-      rm -rf "$tmpdir"
+    postInstall: "true"
 parallelSafe: true
 critical: false
 requires: []

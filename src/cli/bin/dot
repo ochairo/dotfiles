@@ -17,226 +17,58 @@ while [[ -L "$SCRIPT_PATH" ]]; do
 done
 SCRIPT_DIR="$(cd -P "$(dirname "$SCRIPT_PATH")" && pwd)"
 
-# Set up directory structure
-# bin/dot is at src/cli/bin/, so:
-# ../.. from bin = src/
-# ../../.. from bin = repo root
-export DOTFILES_ROOT
 DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-export SRC_DIR="$DOTFILES_ROOT/src"
-export CLI_DIR="$SRC_DIR/cli"
-export LIB_DIR="$SRC_DIR/lib"
-export CORE_DIR="$SRC_DIR/core"
-export COMMANDS_DIR="$CLI_DIR/commands"
-export COMPONENTS_DIR="$SRC_DIR/components"
-export CONFIGS_DIR="$SRC_DIR/configs"
+SRC_DIR="$DOTFILES_ROOT/src"
+CLI_DIR="$SRC_DIR/cli"
+LIB_DIR="$SRC_DIR/lib"
+CORE_DIR="$SRC_DIR/core"
+COMMANDS_DIR="$CLI_DIR/commands"
+COMPONENTS_DIR="$SRC_DIR/components"
+CONFIGS_DIR="$SRC_DIR/configs"
+export DOTFILES_ROOT SRC_DIR CLI_DIR LIB_DIR CORE_DIR COMMANDS_DIR COMPONENTS_DIR CONFIGS_DIR
 
-# Create compatibility aliases for old variable names
-export PROJECT_ROOT="$DOTFILES_ROOT"
-export ROOT="$SRC_DIR"  # Some commands use $ROOT to mean src directory
+[[ -f "$LIB_DIR/index.sh" ]] && source "$LIB_DIR/index.sh"
+[[ -f "$CORE_DIR/index.sh" ]] && source "$CORE_DIR/index.sh"
 
-# Set default paths
-export DOTFILES_LEDGER="${DOTFILES_LEDGER:-$HOME/.dotfiles.ledger}"
-export DOTFILES_BACKUP_DIR="${DOTFILES_BACKUP_DIR:-$HOME/.dotfiles.backup}"
-
-# Create compatibility aliases for ledger/backup variables
-export LEDGER_FILE="$DOTFILES_LEDGER"
-export BACKUP_DIR="$DOTFILES_BACKUP_DIR"
-
-# Enable debug mode if requested
-[[ "${DOTFILES_DEBUG:-0}" == "1" ]] && set -x
-
-# Load generic libraries
-if [[ -f "$LIB_DIR/index.sh" ]]; then
-  # shellcheck source=../../../lib/index.sh
-  source "$LIB_DIR/index.sh"
-else
-  echo "Error: Cannot find lib/index.sh at $LIB_DIR/index.sh" >&2
-  exit 1
-fi
-
-# Load domain-specific core
-if [[ -f "$CORE_DIR/index.sh" ]]; then
-  # shellcheck source=../../../core/index.sh
-  source "$CORE_DIR/index.sh"
-else
-  echo "Error: Cannot find core/index.sh at $CORE_DIR/index.sh" >&2
-  exit 1
-fi
-
-# Create compatibility wrapper functions for old function names
-# Commands use log_* but lib provides msg_*
-log_error() { msg_error "$@"; }
-log_warn() { msg_warn "$@"; }
-log_info() { msg_info "$@"; }
-log_success() { msg_success "$@"; }
-log_debug() { msg_debug "$@"; }
-
-# Commands use registry_* but core provides components_*
-registry_list_components() { components_list "$@"; }
-registry_health_check() { components_health_check "$@"; }
-registry_is_critical() { components_is_critical "$@"; }
-registry_is_parallel_safe() { components_is_parallel_safe "$@"; }
-
-# Export wrapper functions
-export -f log_error log_warn log_info log_success log_debug
-export -f registry_list_components registry_health_check registry_is_critical registry_is_parallel_safe
-
-# Export underlying functions from lib and core so they work in child scripts
-export -f msg_error msg_warn msg_info msg_success msg_debug msg_header msg_progress
-export -f components_list components_health_check components_is_critical components_is_parallel_safe
-export -f components_exists components_description components_requires components_provides components_tags
-export -f ledger_init ledger_add ledger_has ledger_remove ledger_entries
-export -f ui_confirm ui_select ui_multi_select ui_input_text
-export -f presets_show_welcome presets_select presets_select_custom
-export -f presets_validate_selection presets_confirm_installation presets_show_completion
-export -f categories_count_total categories_list
-export -f selection_save selection_load
-export -f update_repo_branch update_current_ref update_remote_ref update_state update_pull
-
-# Export color variables needed by msg_* functions
-export C_RESET C_RED C_GREEN C_YELLOW C_BLUE C_PURPLE C_CYAN C_WHITE C_BOLD C_DIM
-
-# Initialize ledger file
-if [[ ! -f "$DOTFILES_LEDGER" ]]; then
-  touch "$DOTFILES_LEDGER"
-fi
-
-# Debug info
-if [[ "${DOTFILES_DEBUG:-0}" == "1" ]]; then
-  echo "DOTFILES_ROOT: $DOTFILES_ROOT" >&2
-  echo "SRC_DIR: $SRC_DIR" >&2
-  echo "CLI_DIR: $CLI_DIR" >&2
-  echo "LIB_DIR: $LIB_DIR" >&2
-  echo "CORE_DIR: $CORE_DIR" >&2
-  echo "COMMANDS_DIR: $COMMANDS_DIR" >&2
-  echo "COMPONENTS_DIR: $COMPONENTS_DIR" >&2
-  echo "CONFIGS_DIR: $CONFIGS_DIR" >&2
-  echo "DOTFILES_LEDGER: $DOTFILES_LEDGER" >&2
-fi
-
-# =============================================================================
-# CLI FUNCTIONS
-# =============================================================================
-
-usage() {
-  echo "dot <command> [args...]" >&2
-  echo "" >&2
-  echo "Commands:" >&2
-
-  # List top-level commands first
-  echo "" >&2
-  echo "  Main Commands:" >&2
-  for cmd_file in "$COMMANDS_DIR"/*.sh; do
-    [ -f "$cmd_file" ] || continue
-    local name summary
-    name="$(basename "$cmd_file" .sh)"
-    summary="$(grep -E '^# summary:' "$cmd_file" | head -1 | sed 's/# summary:[[:space:]]*//' || true)"
-    printf "    %-18s %s\n" "$name" "${summary:-}" >&2
-  done
-
-  # Function to find and list commands recursively
-  find_and_list_commands() {
-    local dir="$1"
-    local category="$2"
-
-    # Find all .sh files in subdirectories
-    local files=()
-    while IFS= read -r -d '' file; do
-      files+=("$file")
-    done < <(find "$dir" -type f -name "*.sh" -print0 | sort -z)
-
-    if [ ${#files[@]} -gt 0 ] && [ -n "$category" ]; then
-      echo "" >&2
-      echo "  ${category}:" >&2
-    fi
-
-    for f in "${files[@]}"; do
-      local name summary
-      name="$(basename "$f" .sh)"
-      summary="$(grep -E '^# summary:' "$f" | head -1 | sed 's/# summary:[[:space:]]*//' || true)"
-      printf "    %-18s %s\n" "$name" "${summary:-}" >&2
-    done
-  }
-
-  # List commands from each subdirectory
-  find_and_list_commands "$COMMANDS_DIR/diagnostic" "Diagnostic"
-  find_and_list_commands "$COMMANDS_DIR/component" "Components"
-  find_and_list_commands "$COMMANDS_DIR/maintenance" "Maintenance"
-
-  echo "" >&2
-  echo "Use 'dot help <command>' for details." >&2
-}
-
-help_cmd() {
-  local target="$1"
-
-  # Search for command in subdirectories
-  local file=""
-  for subdir in "$COMMANDS_DIR"/*; do
-    [ -d "$subdir" ] || continue
-    local candidate="$subdir/$target.sh"
-    if [ -f "$candidate" ]; then
-      file="$candidate"
-      break
-    fi
-  done
-
-  if [ -z "$file" ]; then
-    echo "Unknown command: $target" >&2
-    exit 1
-  fi
-
-  awk '/^# usage:/{print substr($0,3)} /^# summary:/{print substr($0,3)} /^# aliases:/{print substr($0,3)}' "$file"
-  echo
-  echo "Source: $(echo "$file" | sed "s|$PROJECT_ROOT/||")"
-}
-
-# =============================================================================
-# MAIN CLI DISPATCHER
-# =============================================================================
+DOT_VERSION="0.1.0"
 
 if [ $# -eq 0 ]; then
-  usage; exit 1
+  echo "dot <command> [args...]" >&2
+  exit 1
 fi
 
 case "$1" in
-  help)
-    shift || true
-    if [ $# -eq 0 ]; then usage; exit 0; fi
-    help_cmd "$1"; exit 0;
-    ;;
-  --version|-v)
-    echo "dot (scaffold) 0.0.1"; exit 0;
-    ;;
-  -h|--help)
-    usage; exit 0;
-    ;;
+  --version|-V)
+    echo "$DOT_VERSION"
+    exit 0 ;;
+  --help|-h)
+    echo "Dotfiles CLI"
+    echo "Version: $DOT_VERSION"
+    echo "Commands:"
+    # List top-level command scripts
+    for f in "$COMMANDS_DIR"/*.sh; do
+      [ -f "$f" ] || continue
+      name="$(basename "$f" .sh)"
+      printf "  %s\n" "$name"
+    done
+    # List nested commands
+    for d in "$COMMANDS_DIR"/*; do
+      [[ -d "$d" && -f "$d/$(basename "$d").sh" ]] || continue
+      name="$(basename "$d")"
+      printf "  %s\n" "$name"
+    done
+    exit 0 ;;
 esac
 
 cmd="$1"; shift || true
 
-# Search for command file - check top-level first, then subdirectories
-cmd_file=""
-
-# Check top-level commands (init.sh, install.sh, update.sh)
-if [ -f "$COMMANDS_DIR/$cmd.sh" ]; then
+# Command resolution: prefer flat file, fallback to nested directory form (commands/<cmd>/<cmd>.sh)
+if [[ -f "$COMMANDS_DIR/$cmd.sh" ]]; then
   cmd_file="$COMMANDS_DIR/$cmd.sh"
+elif [[ -f "$COMMANDS_DIR/$cmd/$cmd.sh" ]]; then
+  cmd_file="$COMMANDS_DIR/$cmd/$cmd.sh"
 else
-  # Search in subdirectories
-  for subdir in "$COMMANDS_DIR"/*; do
-    [ -d "$subdir" ] || continue
-    candidate="$subdir/$cmd.sh"
-    if [ -f "$candidate" ]; then
-      cmd_file="$candidate"
-      break
-    fi
-  done
-fi
-
-if [ -z "$cmd_file" ]; then
-  echo "Unknown command: $cmd" >&2
-  echo "Run 'dot help' to list commands." >&2
+  echo "Unknown command: $cmd. Run 'dot <command> --help'." >&2
   exit 1
 fi
 
