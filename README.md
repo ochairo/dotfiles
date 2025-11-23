@@ -41,7 +41,7 @@ Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
   wand wandfile install
   ```
 
-  This installs all formulas and creates symlinks as defined in the [wandfile](./wandfile).
+  This installs all formulas and creates symlinks as defined in the [wandfile](./wandfile.yaml).
 
 <br>
 
