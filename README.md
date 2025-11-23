@@ -19,7 +19,7 @@ Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
 
 ### Setup
 
-- Install tools + dotfiles:
+- Install tools + config dotfiles:
 
   ```bash
   # Clone dotfiles repository to ~/.dotfiles
