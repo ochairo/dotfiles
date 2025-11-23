@@ -13,17 +13,22 @@ Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
 
 ## Quick Start
 
-### Pre-requisites
+### Prerequisites
 
-- Install [wand](https://github.com/ochairo/wand) package manager
+- Install [Wand](https://github.com/ochairo/wand) package manager
 
-### Setup
+  ```bash
+  # Installation
+  curl -sSL https://raw.githubusercontent.com/ochairo/wand/main/scripts/install.sh | bash
+  ```
 
-- Install tools + config dotfiles:
+### Clone & Setup
+
+- Clone this repository and configure dotfiles
 
   ```bash
   # Clone dotfiles repository to ~/.dotfiles
-  git clone https://github.com/ochairo/dotfiles.  git ~/.dotfiles
+  git clone https://github.com/ochairo/dotfiles.git ~/.dotfiles
   ```
 
   ```bash
@@ -36,7 +41,7 @@ Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
   wand wandfile install
   ```
 
-  This installs all required tools (zsh, neovim, etc.) and creates symlinks.
+  This installs all formulas and creates symlinks as defined in the [wandfile](./wandfile).
 
 <br>
 
