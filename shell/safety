@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Safety mechanisms to prevent stuck processes and performance issues
+
+# Function to kill stuck less processes consuming high CPU
+kill_stuck_pagers() {
+  local stuck_processes
+  stuck_processes=$(ps aux | awk '/less/ && $3 > 50 && !/grep/ {print $2}')
+
+  if [[ -n "$stuck_processes" ]]; then
+    echo "Found stuck pager processes, killing them..."
+    echo "$stuck_processes" | xargs kill -9 2>/dev/null || true
+    echo "Stuck processes killed"
+  fi
+}
+
+# Function to check system health
+check_system_health() {
+  local cpu_usage
+  cpu_usage=$(top -l 1 | awk '/CPU usage/ {print $3}' | sed 's/%//')
+
+  if command -v bc >/dev/null 2>&1; then
+    if (( $(echo "$cpu_usage > 80" | bc -l) )); then
+      echo "⚠️  High CPU usage detected: ${cpu_usage}%"
+      echo "Checking for stuck processes..."
+      ps aux | sort -k3 -nr | head -5
+    fi
+  fi
+}
+
+# Auto-cleanup alias for when terminal feels slow
+alias fix-performance='kill_stuck_pagers && check_system_health'
+
+# Prevent common pager traps
+export PAGER=""
+export LESS=""
+export GIT_PAGER=""
+export MANPAGER="nvim +Man!"  # Use nvim for man pages instead of less
+
+# Git safety aliases (always use --no-pager)
+alias glog='git --no-pager log --oneline'
+alias gstat='git --no-pager status'
+alias gdiff='git --no-pager diff'
+
+# Monitor command - run occasionally to check for issues
+alias monitor-cpu='watch -n 2 "ps aux | sort -k3 -nr | head -10"'

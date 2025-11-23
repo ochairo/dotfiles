@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Shell environment for macOS and Linux compatibility
+# Optimized shell environment - only essential environment variables
+
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PAGER="less"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# XDG base
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+# Zsh plugins directory
+export ZSH_PLUGINS="${XDG_CONFIG_HOME}/zsh/plugins"
+
+# Zsh autosuggestions optimization
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
+
+# Starship config
+export STARSHIP_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/starship/starship.toml"
+
+# Essential PATH only
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+# Defer heavy PATH operations to .zshrc
+export DEFER_PATH_SETUP=1

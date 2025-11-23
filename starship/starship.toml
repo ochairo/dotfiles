@@ -1,0 +1,16 @@
+#############################################
+# Minimal starship config with time aligned on
+# the first line (right side). Second line is just
+# the prompt character like default starship.
+#############################################
+
+format = "$all$fill$time$line_break$character"
+
+[time]
+disabled = false
+format = "   $time "
+time_format = "%H:%M:%S%.3f"
+style = "plain"
+
+[fill]
+symbol = " "

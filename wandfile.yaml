@@ -1,0 +1,57 @@
+# Complete development environment configuration
+# Install with: wand wandfile install
+
+formulas:
+  # Core tools
+  - zsh
+  - oh-my-zsh
+  - zsh-syntax-highlighting
+  - zsh-autosuggestions
+
+  # Editor and terminal
+  - neovim
+  - tmux
+
+  # Shell enhancements
+  - starship
+  - ripgrep
+  - fd
+  - fzf
+
+  # Development tools
+  - gh
+  - jq
+
+  # Version managers
+  - fnm
+  - pyenv
+  - rustup
+
+  # Container tools
+  - docker
+  - docker-compose
+
+  # Cloud CLIs
+  - aws-cli
+  - azure-cli
+  - gcloud
+
+symlinks:
+  # Shell configurations (zshrc will source other files from $DOTFILES_ROOT)
+  .zshrc: shell/zshrc
+  .zshenv: shell/zshenv
+  .bashrc: shell/bashrc
+
+  # Git configurations
+  .gitconfig: git/gitconfig
+  .gitignore_global: git/gitignore_global
+
+  # Neovim (Lua-based)
+  .config/nvim/init.lua: nvim/init.lua
+  .config/nvim/lua: nvim/lua
+
+  # Tmux
+  .tmux.conf: tmux/tmux.conf
+
+  # Starship prompt
+  .config/starship/starship.toml: starship/starship.toml
