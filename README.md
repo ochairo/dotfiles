@@ -17,9 +17,9 @@ Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
 
 - Install [wand](https://github.com/ochairo/wand) package manager
 
-### Installation
+### Setup
 
-- Install tools + dotfiles in one command:
+- Install tools + dotfiles:
 
   ```bash
   # Clone dotfiles repository to ~/.dotfiles
@@ -36,7 +36,7 @@ Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
   wand wandfile install
   ```
 
-  This installs all required tools (zsh, neovim, tmux, etc.) and creates symlinks.
+  This installs all required tools (zsh, neovim, etc.) and creates symlinks.
 
 <br>
 
