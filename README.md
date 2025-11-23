@@ -2,7 +2,7 @@
 
 # dotfiles
 
-Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand).
+Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
 
 ![macOS](https://img.shields.io/badge/macOS-000000?style=flat&logo=apple&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)
