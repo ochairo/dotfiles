@@ -13,26 +13,24 @@ Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
 
 ## Quick Start
 
-Install Wand + dotfiles + tools:
+The installer automatically installs Wand, downloads dotfiles, and creates symlinks.
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/ochairo/dotfiles/main/scripts/install.sh | bash
 ```
 
-The installer will:
-
-- [x] Install Wand if needed
-- [x] Download dotfiles (without Git)
-- [x] Install all tools from `wandfile.yaml`
-- [x] Create symlinks automatically
-
-After installation, restart your shell:
-
 ```bash
-source ~/.zshrc  # or ~/.bashrc for Bash
+source ~/.zshrc
 ```
 
-<br>
+## Documentation
+
+- [How It Works](docs/how-it-works.md) - Auto-detection and symlink strategy
+- [Customization](docs/customization.md) - Personalize your setup
+- [Structure](docs/structure.md) - Repository organization
+- [Requirements](docs/requirements.md) - Dependencies and options
+
+<br />
 
 <div align="center">
 
