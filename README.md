@@ -13,35 +13,24 @@ Personal dotfiles managed by [🪄 Wand](https://github.com/ochairo/wand)
 
 ## Quick Start
 
-### Prerequisites
+Install Wand + dotfiles + tools:
 
-- Install [Wand](https://github.com/ochairo/wand) package manager
+```bash
+curl -sSL https://raw.githubusercontent.com/ochairo/dotfiles/main/scripts/install.sh | bash
+```
 
-  ```bash
-  # Installation
-  curl -sSL https://raw.githubusercontent.com/ochairo/wand/main/scripts/install.sh | bash
-  ```
+The installer will:
 
-### Clone & Setup
+- [x] Install Wand if needed
+- [x] Download dotfiles (without Git)
+- [x] Install all tools from `wandfile.yaml`
+- [x] Create symlinks automatically
 
-- Clone this repository and configure dotfiles
+After installation, restart your shell:
 
-  ```bash
-  # Clone dotfiles repository to ~/.dotfiles
-  git clone https://github.com/ochairo/dotfiles.git ~/.dotfiles
-  ```
-
-  ```bash
-  # Navigate to the dotfiles directory
-  cd ~/.dotfiles
-  ```
-
-  ```bash
-  # Install all tools and create symlinks
-  wand wandfile install
-  ```
-
-  This installs all formulas and creates symlinks as defined in the [wandfile](./wandfile.yaml).
+```bash
+source ~/.zshrc  # or ~/.bashrc for Bash
+```
 
 <br>
 
