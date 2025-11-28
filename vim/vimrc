@@ -1,0 +1,55 @@
+" Vim configuration
+" Fallback config for systems without Neovim
+
+" General settings
+set number                      " Show line numbers
+set relativenumber              " Relative line numbering
+set autoindent                  " Auto-indent new lines
+set smartindent                 " Smart indentation
+set expandtab                   " Convert tabs to spaces
+set tabstop=2                   " Tab width
+set shiftwidth=2                " Indentation width
+set softtabstop=2               " Soft tab width
+
+" Search settings
+set ignorecase                  " Case-insensitive search
+set smartcase                   " Smart case search
+set hlsearch                    " Highlight search results
+set incsearch                   " Incremental search
+
+" UI settings
+set cursorline                  " Highlight current line
+set cursorcolumn                " Highlight current column
+set colorcolumn=80,120          " Show column markers
+set ruler                       " Show ruler
+set laststatus=2                " Always show status bar
+set wildmenu                    " Enhanced command completion
+
+" File handling
+set nocompatible                " Disable Vi compatibility
+set hidden                      " Allow hidden buffers
+set backup                      " Enable backups
+set backupdir=~/.vim/backup//   " Backup directory
+set undofile                    " Persistent undo
+set undodir=~/.vim/undo//       " Undo directory
+set swapfile                    " Enable swap files
+set directory=~/.vim/swap//     " Swap directory
+
+" Behavior
+set mouse=a                     " Enable mouse support
+set clipboard=unnamedplus       " Use system clipboard
+set splitbelow                  " Split below current window
+set splitright                  " Split right of current window
+
+" Key mappings
+let mapleader = " "
+nnoremap <leader>n :set nonumber!<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" Syntax highlighting
+syntax on
+set t_Co=256
+if filereadable(expand("~/.vim/colors/tokyonight.vim"))
+  colorscheme tokyonight
+endif

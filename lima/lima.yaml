@@ -1,0 +1,38 @@
+# Lima configuration template
+# Lima is a Linux virtual machine manager for macOS
+# Install Lima: https://github.com/lima-vm/lima
+# Usage: limactl start lima.yaml
+
+# VM name
+vmType: qemu
+arch: aarch64
+
+# Resources
+cpus: 4
+memory: 8GiB
+disk: 100GiB
+
+# Mount home directory
+mounts:
+  - location: ~
+    writable: true
+
+# Enable containerd by default
+containerd:
+  system: false
+  user: true
+
+# Docker socket forwarding
+provision:
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eux
+      # Install Docker CLI (optional, for connecting to Docker daemon)
+      apt-get update
+      apt-get install -y docker.io
+
+# Networking
+networks:
+  - lima: user
+    mode: user

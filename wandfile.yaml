@@ -4,12 +4,12 @@
 formulas:
   # Core tools
   - zsh
-  - oh-my-zsh
   - zsh-syntax-highlighting
   - zsh-autosuggestions
 
   # Editor and terminal
   - neovim
+  - vim
   - tmux
 
   # Shell enhancements
@@ -17,19 +17,21 @@ formulas:
   - ripgrep
   - fd
   - fzf
+  - bat
+  - tree
+  - tldr
+  - curl
+  - wget
+  - direnv
 
   # Development tools
   - gh
   - jq
 
-  # Version managers
-  - fnm
-  - pyenv
-  - rustup
-
   # Container tools
   - docker
   - docker-compose
+  - lima
 
   # Cloud CLIs
   - aws-cli
@@ -50,8 +52,17 @@ symlinks:
   .config/nvim/init.lua: nvim/init.lua
   .config/nvim/lua: nvim/lua
 
+  # Vim (fallback)
+  .vimrc: vim/vimrc
+
   # Tmux
   .tmux.conf: tmux/tmux.conf
 
   # Starship prompt
   .config/starship/starship.toml: starship/starship.toml
+
+  # SSH configuration
+  .ssh/config: ssh/config
+
+  # Lima VM configuration
+  .config/lima/lima.yaml: lima/lima.yaml

@@ -1,0 +1,67 @@
+# SSH Configuration Template
+# Copy this file to ~/.ssh/config and customize with your hosts
+# Each service should have its own dedicated SSH key
+
+# Default settings for all hosts (fallback)
+Host *
+    AddKeysToAgent yes
+    IgnoreUnknown UseKeychain
+    UseKeychain yes
+
+# GitHub (ochairo Account)
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github/ochairo/id_ed25519
+    IdentitiesOnly yes
+
+# GitHub (Work Account)
+Host github-work
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github/work/id_ed25519
+    IdentitiesOnly yes
+
+# GitLab (Work Account)
+Host gitlab.com
+    HostName gitlab.com
+    User git
+    IdentityFile ~/.ssh/gitlab/work/id_ed25519
+    IdentitiesOnly yes
+
+# DevOps / Infrastructure (Work)
+Host devops-server
+    HostName devops.example.com
+    User devops
+    IdentityFile ~/.ssh/devops/work/id_ed25519
+    IdentitiesOnly yes
+    Port 22
+
+# Development Server
+# Host dev-server
+#     HostName dev.example.com
+#     User developer
+#     IdentityFile ~/.ssh/keys/dev_ed25519
+#     IdentitiesOnly yes
+#     LocalForward 3000 localhost:3000
+
+# Multiple Keys for Different Services
+# Host work-server
+#     HostName work.example.com
+#     User developer
+#     IdentityFile ~/.ssh/keys/work_ed25519
+#     IdentitiesOnly yes
+
+# SSH Through Bastion Host
+# Host internal-server
+#     HostName internal.local
+#     User admin
+#     ProxyJump bastion
+#     IdentityFile ~/.ssh/keys/internal_ed25519
+#     IdentitiesOnly yes
+#
+# Host bastion
+#     HostName bastion.example.com
+#     User jump_user
+#     IdentityFile ~/.ssh/keys/bastion_ed25519
+#     IdentitiesOnly yes
